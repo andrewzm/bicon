@@ -1,3 +1,6 @@
+bicon
+=====
+
 This page hosts a supplement package to the paper 'Multivariate Spatial
     Covariance Models: A Conditional Approach' by Cressie and Zammit-Mangion
     (2015, in preparation). This package can be used for the construction of
