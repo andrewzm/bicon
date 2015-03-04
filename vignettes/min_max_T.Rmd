@@ -6,6 +6,10 @@ output:
   pdf_document:
     fig_caption: yes
     latex_engine: xelatex
+vignette: >
+  %\VignetteIndexEntry{Bivariate conditional spatial models: Case study in Section 5}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 bibliography: Bibliography.bib
 header-includes: \usepackage{natbib}
 csl: apa.csl
