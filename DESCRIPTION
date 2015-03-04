@@ -40,3 +40,5 @@ Depends:
 VignetteBuilder: knitr
 License: GPL (>= 2)
 NeedsCompilation: yes
+URL: http://github.com/andrewzm/bicon
+BugReports: http://github.com/andrewzm/bicon/issues
