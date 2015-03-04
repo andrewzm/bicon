@@ -107,11 +107,10 @@ The first thing we need to do is specify which model we are going to analyse. Si
 ### 3. Smoothing
 model = 3
 model_name <- switch(model,"independent","pointwise","moving_average")
-set.seed(1) ## Fix seed
 img_path <- "../paper/art"                  ## Where to save the figures
 show_figs <- 1                              ## Show the figures in document
 print_figs <-  0                            ## Print figures to file (leave =0)
-long_analysis <- 0                          ## Run a long MCMC chain (1) or not (0)
+long_analysis <- 1                          ## Run a long MCMC chain (1) or not (0)
 ```
 
 ## The data
@@ -375,7 +374,7 @@ We do not discuss the algorithm below in detail, as it simply carries out the up
 ```{r,message=F}
 Ycount=1
 I_m1 <- Imat(m1)
-set.seed(1)
+set.seed(1) ## Fix seed
 for(i in 2:N) {
   ## Sample Y
   Qo_new <- prec0_samp[i-1]*Qo_base
@@ -525,6 +524,7 @@ Deviance_mean <- as.numeric(-2*( -0.5*m*log(2*pi) +
                            0.5*crossprod(chol(mean(prec0_samp[MCMC_sub])*Qo_base) %*% 
                                                (Z - C %*%apply(Y_samp,1,mean)))))
 DIC <- 2*mean(Deviance_samp[MCMC_sub]) - Deviance_mean
+breakme
 ```
 
 Obviously, with such few samples the results are not of much use. Instead, we saved the results using `N`=50000, `burn_in` = 1000 and `thin` =100 using the following piece of code

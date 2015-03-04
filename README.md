@@ -25,12 +25,15 @@ For `gpclib` please type
 
     install.packages("gpclib", type = "source")
 
+For vignette compilation please make sure you also have LaTeX and XeTex installed.
+
 To install the `bicon` package and the other dependencies, please install `devtools` and then type
 
     library(devtools)
-    install_github("andrewzm/bicon",build_vignettes=F,dependencies=T)
+    install_github("andrewzm/bicon",build_vignettes=T,dependencies=T)
     
-If all dependencies are installed on your machine you should be able to run and compile the vignettes. To view the vignettes please type
+
+If you do not wish to compile the vignettes (which takes a while) please set `build_vignettes=F` above. Otherwise, to view the vignettes please type
 
     library(bicon)
     vignette()
