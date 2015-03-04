@@ -111,7 +111,7 @@ set.seed(1) ## Fix seed
 img_path <- "../paper/art"                  ## Where to save the figures
 show_figs <- 1                              ## Show the figures in document
 print_figs <-  0                            ## Print figures to file (leave =0)
-long_analysis <- 0                          ## Run a long MCMC chain (1) or not (0)
+long_analysis <- 1                          ## Run a long MCMC chain (1) or not (0)
 ```
 
 ## The data
@@ -173,9 +173,6 @@ distmat11 <- distmat12 <- distmat21 <- distmat22 <-
 Mesh <- initFEbasis(p = mesh$loc[,1:2], 
                     t = mesh$graph$tv,
                     K = mesh$graph$vv)
-#, 
-#                    M = mesh$graph$vv, 
-#                    K = mesh$graph$vv)
 ```
 
 We next establish the dimension of our grids. Since we will be evaluating $Y_1$ and $Y_2$ on the same grid, `n1` = `n2`.
@@ -199,7 +196,7 @@ mesh_locs <- mesh$loc[,1:2]
 h <- matrix(0,n1*n2,2)
 areas <- rep(0,n1*n2)
 for(i in 1:n2) {
-  h[((i-1)*n1+1):(i*n1),] <- t(t(mesh_locs) - mesh_locs[i,])
+  h[((i-1)*n1+1):(i*n1),] <- t(t(mesh_locs) - mesh_locs[i,])log_kappa2_samp
   areas[((i-1)*n1+1):(i*n1)] <- Mesh["area_tess"]
 }
 h1_double <- as.double(h[,1])
@@ -266,7 +263,7 @@ log_kappa1_samp  <- matrix(log(2),1,N)
 ### kappa_{2|1}: init sample at log(2), kappa = exp(gamma)
 log_kappa2_samp  <- matrix(log(2),1,N) 
 
-### rho_\epsilon: init sample at a = 0.1, a = 2*pnorm(gamma) - 1
+### rho_\epsilon: init sample at rho = 0.1, rho = 2*pnorm(gamma) - 1
 rho_trans_samp <- rep(qnorm((0.1+1)/2),N) 
 
 ### A: init sample at A = 0 
@@ -378,9 +375,9 @@ We do not discuss the algorithm below in detail, as it simply carries out the up
 ```{r,message=F}
 Ycount=1
 I_m1 <- Imat(m1)
-
+set.seed(1)
 for(i in 2:N) {
-  
+  if(i==10) breakme
   ## Sample Y
   Qo_new <- prec0_samp[i-1]*Qo_base
   QY_new <- QY +  prec0_samp[i-1] * as(crossprod(chol_Qo_base %*% C),"matrix")
@@ -752,7 +749,7 @@ if(show_figs)   print(Y2plot %>%
 
 ```{r,fig.cap="Prior (light grey) and posterior (dark grey) median (solid line) and inter-quartile ranges (enclosed by dashed lines) of the interaction function $b_o(h)$ of Model 3, along a unit vector $e$ originating at Denver (DE) in the direction of Fort Collins (FC)."}
 ### KERNEL VECTOR PLOT
-if(model==3) {
+if(model==2) {
   
   ## Kernel plots
   dh = 0.04
