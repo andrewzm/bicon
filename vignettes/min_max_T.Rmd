@@ -111,7 +111,7 @@ set.seed(1) ## Fix seed
 img_path <- "../paper/art"                  ## Where to save the figures
 show_figs <- 1                              ## Show the figures in document
 print_figs <-  0                            ## Print figures to file (leave =0)
-long_analysis <- 1                          ## Run a long MCMC chain (1) or not (0)
+long_analysis <- 0                          ## Run a long MCMC chain (1) or not (0)
 ```
 
 ## The data
@@ -196,7 +196,7 @@ mesh_locs <- mesh$loc[,1:2]
 h <- matrix(0,n1*n2,2)
 areas <- rep(0,n1*n2)
 for(i in 1:n2) {
-  h[((i-1)*n1+1):(i*n1),] <- t(t(mesh_locs) - mesh_locs[i,])log_kappa2_samp
+  h[((i-1)*n1+1):(i*n1),] <- t(t(mesh_locs) - mesh_locs[i,])
   areas[((i-1)*n1+1):(i*n1)] <- Mesh["area_tess"]
 }
 h1_double <- as.double(h[,1])
@@ -377,7 +377,6 @@ Ycount=1
 I_m1 <- Imat(m1)
 set.seed(1)
 for(i in 2:N) {
-  if(i==10) breakme
   ## Sample Y
   Qo_new <- prec0_samp[i-1]*Qo_base
   QY_new <- QY +  prec0_samp[i-1] * as(crossprod(chol_Qo_base %*% C),"matrix")
