@@ -17,12 +17,18 @@ To download the vignettes without reproducing them on your machine, please view 
 
 [Vignette 2 (Section 5)](https://github.com/andrewzm/bicon/blob/master/vignettes/min_max_T.pdf?raw=true)
     
-If you wish to reproduce the results, you will need to install the package and its dependencies.
+If you wish to reproduce the results, you will need to install the package and its dependencies. Three of the dependencies, `INLA`, `slice` and `gpclib` need to be installed manually. For `INLA` please visit the [INLA project page](http://www.r-inla.org/download) for installation instructions. For `slice`, which is needed for slice sampling, please visit the [personal webpage of Jonathan Rougier](http://www.maths.bris.ac.uk/~MAZJCR/), download `slice_x.x.tar.gz` and install using
 
-To install the package please install `devtools` and then type
+    install.packages("slice_x.x.tar.gz", type = "source",repos=NULL)
+    
+For `gpclib` please type
+
+    install.packages("gpclib", type = "source")
+
+To install the `bicon` package and the other dependencies, please install `devtools` and then type
 
     library(devtools)
-    install_github("andrewzm/bicon",build_vignettes=T,dependencies=T))
+    install_github("andrewzm/bicon",build_vignettes=T,dependencies=T)
     
 If all dependencies are installed on your machine you should be able to run and compile the vignettes. To view the vignettes please type
 
