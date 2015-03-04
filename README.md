@@ -10,7 +10,15 @@ This page hosts a supplement package to the paper 'Multivariate Spatial
     constructing interaction matrices using the bisquare function as the
     interaction function. The accompanying vignettes may be used to replicate
     the studies found in the paper.
+
+To download the vignettes without reproducing them on your machine, please view them in the `vignettes` folder ot by directly click on the following links:
+
+[Vignette 1 (Section 3.2)](https://github.com/andrewzm/bicon/blob/master/vignettes/bivariate_sim.pdf?raw=true)
+
+[Vignette 2 (Section 5)](https://github.com/andrewzm/bicon/blob/master/vignettes/min_max_T.pdf?raw=true)
     
+If you wish to reproduce the results, you will need to install the package and its dependencies.
+
 To install the package please install `devtools` and then type
 
     library(devtools)
@@ -23,4 +31,8 @@ If all dependencies are installed on your machine you should be able to run and 
     
 and select the vignettes under `bicon`.
 
-If you are unable to install bicon, you may still download the vignettes directly from this github page, from the `vignettes` folder.
+References
+-----
+
+Cressie, N., \& Zammit-Mangion, A. (2015). Multivariate spatial covariance models: A conditional approach.
+Submitted.
