@@ -110,7 +110,7 @@ model_name <- switch(model,"independent","pointwise","moving_average")
 set.seed(1) ## Fix seed
 img_path <- "../paper/art"                  ## Where to save the figures
 show_figs <- 1                              ## Show the figures in document
-print_figs <-  1                            ## Print figures to file (leave =0)
+print_figs <-  0                            ## Print figures to file (leave =0)
 long_analysis <- 0                          ## Run a long MCMC chain (1) or not (0)
 ```
 
@@ -602,7 +602,6 @@ We now extract these data into a data frame, and add coordinates for the labels 
 
 ```{r,message=FALSE}
 ### DOMAIN PLOT
-States <- maptools::readShapeSpatial("../../States/cb_2013_us_state_5m.shp")
 States_fort <- fortify(States) %>% mutate( id= as.numeric(id))
 State_names <- data.frame(Name = States$NAME, id = 0:(length(States$NAME)-1))
 
