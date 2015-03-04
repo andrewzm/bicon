@@ -3,7 +3,7 @@ bicon
 
 This page hosts a supplement package to the paper 'Multivariate Spatial
     Covariance Models: A Conditional Approach' by Cressie and Zammit-Mangion
-    (2015, in preparation). This package can be used for the construction of
+    (2015, submitted). This package can be used for the construction of
     covariance matrices for bivariate processes modelled using the
     conditional approach. The covariance functions are assumed to be Matern
     (3/2) covariance functions whilst functionality is provided for
@@ -11,7 +11,7 @@ This page hosts a supplement package to the paper 'Multivariate Spatial
     interaction function. The accompanying vignettes may be used to replicate
     the studies found in the paper.
 
-To download the vignettes without reproducing them on your machine, please view them in the `vignettes` folder ot by directly click on the following links:
+To download the vignettes without reproducing them on your machine, please view them in the `vignettes` folder or by directly click on the following links:
 
 [Vignette 1 (Section 3.2)](https://github.com/andrewzm/bicon/blob/master/vignettes/bivariate_sim.pdf?raw=true)
 
