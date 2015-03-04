@@ -1,0 +1,7 @@
+* using log directory ‘/media/andrew/Windows/Users/azm/Dropbox/CurrentProjects/Wollongong/MVCF/Conditional-approach-code/bicon/..Rcheck’
+* using R version 3.1.2 (2014-10-31)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* checking for file ‘./DESCRIPTION’ ... ERROR
+Required fields missing or empty:
+  ‘Author’ ‘Maintainer’

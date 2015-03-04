@@ -1,0 +1,249 @@
+\begin{thebibliography}{40}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[{Banerjee et~al.(2004)Banerjee, Carlin \& Gelfand}]{Banerjeeetal2004}
+\textsc{Banerjee, S.}, \textsc{Carlin, B.~P.} \& \textsc{Gelfand, A.~E.}
+  (2004).
+\newblock \textit{Hierarchical Modeling and Analysis for Spatial Data}.
+\newblock Boca Raton, FL: Chapman and Hall/CRC.
+
+\bibitem[{Banerjee et~al.(2015)Banerjee, Carlin \& Gelfand}]{Banerjeeetal2015}
+\textsc{Banerjee, S.}, \textsc{Carlin, B.~P.} \& \textsc{Gelfand, A.~E.}
+  (2015).
+\newblock \textit{Hierarchical Modeling and Analysis for Spatial Data,
+  \textnormal{2nd edn}}.
+\newblock Boca Raton, FL: Chapman and Hall/CRC.
+
+\bibitem[{Berkson(1950)}]{Berkson_1950}
+\textsc{Berkson, J.} (1950).
+\newblock Are there two regressions?
+\newblock \textit{Journal of the American Statistical Association} \textbf{45},
+  164--180.
+
+\bibitem[{Beven(1979)}]{Beven1979}
+\textsc{Beven, K.} (1979).
+\newblock A sensitivity analysis of the {P}enman--{M}onteith actual
+  evapotranspiration estimates.
+\newblock \textit{Journal of Hydrology} \textbf{44}, 169--190.
+
+\bibitem[{Billingsley(1995)}]{Billingsley1995}
+\textsc{Billingsley, P.} (1995).
+\newblock \textit{Probability and Measure, \textnormal{3rd edn}}.
+\newblock New York, NY: John Wiley and Sons.
+
+\bibitem[{Christakos(1984)}]{Christakos1984}
+\textsc{Christakos, G.} (1984).
+\newblock On the problem of permissible covariance and variogram models.
+\newblock \textit{Water Resources Research} \textbf{20}, 251--265.
+
+\bibitem[{Cox \& Wermuth(1996)}]{Cox_1996}
+\textsc{Cox, D.~R.} \& \textsc{Wermuth, N.} (1996).
+\newblock \textit{Multivariate Dependencies: Models, Analysis and
+  Interpretation}.
+\newblock Boca Raton, FL: Chapman and Hall/CRC.
+
+\bibitem[{Cressie(1993)}]{Cressie1993}
+\textsc{Cressie, N.} (1993).
+\newblock \textit{Statistics for Spatial Data, \textnormal{rev. edn}}.
+\newblock New York, NY: John Wiley \& Sons.
+
+\bibitem[{Cressie \& Huang(1999)}]{Cressie_1999}
+\textsc{Cressie, N.} \& \textsc{Huang, H.-C.} (1999).
+\newblock Classes of nonseparable, spatio-temporal stationary covariance
+  functions.
+\newblock \textit{Journal of the American Statistical Association} \textbf{94},
+  1330--1339.
+
+\bibitem[{Cressie \& Wikle(1998)}]{CressieWikle1998b}
+\textsc{Cressie, N.} \& \textsc{Wikle, C.~K.} (1998).
+\newblock The variance-based cross-variogram: {Y}ou can add apples and oranges.
+\newblock \textit{Mathematical Geology} \textbf{30}, 789--799.
+
+\bibitem[{Cressie \& Wikle(2011)}]{CressieWikle2011}
+\textsc{Cressie, N.} \& \textsc{Wikle, C.~K.} (2011).
+\newblock \textit{Statistics for Spatio-Temporal Data}.
+\newblock Hoboken, NJ: John Wiley and Sons.
+
+\bibitem[{Finley et~al.(2008)Finley, Banerjee, Ek \&
+  McRoberts}]{Finleyetal2008}
+\textsc{Finley, A.~O.}, \textsc{Banerjee, S.}, \textsc{Ek, A.~R.} \&
+  \textsc{McRoberts, R.~E.} (2008).
+\newblock Bayesian multivariate process modeling for prediction of forest
+  attributes.
+\newblock \textit{Journal of Agricultural, Biological, and Environmental
+  Statistics} \textbf{13}, 60--83.
+
+\bibitem[{Gelfand et~al.(2004)Gelfand, Schmidt, Banerjee \&
+  Sirmans}]{Gelfandetal2004}
+\textsc{Gelfand, A.~E.}, \textsc{Schmidt, A.~M.}, \textsc{Banerjee, S.} \&
+  \textsc{Sirmans, C.~F.} (2004).
+\newblock Nonstationary multivariate process modeling through spatially varying
+  coregionalization (with discussion).
+\newblock \textit{Test} \textbf{13}, 263--312.
+
+\bibitem[{Genton \& Kleiber(2015)}]{GentonKleiber2015}
+\textsc{Genton, M.~G.} \& \textsc{Kleiber, W.} (2015).
+\newblock Cross-covariance functions for multivariate geostatistics.
+\newblock \textit{Statistical Science} \textbf{30}, to appear.
+
+\bibitem[{Gneiting(2002)}]{Gneiting_2002}
+\textsc{Gneiting, T.} (2002).
+\newblock Nonseparable, stationary covariance functions for space--time data.
+\newblock \textit{Journal of the American Statistical Association} \textbf{97},
+  590--600.
+
+\bibitem[{Gneiting et~al.(2010)Gneiting, Kleiber \&
+  Schlather}]{Gneitingetal2010}
+\textsc{Gneiting, T.}, \textsc{Kleiber, W.} \& \textsc{Schlather, M.} (2010).
+\newblock Mat\'{e}rn cross-covariance functions for multivariate random fields.
+\newblock \textit{Journal of the American Statistical Association}
+  \textbf{105}, 1167--1177.
+
+\bibitem[{Heskes \& Zoeter(2002)}]{Heskes_2002}
+\textsc{Heskes, T.} \& \textsc{Zoeter, O.} (2002).
+\newblock Expectation propagation for approximate inference in dynamic
+  {B}ayesian networks.
+\newblock In \textit{Proceedings of the Eighteenth Conference on Uncertainty in
+  Artificial Intelligence}, UAI'02. San Francisco, CA: Morgan Kaufmann
+  Publishers Inc.
+
+\bibitem[{Huang et~al.(2009)Huang, Yao, Cressie \& Hsing}]{Huangetal2009}
+\textsc{Huang, C.}, \textsc{Yao, Y.}, \textsc{Cressie, N.} \& \textsc{Hsing,
+  T.} (2009).
+\newblock Multivariate intrinsic random functions for cokriging.
+\newblock \textit{Mathematical Geosciences} \textbf{41}, 887--904.
+
+\bibitem[{Journel \& Huijbregts(1978)}]{JournelHuijbregts1978}
+\textsc{Journel, A.~G.} \& \textsc{Huijbregts, C.~J.} (1978).
+\newblock \textit{Mining Geostatistics}.
+\newblock London: Academic Press.
+
+\bibitem[{Kolaczyk(2009)}]{Kolaczyk_2009}
+\textsc{Kolaczyk, E.~D.} (2009).
+\newblock \textit{Statistical Analysis of Network Data}.
+\newblock New York, NY: Springer.
+
+\bibitem[{Kot \& Schaffer(1986)}]{Kot_1986}
+\textsc{Kot, M.} \& \textsc{Schaffer, W.~M.} (1986).
+\newblock Discrete-time growth-dispersal models.
+\newblock \textit{Mathematical Biosciences} \textbf{80}, 109--136.
+
+\bibitem[{Lee \& Schachter(1980)}]{Lee_1980}
+\textsc{Lee, D.-T.} \& \textsc{Schachter, B.~J.} (1980).
+\newblock Two algorithms for constructing a {D}elaunay triangulation.
+\newblock \textit{International Journal of Computer and Information Sciences}
+  \textbf{9}, 219--242.
+
+\bibitem[{Lindgren et~al.(2011)Lindgren, Rue \& Lindstr{\"o}m}]{Lindgren_2011}
+\textsc{Lindgren, F.}, \textsc{Rue, H.} \& \textsc{Lindstr{\"o}m, J.} (2011).
+\newblock An explicit link between {G}aussian fields and {Gaussian Markov
+  random fields: {T}he stochastic partial} differential equation approach.
+\newblock \textit{Journal of the Royal Statistical Society, Series B}
+  \textbf{73}, 423--498.
+
+\bibitem[{Majumdar \& Gelfand(2007)}]{MajumdarGelfand2007}
+\textsc{Majumdar, A.} \& \textsc{Gelfand, A.~E.} (2007).
+\newblock Multivariate spatial modeling for geostatistical data using convolved
+  covariance functions.
+\newblock \textit{Mathematical Geology} \textbf{39}, 225--245.
+
+\bibitem[{Myers(1982)}]{Myers1982}
+\textsc{Myers, D.~E.} (1982).
+\newblock Matrix formulation of cokriging.
+\newblock \textit{Mathematical Geology} \textbf{14}, 249--257.
+
+\bibitem[{Myers(1992)}]{Myers1992}
+\textsc{Myers, D.~E.} (1992).
+\newblock Kriging, cokriging, radial basis functions and the role of positive
+  definiteness.
+\newblock \textit{Computers and Mathematics with Applications} \textbf{24},
+  139--148.
+
+\bibitem[{Neal(2003)}]{Neal_2003}
+\textsc{Neal, R.~M.} (2003).
+\newblock Slice sampling.
+\newblock \textit{Annals of Statistics} \textbf{31}, 705--741.
+
+\bibitem[{{R Core Team}(2014)}]{R}
+\textsc{{R Core Team}} (2014).
+\newblock \textit{R: A Language and Environment for Statistical Computing}.
+\newblock Vienna, Austria: R Foundation for Statistical Computing.
+
+\bibitem[{Rauch et~al.(1965)Rauch, Tung \& Striebel}]{Rauch_1965}
+\textsc{Rauch, H.~E.}, \textsc{Tung, F.} \& \textsc{Striebel, C.} (1965).
+\newblock Maximum likelihood estimates of linear dynamic systems.
+\newblock \textit{AIAA Journal} \textbf{3}, 1445--1450.
+
+\bibitem[{Royle \& Berliner(1999)}]{RoyleBerliner1999}
+\textsc{Royle, J.~A.} \& \textsc{Berliner, L.~M.} (1999).
+\newblock A hierarchical approach to multivariate spatial modeling and
+  prediction.
+\newblock \textit{Journal of Agricultural, Biological, and Environmental
+  Statistics} \textbf{4}, 29--56.
+
+\bibitem[{Royle et~al.(1999)Royle, Berliner, Wikle \& Milliff}]{Royleetal1999}
+\textsc{Royle, J.~A.}, \textsc{Berliner, L.~M.}, \textsc{Wikle, C.~K.} \&
+  \textsc{Milliff, R.} (1999).
+\newblock A hierarchical spatial model for constructing wind fields from
+  scatterometer data in the {L}abrador {S}ea.
+\newblock In \textit{Case Studies in Bayesian Statistics IV}, G.~Gatsonis,
+  B.~Carlin, A.~Gelman, M.~West, R.~E. Kass, A.~Carriquiry \& I.~Verdinelli,
+  eds. New York, NY: Springer--Verlag, pp. 367--382.
+
+\bibitem[{Sain \& Cressie(2007)}]{SainCressie2007}
+\textsc{Sain, S.~R.} \& \textsc{Cressie, N.} (2007).
+\newblock A spatial model for multivariate lattice data.
+\newblock \textit{Journal of Econometrics} \textbf{140}, 226--259.
+
+\bibitem[{Sain et~al.(2011)Sain, Furrer \& Cressie}]{Sainetal2011}
+\textsc{Sain, S.~R.}, \textsc{Furrer, R.} \& \textsc{Cressie, N.} (2011).
+\newblock A spatial analysis of multivariate output from regional climate
+  models.
+\newblock \textit{Annals of Applied Statistics} \textbf{5}, 150--175.
+
+\bibitem[{Spiegelhalter et~al.(2002)Spiegelhalter, Best, Carlin \& Van
+  Der~Linde}]{Spiegelhalter_2002}
+\textsc{Spiegelhalter, D.~J.}, \textsc{Best, N.~G.}, \textsc{Carlin, B.~P.} \&
+  \textsc{Van Der~Linde, A.} (2002).
+\newblock Bayesian measures of model complexity and fit.
+\newblock \textit{Journal of the Royal Statistical Society, Series B}
+  \textbf{64}, 583--639.
+
+\bibitem[{Ver~Hoef \& Barry(1998)}]{verHoef_1998}
+\textsc{Ver~Hoef, J.~M.} \& \textsc{Barry, R.~P.} (1998).
+\newblock Constructing and fitting models for cokriging and multivariable
+  spatial prediction.
+\newblock \textit{Journal of Statistical Planning and Inference} \textbf{69},
+  275--294.
+
+\bibitem[{Ver~Hoef \& Cressie(1993)}]{VerHoefCressie1993}
+\textsc{Ver~Hoef, J.~M.} \& \textsc{Cressie, N.} (1993).
+\newblock Multivariable spatial prediction.
+\newblock \textit{Mathematical Geology} \textbf{25}, 219--240.
+
+\bibitem[{Wackernagel(1995)}]{Wackernagel1995}
+\textsc{Wackernagel, H.} (1995).
+\newblock \textit{Multivariate Geostatistics}.
+\newblock Berlin, DE: Springer.
+
+\bibitem[{Webster et~al.(1994)Webster, Atteia \& Dubois}]{Websteretal1994}
+\textsc{Webster, R.}, \textsc{Atteia, O.} \& \textsc{Dubois, J.~P.} (1994).
+\newblock Coregionalization of trace metals in the soil in the {S}wiss {J}ura.
+\newblock \textit{European Journal of Soil Science} \textbf{45}, 205--218.
+
+\bibitem[{Wikle(2002)}]{Wikle_2002}
+\textsc{Wikle, C.~K.} (2002).
+\newblock A kernel-based spectral model for non-{G}aussian spatio-temporal
+  processes.
+\newblock \textit{Statistical Modelling} \textbf{2}, 299--314.
+
+\bibitem[{Zammit-Mangion et~al.(2015)Zammit-Mangion, Rougier, Schoen, Lindgren
+  \& Bamber}]{Zammit_2015}
+\textsc{Zammit-Mangion, A.}, \textsc{Rougier, J.}, \textsc{Schoen, N.},
+  \textsc{Lindgren, F.} \& \textsc{Bamber, J.} (2015).
+\newblock Multivariate spatio-temporal modelling for assessing {A}ntarctica's
+  present-day contribution to sea-level rise.
+\newblock \textit{Environmetrics} \textbf{\hspace{-0.02in}}, doi:
+  10.1002/env.2323, in press.
+
+\end{thebibliography}

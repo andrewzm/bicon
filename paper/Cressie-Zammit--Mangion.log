@@ -1,0 +1,677 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=latex 2014.10.15)  4 MAR 2015 17:25
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**Cressie-Zammit--Mangion.tex
+(./Cressie-Zammit--Mangion.tex
+LaTeX2e <2011/06/27>
+Babel <3.9h> and hyphenation patterns for 2 languages loaded.
+(./biometrika.cls
+Document Class: biometrika 2009/25/05 v1.5 Standard LaTeX document class
+\draftrule=\dimen102
+\trimrule=\dimen103
+(./Biomet-lineno.sty (./lineno.sty
+Package: lineno 2005/11/02 line numbers on paragraphs v4.41
+\linenopenalty=\count79
+\output=\toks14
+\linenoprevgraf=\count80
+\linenumbersep=\dimen104
+\linenumberwidth=\dimen105
+\c@linenumber=\count81
+\c@pagewiselinenumber=\count82
+\c@LN@truepage=\count83
+\c@internallinenumber=\count84
+\c@internallinenumbers=\count85
+\quotelinenumbersep=\dimen106
+\bframerule=\dimen107
+\bframesep=\dimen108
+\bframebox=\box26
+LaTeX Info: Redefining \\ on input line 3056.
+))
+\minute=\count86
+\hour=\count87
+\trimwidth=\dimen109
+\trimheight=\dimen110
+\typewidth=\dimen111
+\typeheight=\dimen112
+\tempdimen=\dimen113
+\normaltextheight=\dimen114
+\normalbaselineskip=\skip41
+\blindfoliodrop=\dimen115
+\enumdim=\dimen116
+\figheight=\dimen117
+\figwidth=\dimen118
+\tabledim=\dimen119
+\tableleftskip=\skip42
+\tablerightskip=\skip43
+\mathindent=\dimen120
+\emathindent=\dimen121
+\bibindent=\dimen122
+\tempbox=\box27
+\aucount=\count88
+\affcount=\count89
+\articlecount=\count90
+\abbrebox=\box28
+\c@part=\count91
+\c@chapter=\count92
+\c@section=\count93
+\c@subsection=\count94
+\topsepi=\skip44
+\topsepii=\skip45
+\topsepiii=\skip46
+\itemsepi=\skip47
+\itemsepii=\skip48
+\itemsepiii=\skip49
+\LabelSep=\dimen123
+\deflistcount=\count95
+\listtextleftmargin=\skip50
+\listtextleftmarginii=\skip51
+\listtextleftmarginiii=\skip52
+\listtextrightmargin=\skip53
+\listlabelleftskip=\skip54
+\listlabelleftskipii=\skip55
+\listlabelleftskipiii=\skip56
+\abovelistskipi=\skip57
+\belowlistskipi=\skip58
+\abovelistskipii=\skip59
+\belowlistskipii=\skip60
+\abovelistskipiii=\skip61
+\belowlistskipiii=\skip62
+\labelsepi=\skip63
+\labelsepii=\skip64
+\labelsepiii=\skip65
+\enumdimwd=\dimen124
+\unnumlistindent=\dimen125
+\itemleftmargin=\dimen126
+\itemlabelsep=\dimen127
+\c@ncount=\count96
+\abovecaptionskip=\skip66
+\belowcaptionskip=\skip67
+\c@figure=\count97
+\tempadimen=\dimen128
+
+(/usr/share/texlive/texmf-dist/tex/generic/epsf/epsf.sty
+This is `epsf.tex' v2.7.4 <14 February 2011>
+\epsffilein=\read1
+\epsfframemargin=\dimen129
+\epsfframethickness=\dimen130
+\epsfrsize=\dimen131
+\epsftmp=\dimen132
+\epsftsize=\dimen133
+\epsfxsize=\dimen134
+\epsfysize=\dimen135
+\pspoints=\dimen136
+)
+\figtempbox=\box29
+\c@table=\count98
+\@footmax=\dimen137
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 1292.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 1292.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 1292.
+\bibindent=\dimen138
+\bibleftmargin=\dimen139
+\bibitemsep=\dimen140
+\bibparsep=\dimen141
+\bibtext=\dimen142
+\biblabelsep=\dimen143
+\bibleftmargini=\dimen144
+\linecount=\count99
+\tempcount=\count100
+ (/usr/share/texlive/texmf-dist/tex/latex/ntheorem/ntheorem.sty
+Style `ntheorem', Version 1.33 <2011/08/15>
+Package: ntheorem 2011/08/15 1.33
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\theorem@style=\toks15
+\theorem@@style=\toks16
+\theorembodyfont=\toks17
+\theoremnumbering=\toks18
+\theorempreskipamount=\skip68
+\theorempostskipamount=\skip69
+\theoremframepreskipamount=\skip70
+\theoremframepostskipamount=\skip71
+\theoreminframepreskipamount=\skip72
+\theoreminframepostskipamount=\skip73
+\theorem@preskip=\toks19
+\theorem@postskip=\toks20
+\theorem@framepreskip=\toks21
+\theorem@framepostskip=\toks22
+\theorem@inframepreskip=\toks23
+\theorem@inframepostskip=\toks24
+\theoremindent=\dimen145
+\theorem@indent=\dimen146
+\theoremrightindent=\dimen147
+\theorem@rightindent=\dimen148
+\theoremheaderfont=\toks25
+\theoremseparator=\toks26
+\theoremprework=\toks27
+\theorempostwork=\toks28
+\theoremsymbol=\toks29
+\qedsymbol=\toks30
+\theoremkeyword=\toks31
+\qedsymbol=\toks32
+\thm@topsep=\skip74
+\thm@topsepadd=\skip75
+Package ntheorem Info: Option `thmmarks' loaded on input line 1175.
+\c@endNonectr=\count101
+\c@currNonectr=\count102
+\mysavskip=\skip76
+)
+\c@currtheoremctr=\count103
+\c@endtheoremctr=\count104
+\c@theorem=\count105
+\c@currlemmactr=\count106
+\c@endlemmactr=\count107
+\c@lemma=\count108
+\c@currcorollaryctr=\count109
+\c@endcorollaryctr=\count110
+\c@corollary=\count111
+\c@currpropositionctr=\count112
+\c@endpropositionctr=\count113
+\c@proposition=\count114
+\c@currdefinitionctr=\count115
+\c@enddefinitionctr=\count116
+\c@definition=\count117
+\c@currassumptionctr=\count118
+\c@endassumptionctr=\count119
+\c@assumption=\count120
+\c@currremarkctr=\count121
+\c@endremarkctr=\count122
+\c@remark=\count123
+\c@currstepctr=\count124
+\c@endstepctr=\count125
+\c@step=\count126
+\c@currconditionctr=\count127
+\c@endconditionctr=\count128
+\c@condition=\count129
+\c@currpropertyctr=\count130
+\c@endpropertyctr=\count131
+\c@property=\count132
+\c@currrestrictionctr=\count133
+\c@endrestrictionctr=\count134
+\c@restriction=\count135
+\c@currexamplectr=\count136
+\c@endexamplectr=\count137
+\c@example=\count138
+\c@curralgoctr=\count139
+\c@endalgoctr=\count140
+\c@algo=\count141
+\c@currproofctr=\count142
+\c@endproofctr=\count143
+\c@proof=\count144
+
+(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip77
+\bibsep=\skip78
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count145
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2013/01/14 v2.14 AMS math features
+\@mathmargin=\skip79
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks33
+\ex@=\dimen149
+)
+LaTeX Info: Redefining \text on input line 39.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen150
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count146
+LaTeX Info: Redefining \frac on input line 210.
+\uproot@=\count147
+\leftroot@=\count148
+LaTeX Info: Redefining \overline on input line 306.
+\classnum@=\count149
+\DOTSCASE@=\count150
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
+\Mathstrutbox@=\box30
+\strutbox@=\box31
+\big@size=\dimen151
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
+\macc@depth=\count151
+\c@MaxMatrixCols=\count152
+\dotsspace@=\muskip10
+\c@parentequation=\count153
+\dspbrk@lvl=\count154
+\tag@help=\toks34
+\row@=\count155
+\column@=\count156
+\maxfields@=\count157
+\andhelp@=\toks35
+\eqnshift@=\dimen152
+\alignsep@=\dimen153
+\tagshift@=\dimen154
+\tagwidth@=\dimen155
+\totwidth@=\dimen156
+\lineht@=\dimen157
+\@envbody=\toks36
+\multlinegap=\skip80
+\multlinetaggap=\skip81
+\mathdisplay@stack=\toks37
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/times.sty
+Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty
+Package: bm 2004/02/26 v1.1c Bold Symbol Support (DPC/FMi)
+\symboldoperators=\mathgroup4
+\symboldletters=\mathgroup5
+\symboldsymbols=\mathgroup6
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 138.
+LaTeX Info: Redefining \bm on input line 204.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
+Package: algorithm2e 2013/01/06 v5.00 algorithms environments
+\c@AlgoLine=\count158
+
+(/usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty
+Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/relsize/relsize.sty
+Package: relsize 2013/03/29 ver 4.1
+)
+********************************************************
+Package `algorithm2e' Release 5.0 -- january 06 2013 --
+- algorithm2e-announce@lirmm.fr mailing list for announcement about releases
+- algorithm2e-discussion@lirmm.fr mailing list for discussion about package
+subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
+- Author: Christophe Fiorio (cfiorio@um2.fr)
+********************************************************
+\skiptotal=\skip82
+\skiplinenumber=\skip83
+\skiprule=\skip84
+\skiphlne=\skip85
+\skiptext=\skip86
+\skiplength=\skip87
+\algomargin=\skip88
+\skipalgocfslide=\skip89
+\algowidth=\dimen158
+\inoutsize=\dimen159
+\inoutindent=\dimen160
+\interspacetitleruled=\dimen161
+\interspacealgoruled=\dimen162
+\interspacetitleboxruled=\dimen163
+\algocf@inoutbox=\box32
+\algocf@inputbox=\box33
+\AlCapSkip=\skip90
+\AlCapHSkip=\skip91
+\algoskipindent=\skip92
+\algocf@nlbox=\box34
+\algocf@hangingbox=\box35
+\algocf@untilbox=\box36
+\algocf@skipuntil=\skip93
+\algocf@capbox=\box37
+\algoheightruledefault=\skip94
+\algoheightrule=\skip95
+\algotitleheightruledefault=\skip96
+\algotitleheightrule=\skip97
+\c@algocfline=\count159
+\c@algocfproc=\count160
+\c@algocf=\count161
+\algocf@algoframe=\box38
+\algocf@algobox=\box39
+) (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup7
+\symAMSb=\mathgroup8
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: dvips.def on input line 130.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/dvips.def
+File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/dvipsnam.def
+File: dvipsnam.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty
+Package: setspace 2011/12/19 v6.7a set line spacing
+)
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
+\bigstrutjot=\dimen164
+)
+(./Cressie-Zammit--Mangion.aux)
+\openout1 = `Cressie-Zammit--Mangion.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 140.
+LaTeX Font Info:    ... okay on input line 140.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 140.
+LaTeX Font Info:    ... okay on input line 140.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 140.
+LaTeX Font Info:    ... okay on input line 140.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 140.
+LaTeX Font Info:    ... okay on input line 140.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 140.
+LaTeX Font Info:    ... okay on input line 140.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 140.
+LaTeX Font Info:    ... okay on input line 140.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 140.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <16> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 167.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 167.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1phv.fd
+File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
+)
+LaTeX Font Info:    Try loading font information for U+msa on input line 167.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 167.
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+Underfull \hbox (badness 4595) in paragraph at lines 173--175
+\OT1/ptm/m/it/9 Some key words\OT1/ptm/m/n/9 : Mul-ti-vari-ate geo-statis-tics;
+ Cross-covariance func-tion; Asym-me-try; Con-di-tional mod-els.
+ []
+
+
+Overfull \vbox (62.0pt too high) has occurred while \output is active []
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 187.
+
+Overfull \vbox (19.51196pt too high) has occurred while \output is active []
+
+
+[1
+
+]
+Underfull \hbox (badness 1442) in paragraph at lines 199--200
+[]\OT1/ptm/m/n/10.95 In this ar-ti-cle, we in-tro-duce the con-di-tional ap-pro
+ach with the bi-vari-ate case where
+ []
+
+
+Overfull \vbox (62.0pt too high) has occurred while \output is active []
+
+
+Overfull \vbox (1.06897pt too high) has occurred while \output is active []
+
+
+[2]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \vbox (62.0pt too high) has occurred while \output is active []
+
+
+Overfull \vbox (1.1294pt too high) has occurred while \output is active []
+
+
+[3]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \vbox (62.0pt too high) has occurred while \output is active []
+
+
+Overfull \vbox (1.06897pt too high) has occurred while \output is active []
+
+
+[4]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \vbox (62.0pt too high) has occurred while \output is active []
+
+
+Overfull \vbox (1.1294pt too high) has occurred while \output is active []
+
+
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 312--314
+\OT1/ptm/m/n/10.95 Recall that $\OML/cmm/m/it/10.95 Z[]\OT1/cmr/m/n/10.95 (\OML
+/cmm/m/it/10.95 s[]\OT1/cmr/m/n/10.95 ) = \OML/cmm/m/it/10.95 Y[]\OT1/cmr/m/n/1
+0.95 (\OML/cmm/m/it/10.95 s[]\OT1/cmr/m/n/10.95 ) + \OML/cmm/m/it/10.95 "[]\OT1
+/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 s[]\OT1/cmr/m/n/10.95 )$\OT1/ptm/m/n/10.95 
+, $\OML/cmm/m/it/10.95 E\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 "[]\OT1/cmr/m/n
+/10.95 (\OMS/cmsy/m/n/10.95 ^^A\OT1/cmr/m/n/10.95 )) = 0$\OT1/ptm/m/n/10.95 , a
+nd $[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 "[]\OT1/cmr/m/n/10.95 (\OMS/cmsy/
+m/n/10.95 ^^A\OT1/cmr/m/n/10.95 )) = \OML/cmm/m/it/10.95 ^^[[]\OT1/cmr/m/n/10.9
+5 ;  []\OML/cmm/m/it/10.95 i \OT1/cmr/m/n/10.95 =
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \vbox (62.0pt too high) has occurred while \output is active []
+
+
+Overfull \vbox (1.06897pt too high) has occurred while \output is active []
+
+
+[6]
+(art/Fig1.eps
+)
+
+Overfull \vbox (180.8pt too high) detected at line 363
+ []
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 363.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \vbox (62.0pt too high) has occurred while \output is active []
+
+
+Overfull \vbox (1.1294pt too high) has occurred while \output is active []
+
+
+[7]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \vbox (62.0pt too high) has occurred while \output is active []
+
+
+Overfull \vbox (1.06897pt too high) has occurred while \output is active []
+
+
+[8]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \vbox (62.0pt too high) has occurred while \output is active []
+
+
+Overfull \vbox (1.1294pt too high) has occurred while \output is active []
+
+
+[9]
+Overfull \vbox (62.0pt too high) has occurred while \output is active []
+
+
+Overfull \vbox (1.06897pt too high) has occurred while \output is active []
+
+
+[10]
+Underfull \hbox (badness 3219) in paragraph at lines 475--476
+[]\OT1/ptm/m/n/10.95 We demon-strate the flex-i-bil-ity of the con-di-tional ap
+-proach on the bi-vari-ate min-i-
+ []
+
+
+Underfull \vbox (badness 3078) has occurred while \output is active []
+
+
+Overfull \vbox (62.0pt too high) has occurred while \output is active []
+
+
+Overfull \vbox (1.1294pt too high) has occurred while \output is active []
+
+
+[11]
+(art/Fig2.eps
+)
+
+Overfull \vbox (120.8pt too high) detected at line 503
+ []
+
+(art/Fig3.eps
+)
+
+Overfull \vbox (228.8pt too high) detected at line 514
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \vbox (62.0pt too high) has occurred while \output is active []
+
+
+Overfull \vbox (1.06897pt too high) has occurred while \output is active []
+
+
+[12]
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 541.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+Overfull \vbox (62.0pt too high) has occurred while \output is active []
+
+
+Overfull \vbox (1.1294pt too high) has occurred while \output is active []
+
+
+[13] (./Cressie-Zammit--Mangion.bbl
+Overfull \vbox (62.0pt too high) has occurred while \output is active []
+
+
+Overfull \vbox (1.06897pt too high) has occurred while \output is active []
+
+
+[14])
+Overfull \vbox (62.0pt too high) has occurred while \output is active []
+
+
+Overfull \vbox (1.1294pt too high) has occurred while \output is active []
+
+
+[15]
+Underfull \hbox (badness 3503) in paragraph at lines 621--623
+\OT1/ptm/m/n/10 For $\OML/cmm/m/it/10 C[]\OT1/cmr/m/n/10 (\OMS/cmsy/m/n/10 ^^A\
+OT1/cmr/m/n/10 )$ \OT1/ptm/m/n/10 and $\OML/cmm/m/it/10 C[]\OT1/cmr/m/n/10 (\OM
+S/cmsy/m/n/10 ^^A\OT1/cmr/m/n/10 )$ \OT1/ptm/m/n/10 to be valid cross-covarianc
+e func-tions, it is re-quired that $\OT1/cmr/m/n/10 ^^@[](\OML/cmm/m/it/10 !\OT
+1/cmr/m/n/10 ) \OMS/cmsy/m/n/10 ^^@
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \vbox (62.0pt too high) has occurred while \output is active []
+
+
+Overfull \vbox (1.06897pt too high) has occurred while \output is active []
+
+
+[16]
+Overfull \vbox (62.0pt too high) has occurred while \output is active []
+
+
+Overfull \vbox (1.1294pt too high) has occurred while \output is active []
+
+
+[17]
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 695.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <5.5> not available
+(Font)              size <5> substituted on input line 695.
+
+
+LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <5.5> not available
+(Font)              size <5> substituted on input line 695.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <5.5> not available
+(Font)              size <5> substituted on input line 695.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <5.5> not available
+(Font)              size <5> substituted on input line 695.
+
+
+LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <5.5> not available
+(Font)              size <5> substituted on input line 695.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <5.5> not available
+(Font)              size <5> substituted on input line 695.
+
+LaTeX Font Info:    Font shape `OT1/pcr/m/it' in size <11> not available
+(Font)              Font shape `OT1/pcr/m/sl' tried instead on input line 720.
+\tf@thm=\write3
+\openout3 = `Cressie-Zammit--Mangion.thm'.
+
+
+Overfull \vbox (62.0pt too high) has occurred while \output is active []
+
+
+Overfull \vbox (1.06897pt too high) has occurred while \output is active []
+
+
+[18] (./Cressie-Zammit--Mangion.aux)
+
+LaTeX Font Warning: Size substitutions with differences
+(Font)              up to 0.5pt have occured.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 4930 strings out of 495029
+ 64673 string characters out of 6181522
+ 145896 words of memory out of 5000000
+ 8083 multiletter control sequences out of 15000+600000
+ 32431 words of font info for 99 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 31i,17n,26p,1426b,301s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on Cressie-Zammit--Mangion.dvi (18 pages, 120504 bytes).

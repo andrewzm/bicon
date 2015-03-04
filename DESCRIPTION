@@ -1,0 +1,42 @@
+Package: bicon
+Type: Package
+Title: Bivariate modelling using the conditional approach
+Version: 0.1.0
+Date: 2015-02-27
+Authors@R: c(person("Andrew", "Zammit-Mangion", role = c("aut", "cre"),
+    email = "andrewzm@gmail.com"))
+Suggests:
+    knitr,
+    dplyr,
+    tidyr,
+    gridExtra,
+    grid,
+    extrafont,
+    INLA,
+    slice,
+    maptools
+Description: This is a supplement package to the paper 'Multivariate Spatial
+    Covariance Models: A Conditional Approach' by Cressie and Zammit-Mangion
+    (2015, in preparation). This package can be used for the construction of
+    covariance matrices for bivariate processes modelled using the
+    conditional approach. The covariance functions are assumed to be Matern
+    (3/2) covariance functions whilst functionality is provided for
+    constructing interaction matrices using the bisquare function as the
+    interaction function. The accompanying vignettes may be used to replicate
+    the studies found in the paper.
+Imports:
+    Rcpp,
+    ggplot2,
+    Matrix,
+    gpclib,
+    deldir,
+    network,
+    akima,
+    scales
+LinkingTo: Rcpp
+LazyData: true
+Depends:
+    R (>= 3.0)
+VignetteBuilder: knitr
+License: GPL (>= 2)
+NeedsCompilation: yes

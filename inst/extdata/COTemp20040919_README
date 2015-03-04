@@ -1,0 +1,9 @@
+Name: Minimum-Maximum temperatures data set used in Genton and Kleiber (2014)
+Owner: Andrew Zammit Mangion
+E-mail: azm@uow.edu.au
+Description: The .txt file contains four columns:
+- Minimum temperature residual
+- Maximum temperature residual
+- Longitude
+- Latitude 
+Date: 13/10/2014

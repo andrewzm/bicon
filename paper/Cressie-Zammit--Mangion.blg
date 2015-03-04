@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: Cressie-Zammit--Mangion.aux
+The style file: biometrika.bst
+Database file #1: Bibliography.bib
+You've used 40 entries,
+            2826 wiz_defined-function locations,
+            904 strings with 11039 characters,
+and the built_in function-call counts, 19376 in all, are:
+= -- 1885
+> -- 798
+< -- 28
++ -- 324
+- -- 268
+* -- 1692
+:= -- 3422
+add.period$ -- 122
+call.type$ -- 40
+change.case$ -- 281
+chr.to.int$ -- 40
+cite$ -- 40
+duplicate$ -- 895
+empty$ -- 1452
+format.name$ -- 391
+if$ -- 3781
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 50
+newline$ -- 204
+num.names$ -- 162
+pop$ -- 281
+preamble$ -- 1
+purify$ -- 247
+quote$ -- 0
+skip$ -- 478
+stack$ -- 0
+substring$ -- 1264
+swap$ -- 204
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 330
+warning$ -- 0
+while$ -- 178
+width$ -- 0
+write$ -- 515
