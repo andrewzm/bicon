@@ -5,16 +5,12 @@ date: "Sunday, March 01, 2015"
 output:
   pdf_document:
     fig_caption: yes
-    latex_engine: xelatex
-vignette: >
-  %\VignetteIndexEntry{Bivariate conditional spatial models: Simulation example in Section 3.2}
-  %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
-header-includes:
-   - \usepackage{natbib}
 bibliography: Bibliography.bib
+header-includes: \usepackage{natbib}
 csl: apa.csl
 Extension: raw_tex
+vignette: |
+  %\VignetteIndexEntry{Bivariate conditional spatial models: Simulation example in Section 3.2} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
 ---
 \newcommand{\Deltab} {\Delta}
 \newcommand{\intd} {\textrm{d}}
@@ -54,7 +50,7 @@ Extension: raw_tex
 \newcommand{\vect}{\mathrm{vec}}
 \newcommand{\Gau}{\mathrm{Gau}}
 \newcommand{\RR}{\mathbb{R}}
-\renewcommand{\T}{{ \mathrm{\scriptscriptstyle T} }}
+\newcommand{\T}{{ \mathrm{\scriptscriptstyle T} }}
 
 ## Setting up
 
@@ -339,7 +335,6 @@ Sigma_plot <- LinePlotTheme() +
     coord_fixed() +
   ylab("s") + xlab("u") + scale_y_reverse() + 
     theme(panel.margin = grid::unit(1, "lines"))
-extrafont::loadfonts(device = "postscript") ## for postscript()
 if(print_figs) ggsave(Sigma_plot, 
                       filename = file.path(img_path,"Sigma.eps"),
                       width=8,height=7,family="Arial") 

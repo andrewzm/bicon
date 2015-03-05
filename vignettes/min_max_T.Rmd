@@ -5,15 +5,12 @@ date: "Sunday, March 01, 2015"
 output:
   pdf_document:
     fig_caption: yes
-    latex_engine: xelatex
-vignette: >
-  %\VignetteIndexEntry{Bivariate conditional spatial models: Case study in Section 5}
-  %\VignetteEngine{knitr::rmarkdown}
-  \usepackage[utf8]{inputenc}
 bibliography: Bibliography.bib
 header-includes: \usepackage{natbib}
 csl: apa.csl
 Extension: raw_tex
+vignette: |
+  %\VignetteIndexEntry{Bivariate conditional spatial models: Case study in Section 5} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
 ---
 \newcommand{\Deltab} {\Delta}
 \newcommand{\intd} {\textrm{d}}
@@ -54,7 +51,7 @@ Extension: raw_tex
 \newcommand{\vect}{\mathrm{vec}}
 \newcommand{\Gau}{\mathrm{Gau}}
 \newcommand{\RR}{\mathbb{R}}
-\renewcommand{\T}{{ \mathrm{\scriptscriptstyle T} }}
+\newcommand{\T}{{ \mathrm{\scriptscriptstyle T} }}
 
 ## Setting up
 
@@ -352,7 +349,7 @@ slice_rho_trans <- slice::slice(1)
 slice_bisquare <- slice::slice(3)
 ```
 
-We can now start the Gibbs sampler, for which we will be requiring the conditional distributions. Denote $\theta$ as the collection of unknown parameters and denote $\rho_\varepsilon = 2\Phi(\tilde\rho_\varepsilon) - 1$, $r = \exp(\tilde{r})$ and $\kappa_i = \exp(\tilde\kappa_i)$, where the sign $~\~$ is used to note the (transformed) variable we actually sample from. Then
+We can now start the Gibbs sampler, for which we will be requiring the conditional distributions. Denote $\theta$ as the collection of unknown parameters and denote $\rho_\varepsilon = 2\Phi(\tilde\rho_\varepsilon) - 1$, $r = \exp(\tilde{r})$ and $\kappa_i = \exp(\tilde\kappa_i)$, where the sign \textasciitilde is used to note the (transformed) variable we actually sample from. Then
 
 \begin{align}
 p(\Yvec | \Zvec, \theta) &\propto p(\Zvec | \Yvec,\thetab)p(\Yvec| \thetab) \\
@@ -524,7 +521,6 @@ Deviance_mean <- as.numeric(-2*( -0.5*m*log(2*pi) +
                            0.5*crossprod(chol(mean(prec0_samp[MCMC_sub])*Qo_base) %*% 
                                                (Z - C %*%apply(Y_samp,1,mean)))))
 DIC <- 2*mean(Deviance_samp[MCMC_sub]) - Deviance_mean
-breakme
 ```
 
 Obviously, with such few samples the results are not of much use. Instead, we saved the results using `N`=50000, `burn_in` = 1000 and `thin` =100 using the following piece of code
