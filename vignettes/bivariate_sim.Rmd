@@ -9,8 +9,10 @@ bibliography: Bibliography.bib
 header-includes: \usepackage{natbib}
 csl: apa.csl
 Extension: raw_tex
-vignette: |
-  %\VignetteIndexEntry{Bivariate conditional spatial models: Simulation example in Section 3.2} %\VignetteEngine{knitr::rmarkdown} \usepackage[utf8]{inputenc}
+vignette: >
+  %\VignetteIndexEntry{Bivariate conditional spatial models: Simulation example in Section 3.2}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
 \newcommand{\Deltab} {\Delta}
 \newcommand{\intd} {\textrm{d}}
