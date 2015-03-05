@@ -110,7 +110,7 @@ model_name <- switch(model,"independent","pointwise","moving_average")
 img_path <- "../paper/art"                  ## Where to save the figures
 show_figs <- 1                              ## Show the figures in document
 print_figs <-  0                            ## Print figures to file (leave =0)
-long_analysis <- 1                          ## Run a long MCMC chain (1) or not (0)
+long_analysis <- 0                          ## Run a long MCMC chain (1) or not (0)
 ```
 
 ## The data
