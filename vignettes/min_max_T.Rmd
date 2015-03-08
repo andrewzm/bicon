@@ -618,7 +618,7 @@ We can now plot the domain of interest overlaying the state boundaries.
 
 ```{r,fig.cap="State boundaries in a region of the USA (dashed lines), with the domain of interest enclosed by a bounding polygon (solid line)."}
 Stateplot <- LinePlotTheme() + 
-  geom_path(data=States_fort,aes(long,lat,group=group,label=Name),linetype="dashed") +
+  geom_path(data=States_fort,aes(long,lat,group=group,label=Name),linetype="dotted") +
   geom_text(data=State_summaries,aes(long,lat,label=Name)) +
   coord_fixed(,xlim=c(-115,-95),ylim=c(33,45)) + 
   geom_path(data=conv_hull,aes(x,y),size=1,,colour="black") +
@@ -640,7 +640,7 @@ meshplot <- function(g,include_obs=1L) {
   p <- p + 
     xlab('lon') + ylab('lat') + 
     coord_fixed(xlim=c(-110,-101.5),ylim=c(36.5,41.5)) +
-    geom_path(data=States_fort,aes(long,lat,group=group,label=Name),linetype="dashed") +
+    geom_path(data=States_fort,aes(long,lat,group=group,label=Name),linetype="dotted") +
     geom_path(data=conv_hull,aes(x,y),size=1,,colour="black")
   if(include_obs) p <- p + geom_point(data = temps,aes(lon,lat),size=3)
   p
@@ -657,7 +657,6 @@ if(show_figs)
 To combine the figures into a single panel we use
 
 ```{r,eval=FALSE}
-library(gridExtra)
 g <- arrangeGrob(Stateplot,Colorado_Mesh,ncol=2)
 if(print_figs) ggsave(g, 
                       filename = file.path(img_path,"Fig2.eps"),
