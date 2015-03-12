@@ -552,7 +552,11 @@ save(model_name,
 and now re-load these results using
 
 ```{r}
-data(moving_average)
+if(!long_analysis) {
+  if(model == 1)  data(independent)
+  if(model == 2)  data(pointwise)
+  if(model == 3)  data(moving_average)
+}
 ```
 
 If we wish to write out the results to a text file we can use the following code (not evaluated)
@@ -693,7 +697,8 @@ Mesh["Y2"] <- apply(Y_samp,1,mean)[-(1:n1)]
 Mesh["diffY"] <- Mesh["Y2"] - Mesh["Y1"]
 
 Y1plot <- plot_interp(Mesh,"Y1",ds=200,min=-7.9,max=7.9,leg_title="Y1 (degC)",reverse=T) %>% 
-  meshplot(include_obs=0L) 
+  meshplot(include_obs=0L) %>%
+  mesh_cities()
 
 Y1plot2 <- LinePlotTheme() %>% ## BW version
   meshplot(include_obs=0L) %>% 
@@ -704,7 +709,8 @@ Y1plot2 <- LinePlotTheme() %>% ## BW version
   theme(text = element_text(size = 35))
 
 Y2plot <- plot_interp(Mesh,"Y2",ds=200,min=-7.9,max=7.9,leg_title="Y2 (degC)",reverse=T) %>% 
-  meshplot(include_obs=0L) 
+  meshplot(include_obs=0L)  %>%
+  mesh_cities()
 
 Y2plot2 <- LinePlotTheme() %>%   ## BW version
   meshplot(include_obs=0L) %>% 
@@ -745,7 +751,7 @@ if(show_figs)   print(Y2plot %>%
 
 ```{r,fig.cap="Prior (light grey) and posterior (dark grey) median (solid line) and inter-quartile ranges (enclosed by dashed lines) of the interaction function $b_o(h)$ of Model 3, along a unit vector $e$ originating at Denver (DE) in the direction of Fort Collins (FC)."}
 ### KERNEL VECTOR PLOT
-if(model==2) {
+if(model==3) {
   
   ## Kernel plots
   dh = 0.04
@@ -799,7 +805,7 @@ if(model==2) {
       geom_line(data=h,aes(x=he,y=uq),linetype=2,size=0.4) 
   }
   g <- plot_h(LinePlotTheme(),hprior,col="light grey",al=1) %>%
-  plot_h(hpost,col="dark grey",al=1) + 
+  plot_h(hpost,col="black",al=0.5) + 
     ylim(-0.15,0.4) + 
     ylab(expression(paste(b[o],"(h",bold(e),")",sep = "")))+ 
     xlab("h") +
@@ -823,14 +829,21 @@ if(model==2) {
   
   g_all <- arrangeGrob(arrangeGrob(Y1plot,Y2plot,ncol=1),g + 
                          theme(text = element_text(size = 50)),ncol=2)
-  if (print_figs) ggsave(g_all,
-                   filename = file.path(img_path,"Fig3.eps"),
-                   width=28,height=16,family="Arial") 
+  if (print_figs) {
+      cairo_ps(filename = file.path(img_path,"Fig3.eps"),
+                   width=28,height=16,family="Arial")
+      print(g_all)
+      dev.off()
+  }
   g_all <- arrangeGrob(arrangeGrob(Y1plot2,Y2plot2,ncol=1),g + 
                              theme(text = element_text(size = 50)),ncol=2)
-  if (print_figs) ggsave(g_all,
-                           filename = file.path(img_path,"Fig3BW.eps"),
-                          width=28,height=16,family="Arial") 
+  if (print_figs){
+      cairo_ps(filename = file.path(img_path,"Fig3BW.eps"),
+                   width=28,height=16,family="Arial")
+      print(g_all)
+      dev.off()
+  }
+
 }
 
 
