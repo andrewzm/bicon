@@ -18,9 +18,9 @@ plot(x, y, ...)
 a ggplot2 object
 }
 \description{
-This function is the general one used for plotting/visualising objects mesh objects
+This function is the general one used for plotting/visualising objects mesh objects.
 }
 \examples{
-## See vignette
+## See vignette min_max_T
 }
 

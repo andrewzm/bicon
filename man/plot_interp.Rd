@@ -14,7 +14,7 @@ plot_interp(x, y, ds, ...)
 \S4method{plot}{FEBasis,ANY}(x, y, ...)
 }
 \arguments{
-\item{x}{a Mesh object}
+\item{x}{a mesh object}
 
 \item{y}{a character indicated which column to plot}
 
@@ -32,6 +32,6 @@ This function takes a mesh and a column name in the mesh, to generate an interpo
 field of the indicated column
 }
 \examples{
-## See vignette
+## See vignette min_max_T
 }
 

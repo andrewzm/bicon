@@ -352,18 +352,18 @@ slice_rho_trans <- slice::slice(1)
 slice_bisquare <- slice::slice(3)
 ```
 
-We can now start the Gibbs sampler, for which we will be requiring the conditional distributions. Denote $\theta$ as the collection of unknown parameters and denote $\rho_\varepsilon = 2\Phi(\tilde\rho_\varepsilon) - 1$, $r = \exp(\tilde{r})$ and $\kappa_i = \exp(\tilde\kappa_i)$, where the sign \textasciitilde is used to note the (transformed) variable we actually sample from. Then
+We can now start the Gibbs sampler, for which we will be requiring the conditional distributions. Denote $\theta = (\sigma_\varepsilon^2,\rho_\varepsilon, \sigma^2_{11}, \sigma^2_{2|1}, \kappa_{11}, \kappa_{2|1},A,r)'$ as the collection of unknown parameters and $\tilde\theta = (\sigma_\varepsilon^{-2},\tilde\rho_\varepsilon, \sigma^{-2}_{11}, \sigma^{-2}_{2|1}, \tilde\kappa_{11}, \tilde\kappa_{2|1},A,\tilde{r})'$ as the transformed parameters we actually sample from. Recall from @CressieZammit2015 that $\rho_\varepsilon = 2\Phi(\tilde\rho_\varepsilon) - 1$, $r = \exp(\tilde{r})$ and $\kappa_i = \exp(\tilde\kappa_i)$. Then
 
 \begin{align}
-p(\Yvec | \Zvec, \theta) &\propto p(\Zvec | \Yvec,\thetab)p(\Yvec| \thetab) \\
-p(\sigma_\varepsilon^{-2} | \Yvec,\Zvec, \theta^{/\sigma_\varepsilon^{-2} }) &\propto p(\Zvec | \Yvec,\thetab)p(\sigma_\varepsilon^{-2})\\
-p(\tilde\rho_\varepsilon | \Yvec,\Zvec, \theta^{/\tilde\rho_\varepsilon }) &\propto p(\Zvec | \Yvec,\thetab)p(\tilde\rho_\varepsilon )\\
-p(\sigma^{-2}_{11} | \Yvec,\Zvec, \theta^{/\sigma^{-2}_{11}}) &\propto p(\Yvec_1 | \thetab)p(\sigma^{-2}_{11})\\
-p(\sigma^{-2}_{2|1} | \Yvec,\Zvec, \theta^{/\sigma^{-2}_{2|1}}) &\propto p(\Yvec_2 | \Yvec_1, \thetab)p(\sigma^{-2}_{2|1})\\
-p(\tilde\kappa_{11} | \Yvec,\Zvec, \theta^{/\tilde\kappa_{11}}) &\propto p(\Yvec_1 | \thetab)p(\tilde\kappa_{11})\\
-p(\tilde\kappa_{2|1} | \Yvec,\Zvec, \theta^{/\tilde\kappa_{2|1}}) &\propto p(\Yvec_2 | \Yvec_1, \thetab)p(\tilde\kappa_{2|1})\\
-p(A | \Yvec,\Zvec, \theta^{/A}) &\propto p(\Yvec_2 | \Yvec_1, \thetab)p(A)\\
-p(\Deltab,\tilde r | \Yvec,\Zvec, \theta^{/(\Deltab,\tilde r)}) &\propto p(\Yvec_2 | \Yvec_1, \thetab)p(\Deltab)p(\tilde r)
+p(\Yvec | \Zvec, \tilde\theta) &\propto p(\Zvec | \Yvec,\tilde\thetab)p(\Yvec| \tilde\thetab) \\
+p(\sigma_\varepsilon^{-2} | \Yvec,\Zvec, \tilde\theta^{/\sigma_\varepsilon^{-2} }) &\propto p(\Zvec | \Yvec,\tilde\thetab)p(\sigma_\varepsilon^{-2})\\
+p(\tilde\rho_\varepsilon | \Yvec,\Zvec, \tilde\theta^{/\tilde\rho_\varepsilon }) &\propto p(\Zvec | \Yvec,\tilde\thetab)p(\tilde\rho_\varepsilon )\\
+p(\sigma^{-2}_{11} | \Yvec,\Zvec, \tilde\theta^{/\sigma^{-2}_{11}}) &\propto p(\Yvec_1 | \tilde\thetab)p(\sigma^{-2}_{11})\\
+p(\sigma^{-2}_{2|1} | \Yvec,\Zvec, \tilde\theta^{/\sigma^{-2}_{2|1}}) &\propto p(\Yvec_2 | \Yvec_1, \tilde\thetab)p(\sigma^{-2}_{2|1})\\
+p(\tilde\kappa_{11} | \Yvec,\Zvec, \tilde\theta^{/\tilde\kappa_{11}}) &\propto p(\Yvec_1 | \tilde\thetab)p(\tilde\kappa_{11})\\
+p(\tilde\kappa_{2|1} | \Yvec,\Zvec, \tilde\theta^{/\tilde\kappa_{2|1}}) &\propto p(\Yvec_2 | \Yvec_1, \tilde\thetab)p(\tilde\kappa_{2|1})\\
+p(A | \Yvec,\Zvec, \tilde\theta^{/A}) &\propto p(\Yvec_2 | \Yvec_1, \tilde\thetab)p(A)\\
+p(\Deltab,\tilde r | \Yvec,\Zvec, \tilde\theta^{/(\Deltab,\tilde r)}) &\propto p(\Yvec_2 | \Yvec_1, \tilde\thetab)p(\Deltab)p(\tilde r)
 \end{align}
 
 We do not discuss the algorithm below in detail, as it simply carries out the updates according to the conditional distributions listed above. However, there are a couple of points are worth mentioning:

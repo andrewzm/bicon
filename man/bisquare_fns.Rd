@@ -4,7 +4,7 @@
 \alias{bisquare_2d}
 \alias{bisquare_B}
 \alias{bisquare_fns}
-\title{Bisquare function in one dimension}
+\title{Bisquare function}
 \usage{
 bisquare_1d(h, delta = 0, r = 1, A = 1)
 
@@ -36,7 +36,7 @@ bisquare_B(h1, h2, delta = c(0, 0), r = 1, A = 1, areas = rep(1,
 The bisquare function
 }
 \details{
-The bisquare function is given by \deqn{b(s,v) \equiv \left\{\begin{array}{ll} A\{1 - (|v- s - \Delta|/r)^2\}^2, &| v -s  - \Delta| \le r \\ 0, & \textrm{otherwise}. \end{array} \right.}{b(s,v) =  A{1 - (|v- s - d|/r)^2}^2  if | v -s  - d| <= r,  0 otherwise}
+The bisquare function (shifted by \eqn{\Delta}) is given by \deqn{b(s,v) \equiv \left\{\begin{array}{ll} A\{1 - (|v- s - \Delta|/r)^2\}^2, &| v -s  - \Delta| \le r \\ 0, & \textrm{otherwise}. \end{array} \right.}{b(s,v) =  A{1 - (|v- s - d|/r)^2}^2  if | v -s  - d| <= r,  0 otherwise}
 The function \code{bisquare_1d} accepts \code{h} in any shape or size, while for \code{bisquare_2d}, \code{h1} and \code{h2} need to be vectors of the same size. The parameter \code{delta} needs to be equal to one or two in length, depending on the spatial dimension.
 
 The function \code{bisquare_B} is used to construct the matrix \eqn{B} given the bisquare parameters. It is meant to be used in problems of 2 dimensions.

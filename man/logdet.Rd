@@ -9,7 +9,7 @@ logdet(L)
 \item{L}{the Cholesky factor of Q}
 }
 \description{
-Find the log determinant of a matrix Q from its Cholesky factor L
+Find the log determinant of a matrix Q from its Cholesky factor L.
 }
 \examples{
 require(Matrix)

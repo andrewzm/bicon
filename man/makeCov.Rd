@@ -39,7 +39,7 @@ Covariance (or precision) matrix
 Construct the covariance or precision matrix for the bivariate model constructed using the conditional approach.
 }
 \details{
-Both C_{11} and C_{2|1} are Matern covariance functions with smoothness 3/2. Covariance matrices are computed from Matern covariance functions using the vector of distances \code{r}, so that Sigma[1,1] = cov(Y1(s),Y1(s+r[1])), Sigma[1 + n,1] = cov(Y2(s),Y1(s+r[1])) and so on. Currently the grids on which Y1 and Y2 are evaluated need to be identical.
+Both C_{11} and C_{2|1} are Matern covariance functions with smoothness parameter equal to 3/2. Covariance matrices are computed from Matern covariance functions using the vector of distances \code{r}, so that Sigma[1,1] = cov(Y1(s),Y1(s+r[1])), Sigma[1 + n,1] = cov(Y2(s),Y1(s+r[1])) and so on. Currently the grids on which Y1 and Y2 are evaluated need to be identical.
 
 The matrix \eqn{B} is the interaction matrix. The full covariance matrix returned is \deqn{\Sigma =   \left( \begin{array}{cc}\Sigma_{11} & \Sigma_{11}B' \\ B \Sigma_{11} & \Sigma_{2\mid 1}+B\Sigma_{11}B'  \end{array}\right).}{Sigma = [Sigma_{11} & Sigma_{11}B' ; B Sigma_{11} & Sigma_{2|1} + B Sigma_{11}B'].}
 }

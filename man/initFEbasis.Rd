@@ -16,10 +16,10 @@ initFEbasis(p, t, K)
 Object of class \code{FEBasis}
 }
 \description{
-This function initialises an object of class \code{FEBasis} which defines a set of `tent' basis functions over a pre-specified triangulation in 2-D
+This function initialises an object of class \code{FEBasis} which defines a set of elemental `tent' basis functions over a pre-specified triangulation in 2-D
 }
 \examples{
-## See vignette
+## See vignette min_max_T
 }
 \keyword{basis}
 \keyword{elements,}

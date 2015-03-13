@@ -12,6 +12,6 @@
 Methods for \code{"[<-"}, i.e., extraction or subsetting of elements in the data frame of the mesh object
 }
 \examples{
-## See vignette
+## See vignette min_max_T
 }
 

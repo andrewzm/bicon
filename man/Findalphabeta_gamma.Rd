@@ -8,15 +8,21 @@ Findalphabeta_gamma(pars, p5, p95)
 \arguments{
 \item{pars}{the shape and rate parameters (in that order) of the Gamma distribution}
 
-\item{p5}{the 5 percentile of the desired error distribution}
+\item{p5}{the 5-th percentile of the desired error distribution}
 
-\item{p95}{the 95 percentils of the desired error distribution}
+\item{p95}{the 95-th percentile of the desired error distribution}
 }
 \value{
-A numeric which is a measure of the discrepancy between the Gamma distribution over the precision and the 5/95 percentiles of the error.
+A measure of discrepancy between the Gamma distribution with parameters \code{par} and the desired 5-th 95-th percentiles of the error signal.
 }
 \description{
-This function returns the normalised difference between specified and required 5 and 95 percentiles of the Gamma distribution. The percentiles represent those of the required error, i.e. the square root of the variance. For example, if the error of an observation is believed to be between 1 and 5, with 90\% credibility, then we can see how distant a Gamma distribution over the precision with shape and rate parameters in \code{pars} differs from this belief by calling \code{Findalphabeta_gamma(pars,1,5)}. This function can then be passed to an optimisation routine to find better values for \code{pars}.
+See details below.
+}
+\details{
+Assume that in our model there is an error term (for example, observation error) \eqn{e \sim \mathcal{N}(0,\sigma^2)} and we are required to estimate the precision, \eqn{\sigma^{-2}}. Assume further that we have sufficient prior knowledge to know that \eqn{F_e(0.05)} = \code{p5} and \eqn{F_e(0.95)} = \code{p95}, where \code{F_e} is the cumulative distribution function of \eqn{e} and \code{p5} and \code{p95} are known. This function helps configure a prior distribution over \eqn{\sigma^{-2}} which reflects this prior belief. Specifically, let \eqn{\Lambda_{\alpha,\beta}} be the cumulative distribution function of the Gamma distribution with parameters \eqn{\alpha} and \eqn{\beta}. Then this function returns the discrepancy
+\deqn{\frac{\Lambda_{\alpha,\beta}(0.05) - 1/(p95)^2}{1/(p95)^2}  + \frac{\Lambda_{\alpha,\beta}(0.95) - 1/(p5)^2}{1/(p5)^2}}
+
+For example, we can see how representative a Gamma distribution over the precision with shape and rate parameters in \code{pars} is of our prior belief that \code{p5} and \code{p95} are 1 and 5, respectively, by calling \code{Findalphabeta_gamma(pars,1,5)}. This function can hance be passed to an optimisation routine to find better values for \code{pars}.
 }
 \examples{
 require(actuar)
