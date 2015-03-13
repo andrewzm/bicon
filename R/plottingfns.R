@@ -1,11 +1,11 @@
 #' @title Plot meshes and observations
-#' @description This function is the general one used for plotting/visualising objects mesh objects
+#' @description This function is the general one used for plotting/visualising objects mesh objects.
 #' @param x a mesh object
 #' @param ... other parameters used to configure the plot. These include \code{max} (upperbound on colour scale) and \code{min} (lowerbound on colour scale)
 #' @return a ggplot2 object
 #' @export
 #' @examples 
-#' ## See vignette
+#' ## See vignette min_max_T
 setGeneric("plot")
 
 
@@ -13,7 +13,7 @@ setGeneric("plot")
 #' @docType methods
 #' @description This function takes a mesh and a column name in the mesh, to generate an interpolated
 #' field of the indicated column
-#' @param x a Mesh object
+#' @param x a mesh object
 #' @param y a character indicated which column to plot
 #' @param ds the resolution of the plot (defaulted to 40 x 40)
 #' @param max upperbound on colour scale
@@ -21,7 +21,7 @@ setGeneric("plot")
 #' @return a ggplot2 object
 #' @export
 #' @examples 
-#' ## See vignette
+#' ## See vignette min_max_T
 setGeneric("plot_interp", function(x,y,ds,...) standardGeneric("plot_interp"))
 
 .check_plot_args <- function(args,z=0) {

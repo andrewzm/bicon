@@ -4,7 +4,7 @@
 \alias{Basis-class}
 \title{Parent class for basis functions}
 \description{
-A basis function contains three slots, the first is a list of parameters (\code{pars}), the second is the number (\code{n}) of basis functions and the third is a list of functions (\code{fn}). The pars field usually contains parameters which appear in fn.
+A basis function class contains three slots, the first is a list of parameters (\code{pars}), the second is the number (\code{n}) of basis functions and the third is a list of functions (\code{fn}). The pars field usually contains parameters which appear in fn.
 }
 \details{
 

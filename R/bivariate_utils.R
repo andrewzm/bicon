@@ -2,7 +2,7 @@
 ### Bisquare functions
 ###-----------------------------
 
-#' @title Bisquare function in one dimension
+#' @title Bisquare function
 #' @name bisquare_fns
 #' @aliases bisquare_1d
 #' @aliases bisquare_2d
@@ -18,7 +18,7 @@
 #' @param areas area associated with each column in B
 #' @param n1 number of rows
 #' @param n2 number of columns
-#' @details The bisquare function is given by \deqn{b(s,v) \equiv \left\{\begin{array}{ll} A\{1 - (|v- s - \Delta|/r)^2\}^2, &| v -s  - \Delta| \le r \\ 0, & \textrm{otherwise}. \end{array} \right.}{b(s,v) =  A{1 - (|v- s - d|/r)^2}^2  if | v -s  - d| <= r,  0 otherwise}
+#' @details The bisquare function (shifted by \eqn{\Delta}) is given by \deqn{b(s,v) \equiv \left\{\begin{array}{ll} A\{1 - (|v- s - \Delta|/r)^2\}^2, &| v -s  - \Delta| \le r \\ 0, & \textrm{otherwise}. \end{array} \right.}{b(s,v) =  A{1 - (|v- s - d|/r)^2}^2  if | v -s  - d| <= r,  0 otherwise}
 #' The function \code{bisquare_1d} accepts \code{h} in any shape or size, while for \code{bisquare_2d}, \code{h1} and \code{h2} need to be vectors of the same size. The parameter \code{delta} needs to be equal to one or two in length, depending on the spatial dimension.
 #' 
 #' The function \code{bisquare_B} is used to construct the matrix \eqn{B} given the bisquare parameters. It is meant to be used in problems of 2 dimensions.
@@ -80,7 +80,7 @@ bisquare_notC <- function(h,delta,r,A) {
 #' @param kappa2 scale of C_{2|1}
 #' @param B interaction matrix
 #' @return Covariance (or precision) matrix
-#' @details  Both C_{11} and C_{2|1} are Matern covariance functions with smoothness 3/2. Covariance matrices are computed from Matern covariance functions using the vector of distances \code{r}, so that Sigma[1,1] = cov(Y1(s),Y1(s+r[1])), Sigma[1 + n,1] = cov(Y2(s),Y1(s+r[1])) and so on. Currently the grids on which Y1 and Y2 are evaluated need to be identical. 
+#' @details  Both C_{11} and C_{2|1} are Matern covariance functions with smoothness parameter equal to 3/2. Covariance matrices are computed from Matern covariance functions using the vector of distances \code{r}, so that Sigma[1,1] = cov(Y1(s),Y1(s+r[1])), Sigma[1 + n,1] = cov(Y2(s),Y1(s+r[1])) and so on. Currently the grids on which Y1 and Y2 are evaluated need to be identical. 
 #' 
 #' The matrix \eqn{B} is the interaction matrix. The full covariance matrix returned is \deqn{\Sigma =   \left( \begin{array}{cc}\Sigma_{11} & \Sigma_{11}B' \\ B \Sigma_{11} & \Sigma_{2\mid 1}+B\Sigma_{11}B'  \end{array}\right).}{Sigma = [Sigma_{11} & Sigma_{11}B' ; B Sigma_{11} & Sigma_{2|1} + B Sigma_{11}B'].}
 #' @export
@@ -153,7 +153,7 @@ Imat <- function (n)
 
 #' @title Find the log determinant
 #'
-#' @description Find the log determinant of a matrix Q from its Cholesky factor L
+#' @description Find the log determinant of a matrix Q from its Cholesky factor L.
 #' @param L the Cholesky factor of Q
 #' @export
 #' @examples 
@@ -174,12 +174,16 @@ logdet <- function(L)  {
 
 #' @title Quantile difference when tuning Gamma distribution hyper-parameters
 #'
-#' @description This function returns the normalised difference between specified and required 5 and 95 percentiles of the Gamma distribution. The percentiles represent those of the required error, i.e. the square root of the variance. For example, if the error of an observation is believed to be between 1 and 5, with 90\% credibility, then we can see how distant a Gamma distribution over the precision with shape and rate parameters in \code{pars} differs from this belief by calling \code{Findalphabeta_gamma(pars,1,5)}. This function can then be passed to an optimisation routine to find better values for \code{pars}.
-#'
+#' @description See details below.
+#' 
 #' @param pars the shape and rate parameters (in that order) of the Gamma distribution
-#' @param p5 the 5 percentile of the desired error distribution
-#' @param p95 the 95 percentils of the desired error distribution
-#' @return A numeric which is a measure of the discrepancy between the Gamma distribution over the precision and the 5/95 percentiles of the error.
+#' @param p5 the 5-th percentile of the desired error distribution
+#' @param p95 the 95-th percentile of the desired error distribution
+#' @return A measure of discrepancy between the Gamma distribution with parameters \code{par} and the desired 5-th 95-th percentiles of the error signal.
+#' @details Assume that in our model there is an error term (for example, observation error) \eqn{e \sim \mathcal{N}(0,\sigma^2)} and we are required to estimate the precision, \eqn{\sigma^{-2}}. Assume further that we have sufficient prior knowledge to know that \eqn{F_e(0.05)} = \code{p5} and \eqn{F_e(0.95)} = \code{p95}, where \code{F_e} is the cumulative distribution function of \eqn{e} and \code{p5} and \code{p95} are known. This function helps configure a prior distribution over \eqn{\sigma^{-2}} which reflects this prior belief. Specifically, let \eqn{\Lambda_{\alpha,\beta}} be the cumulative distribution function of the Gamma distribution with parameters \eqn{\alpha} and \eqn{\beta}. Then this function returns the discrepancy 
+#' \deqn{\frac{\Lambda_{\alpha,\beta}(0.05) - 1/(p95)^2}{1/(p95)^2}  + \frac{\Lambda_{\alpha,\beta}(0.95) - 1/(p5)^2}{1/(p5)^2}}
+#' 
+#' For example, we can see how representative a Gamma distribution over the precision with shape and rate parameters in \code{pars} is of our prior belief that \code{p5} and \code{p95} are 1 and 5, respectively, by calling \code{Findalphabeta_gamma(pars,1,5)}. This function can hance be passed to an optimisation routine to find better values for \code{pars}.
 #' @keywords Gamma distribution, prior elicitation
 #' @export
 #' @examples

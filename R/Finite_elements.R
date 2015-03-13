@@ -1,6 +1,6 @@
 #' @title Initialise a finite element basis
 #' 
-#' @description This function initialises an object of class \code{FEBasis} which defines a set of `tent' basis functions over a pre-specified triangulation in 2-D
+#' @description This function initialises an object of class \code{FEBasis} which defines a set of elemental `tent' basis functions over a pre-specified triangulation in 2-D
 #'
 #' @param p \code{n} \eqn{\times} 2 matrix of vertex locations.
 #' @param t \code{m} \eqn{\times} 3 matrix of triangulations. Each row identifies which rows of \code{p} make up each triangle.
@@ -9,7 +9,7 @@
 #' @keywords finite elements, basis functions
 #' @export
 #' @examples
-#' ## See vignette
+#' ## See vignette min_max_T
 initFEbasis = function(p,t,K) {
     fn <- pars <- list()
     pars$p <- p
@@ -66,7 +66,7 @@ PolygonfromVoronoi <- function(Voronoi,p) {
 #' @rdname assignment
 #' @description Methods for \code{"[<-"}, i.e., extraction or subsetting of elements in the data frame of the mesh object
 #' @examples 
-#' ## See vignette
+#' ## See vignette min_max_T
 NULL
 
 
