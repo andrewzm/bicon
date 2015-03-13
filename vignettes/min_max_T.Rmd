@@ -57,13 +57,13 @@ vignette: >
 
 ## Setting up
 
-An important component of this example is the slice sampler. Here we use the code by Jonathan Rougier, University of Bristol, which is not available from CRAN. As of writing, this was available from [his personal webpage](http://www.maths.bris.ac.uk/~MAZJCR/). Once downloaded this package may be installed using 
+An important component of this example is the slice sampler. Here we use the code by Jonathan Rougier, University of Bristol. As of writing, this was available from [his personal webpage](http://www.maths.bris.ac.uk/~MAZJCR/). Once downloaded this package may be installed using 
 
 ```{r,eval=FALSE}
 install.packages("./slice_0.9.tar.gz",type="source",repos=NULL)
 ```
 
-We will also be needing part of the `INLA` package and installation instructions for this can be found on the [R-INLA homepage](http://www.r-inla.org/). Once these are installed we can load the required packages. As with the previous vignette (simulation example in Section 3.2), we will also need `dplyr`, `tidyr`, and `Matrix` for core operations and `ggplot2`, `gridExtra`, `grid`, `extrafont` and `maptools` for plotting purposes.
+We will also be needing part of the `INLA` package and installation instructions for this can be found on the [R-INLA homepage](http://www.r-inla.org/). Once these are installed we can load the required packages. As with the other vignette (simulation example in Section 3.2), we will also need `dplyr`, `tidyr`, and `Matrix` for core operations and `ggplot2`, `gridExtra`, `grid`, `extrafont` and `maptools` for plotting purposes.
 
 
 ```{r,message=FALSE,warning=FALSE}
@@ -79,7 +79,7 @@ library(extrafont)
 library(maptools)
 ```
 
-Finally, we will also be need the package `bicon` to facilitate matrix construction.
+Finally, we will also need the package `bicon` to facilitate matrix construction.
 
 ```{r,message=FALSE}
 library(bicon)
@@ -97,7 +97,7 @@ As detailed in @CressieZammit2015, we consider three models in this case study. 
 
 where $\Deltab = (\Delta_1, \Delta_2)^\T$ is a shift parameter vector that captures asymmetry, $r$ is the aperture parameter, and $A$ is the amplitude. In Model 3, $b_o(\h)$ is a shifted bisquare function in $\mathbb{R}^2$. The covariance functions $C_{11}(\cdot)$ and $C_{2|1}(\cdot)$ are Matérn covariance functions with $\nu_{11} = \nu_{2|1} = 1.5$. 
 
-The first thing we need to do is specify which model we are going to analyse. Since Model 3 is the most complicated, we will use this throughout this vignette. The second thing, is to indicate whether we want to run the full MCMC scheme (takes a long time!) or just generate a few samples to make sure the code is working. For the purpose of this vignette we will use a flag `long_analysis` to indicate whether we want to run the full MCMC chain or not.
+The first thing we need to do is specify which model we are going to analyse. Since Model 3 is the most complicated, we will use this throughout this vignette. The second thing is to indicate whether we want to run the full MCMC scheme (takes a long time!) or just generate a few samples to make sure the code is working. For the purpose of this vignette we will use a flag `long_analysis` to indicate whether we want to run the full MCMC chain or not.
 
 ```{r}
 ### Model choice
@@ -114,7 +114,8 @@ long_analysis <- 0                          ## Run a long MCMC chain (1) or not 
 
 ## The data
 
-The data was made available through the work of @GentonKleiber2015 and is included in the package `extdata` folder. These have also been included as part of the package for convenience, by first preprocessing it using
+The data were made available through the paper of @GentonKleiber2015 and is included in the package `extdata` folder. For convenience, these have also been included as part of the package after the data were preprocessed using
+
 
 ```{r,eval=FALSE}
 temps_path <- system.file("extdata","COTemp20040919.txt", package = "bicon")
@@ -130,7 +131,7 @@ Thus, these data can simply be loaded using the `data` command
 data(temps)
 ```
 
-The above command loads the data `temps` in the the global environment as a data frame. The data frame stores the  minimum temperature (`minT`), the maximum temperature (`maxT`) and the lon-lat coordinates of the measurement stations (`lon` and `lat`).
+The command above loads the data `temps` in the the global environment as a data frame. The data frame stores the  minimum temperature (`minT`), the maximum temperature (`maxT`) and the lon-lat coordinates of the measurement stations (`lon` and `lat`).
 
 ```{r}
 print(head(temps))
@@ -157,7 +158,7 @@ obs2 <- temps %>%
 
 ## Process discretisation
 
-We approximate the processes as a sum of basis functions (tent functions) constructed on a triangulation. The triangulation is formed using the mesher in the `INLA` package, while we provide a tailored function `initFEbasis` which takes information from the INLA mesher and casts it into a `Mesh` object. We provide several methods associated with the `Mesh` class which will be useful for plotting later on. Importantly, the `Mesh` object also contains information on the areas of the elements in the Voronoi tesselation, which will be used to approximate the integrations.
+We approximate the processes as a sum of elemental basis functions (tent functions) constructed on a triangulation. The triangulation is formed using the mesher in the `INLA` package, while we provide a tailored function `initFEbasis` which takes information from the INLA mesher and casts it into a `Mesh` object. We provide several methods associated with the `Mesh` class which will be useful for plotting later on. Importantly, the `Mesh` object also contains information on the areas of the elements in the Voronoi tesselation, which will be used to approximate the integrations.
 
 ```{r,warning=FALSE}
 ### Construct mesh
@@ -183,7 +184,7 @@ n2 <- mesh$n
 n <- n1 + n2
 ```
 
-As in the first vignette (simulation example of Section 3.2), we will approximate the integration using the rectangular rule. When using finite elements, this reduces to using the area of the Voronoi tessellation as the weight for the function values.
+As in the first vignette (simulation example in Section 3.2), we will approximate the integration using the rectangular rule. When using finite elements, this reduces to using the area of the Voronoi tessellation as the weight for the function values.
 
 We first compute the vector of displacements $h$ which will be of length (`n2` $\times$ `n1`) and with each element associate an integration weight equal to the area of the Voronoi tessellation associated with the element:
 
@@ -231,7 +232,7 @@ C <- bdiag(C1,C1)       ## incidence matrix
 
 ## MCMC initialisation and prior specification
 
-This is the computational and memory intensive part of the program. Since this is only a vignette we will only generate 10 samples. For the simulation study in Section 5, we used 50000 samples and thinned by only keeping every 100. To carry out the full analysis, please set `long_analysis = 1` above.
+This is the computational and memory intensive part of the program. Since this is only a vignette we will only generate 10 samples. For the simulation study in Section 5, we used 50000 samples and thinned by keeping every 100. To carry out the full analysis, please set `long_analysis = 1` above.
 
 ```{r}
 ### MCMC initialisations
@@ -274,13 +275,13 @@ log_r_samp <- rep(log(0.3),N)
 d1_samp <- rep(0,N) 
 d2_samp <- rep(0,N) 
 
-### Sampleing the Deviance
+### Sampling the Deviance
 Deviance_samp <- rep(0,N)
 ```
 
 We next specify the prior distributions over all unknown parameters. These are detailed in Table 2, Appendix 3 of @CressieZammit2015. In order to tune the prior distribution over the precision parameters we use a function `Findalphabeta_gamma` which, given the 5th and 95th percentiles for the desired standard deviations, finds appropriate values for $\alpha,\beta$ (shape and rate parameters) needed to define the Gamma distribution. Type `help(Findalphabeta_gamma)` for more details.
 
-A new function appearing below is `makeQY`. This has an interface identical to `makeSY` but instead returns the precision matrix $\Sigma^{-1}$. This is useful since working with the precision matrices is slightly more computationally efficient than working with covariance matricies (even if the precision matrix is dense).
+A new function appearing below is `makeQY`. This has an interface identical to `makeSY` but instead returns the precision matrix $\Sigma^{-1}$. This is useful since working with the precision matrices is slightly more computationally efficient than working with covariance matrices (even if the precision matrix is dense).
 
 ```{r}
 ##################################
@@ -338,7 +339,7 @@ prec_log_r = 1/(0.5^2)
 
 ### The sampler
 
-Before we start the MCMC routine, we need to initialise the slice sampler for those variables which have a conditional distribution that is not available in closed form. For the scales and observation correlation parameter we use univariate slice samplers, while for the bisquare function we use a tri-variate slice sampler.
+Before we start the MCMC routine, we need to initialise the slice sampler for those variables which have a conditional distribution that is not available in closed form. For the scale parameters and observation error correlation parameter we use univariate slice samplers, while for the parameters associated with the bisquare function we use a tri-variate slice sampler.
 
 ```{r}
 #######################
@@ -365,9 +366,9 @@ p(A | \Yvec,\Zvec, \theta^{/A}) &\propto p(\Yvec_2 | \Yvec_1, \thetab)p(A)\\
 p(\Deltab,\tilde r | \Yvec,\Zvec, \theta^{/(\Deltab,\tilde r)}) &\propto p(\Yvec_2 | \Yvec_1, \thetab)p(\Deltab)p(\tilde r)
 \end{align}
 
-We do not discuss the algorithm below in detail, as it simply carries out the updatesaccording to the conditional distributions listed above. However, a couple points are worth mentioning:
+We do not discuss the algorithm below in detail, as it simply carries out the updates according to the conditional distributions listed above. However, there are a couple of points are worth mentioning:
 
-- Where appropriate, we sample directly using functons such as `rgamma`. When the conditional distribution is not available in closed form we use the slice sampler. When slice sampling, all we need to do is supply the sampler with the logarithm of the conditional distribution and a `learn` parameter, which indicates for how many samples we are adapting the interval width in the slice sampler. This is set equal to the burn-in in each case.
+- Where appropriate, we sample directly using functons such as `rgamma`. When the conditional distribution is not available in closed form we use the slice sampler. When doing slice sampling, all we need to do is supply the sampler with the logarithm of the conditional distribution and a `learn` parameter, which indicates for how many samples we are adapting the interval width in the slice sampler. This is set equal to the burn-in in each case.
 -  To sample the precision and scale parameters, we need to construct the covariance and precision matrices corresponding to $C_{11}(\cdot)$ and $C_{2|1}(\cdot)$. For this we use the functions `makeS` and `makeQ` respectively.
 
 ```{r,message=F}
@@ -510,7 +511,7 @@ for(i in 2:N) {
 
 The discrepancy between data and model can be be assessed using the \emph{deviance}                             \begin{equation}                                                                                                D(\Zvec,\Yvec,\thetab) \equiv -2 \log p(\Zvec\mid \Yvec,\thetab).                                               \end{equation}                                                                                                  Since the deviance is a function of the unknowns $\Yvec$ and $\thetab$ we use the average deviance from the posterior realisations of $(\Yvec, \thetab)$                                           
 \begin{equation}                                                                                                \widehat D(\Zvec) \equiv \frac{1}{N}\sum_{i=1}^N D(\Zvec,\Yvec^{(i)},\thetab^{(i)}).                            \end{equation}                                                                                                   where $N$ is the number of samples.                                                                                            
-The average deviance alone is not sufficient when comparing across models with differing complexities. In deviance-based strategies, a penalty for model complexity $p_D$ is obtained by computing the difference between $\widehat D(\Zvec)$ and the deviance at the posterior means of $\Yvec,\thetab$, $D(\Zvec; \widehat \Yvec, \widehat \thetab)$. Then the \emph{Deviance Information Criterion} (DIC) is simply the addition of these two quantities [@Spiegelhalter_2002]:                                                                                                               
+The average deviance alone is not sufficient when comparing across models with differing complexities. In deviance-based strategies, a penalty for model complexity $p_D$ is obtained by computing the difference between $\widehat D(\Zvec)$ and the deviance at the posterior means of $\Yvec,\thetab$, $D(\Zvec; \widehat \Yvec, \widehat \thetab)$. Then the \emph{Deviance Information Criterion} (DIC) is simply the addition of the average deviance and the penalty [@Spiegelhalter_2002]. This results in the following formula:                                               
 \begin{equation}                                                                                                DIC \equiv 2\widehat D(\Zvec) - D(\Zvec; \widehat\Yvec,\widehat\thetab).                                        \end{equation}                                                                                                                                                                                               
 We find the mean deviance and the DIC from the samples as follows.
 
@@ -546,16 +547,16 @@ save(model_name,
      Deviance_samp,
      Deviance_mean,
      DIC,
-     file=paste0("../data/",model_name,".rda"))
+     file=paste0("../inst/extdata/",model_name,".rda"))
 ```
 
 and now re-load these results using
 
 ```{r}
 if(!long_analysis) {
-  if(model == 1)  data(independent)
-  if(model == 2)  data(pointwise)
-  if(model == 3)  data(moving_average)
+  if(model == 1)  load(system.file("extdata","independent.rda", package = "bicon"))
+  if(model == 2)  load(system.file("extdata","pointwise.rda", package = "bicon"))
+  if(model == 3)  load(system.file("extdata","moving_average.rda", package = "bicon"))
 }
 ```
 
@@ -589,7 +590,7 @@ close(fileConn)
 
 ### Plotting
 
-As in the previous vignette, we only briefly describe the code used to plot the results. The first plot shows the domain of interest around the state of Colorado. The shapefile required is available in the `extdata` folder of the package and is accessible through
+As in the other vignette (simulation example of Section 3.2), we only briefly describe the code used to plot the results. The first plot shows the domain of interest around the state of Colorado. The shapefile required is available in the `extdata` folder of the package and is accessible through
 
 ```{r}
 shapefile_path <- system.file("extdata", "cb_2013_us_state_5m.shp", package = "bicon")
@@ -731,7 +732,7 @@ if(print_figs) {
 }
 ```
 
-```{r,fig.cap="Interpolated map in degrees Celsius (degC) of E($Y_1$ |  $Z_1$,$Z_2$)",fig.width=10}
+```{r,fig.cap="Interpolated map in degrees Celsius (degC) of E($Y_1$ |  $Z_1$,$Z_2$), overlaid on the triangulation",fig.width=10}
 knitr::opts_chunk$set(dev = 'pdf')
 if(show_figs) print(Y1plot %>% 
                         mesh_cities(pt_size=6,txt_size=6)+ 
@@ -741,7 +742,7 @@ if(show_figs) print(Y1plot %>%
 ```
 
 
-```{r,fig.cap="Interpolated map in degrees Celsius (degC) of E($Y_2$ |  $Z_1$,$Z_2$)",fig.width=13}
+```{r,fig.cap="Interpolated map in degrees Celsius (degC) of E($Y_2$ |  $Z_1$,$Z_2$), overlaid on the triangulation",fig.width=13}
 if(show_figs)   print(Y2plot %>% 
                           mesh_cities(pt_size=6,txt_size=6) + 
                           theme(text = element_text(size = 15)) + 
