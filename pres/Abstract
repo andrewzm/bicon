@@ -1,0 +1,17 @@
+    Causal spatial models
+    ---------------------
+
+    Multivariate geostatistics is based on modelling all covariances between
+    all possible combinations of two or more variables and their locations
+    in a continuously indexed domain. Multivariate
+    spatial covariance models need to be built with some care, since any
+    covariance matrix that is derived from such a model has to be
+    nonnegative-definite. In this presentation I will talk about a specific
+    class of multivariate spatial models that are constructed using conditional 
+    dependency arguments:  causal spatial models. We show that these models yield flexible, 
+    yet valid cross-covariance functions that generalize many of the special cases 
+    used to date. The approach will be demonstrated on both simulation and 
+    real case studies, one of which applies the model to flux estimation of methane 
+    in the United Kingdom and Ireland. This is joint work with Noel Cressie.
+
+

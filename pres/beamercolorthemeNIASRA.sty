@@ -1,0 +1,66 @@
+% To specify the integer values of "RGB", ranging from 0 t0 255, we need to use the "RGB" in CAPS or UPPERCASE
+% Also, the first curly braces include the name that we assign to the colour combination
+
+\mode<presentation>
+
+\definecolor{beamer@uowpurple}{RGB}{67,51,147}
+\definecolor{UOWPurple}{RGB}{67,51,147}
+\definecolor{UOWOrange}{RGB}{217,122,45}
+\definecolor{UOWGold}{RGB}{236,183,49}
+\definecolor{UOWRed}{RGB}{207,57,66}
+\definecolor{UOWBlue}{RGB}{36,83,151}
+\definecolor{NIASRAWhite}{RGB}{255,255,255}
+
+%\setbeamercolor{normal text}{fg=black,bg=white}
+\setbeamercolor{alerted text}{fg=UOWRed}
+\setbeamercolor{example text}{fg=UOWBlue!50!black}
+
+\setbeamercolor{structure}{fg=beamer@uowpurple}
+
+
+\setbeamercolor*{palette primary}{use=structure,fg=white,bg=structure.fg}
+\setbeamercolor*{palette secondary}{use=structure,fg=white,bg=structure.fg!75!black}
+\setbeamercolor*{palette tertiary}{use=structure,fg=white,bg=structure.fg!50!black}
+\setbeamercolor*{palette quaternary}{fg=white,bg=black}
+
+\setbeamercolor*{sidebar}{use=structure,bg=structure.fg}
+
+\setbeamercolor*{palette sidebar primary}{use=structure,fg=structure.fg!10}
+\setbeamercolor*{palette sidebar secondary}{fg=white}
+\setbeamercolor*{palette sidebar tertiary}{use=structure,fg=structure.fg!50}
+\setbeamercolor*{palette sidebar quaternary}{fg=white}
+
+\setbeamercolor*{titlelike}{parent=palette primary}
+
+\setbeamercolor*{separation line}{}
+\setbeamercolor*{fine separation line}{}
+
+%\setbeamercolor{block title}{use=structure,fg=white,bg=structure.fg!75!black}
+\setbeamercolor{block title alerted}{use=alerted text,fg=white,bg=alerted text.fg!75!black}
+\setbeamercolor{block title example}{use=example text,fg=white,bg=example text.fg!75!black}
+
+\setbeamercolor{block title}{use=structure,bg=UOWPurple!28!white,fg=UOWRed}
+%\setbeamercolor{block body}{bg=UOWPurple!15!white}
+
+\setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!15!bg}
+\setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!10!bg}
+\setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg!10!bg}
+
+
+\mode
+<all>
+
+
+%
+%\setbeamercolor{normal text}{fg=black,bg=white}
+%\setbeamercolor{alerted text}{fg=UOWRed}
+%\setbeamercolor{example text}{fg=UOWBlue!50!black}
+%\setbeamercolor{structure}{fg=beamer@UOWPurple}
+%
+%\setbeamercolor{title page}{fg=white}
+%\setbeamercolor{logo}{bg=white}
+%\setbeamercolor{frametitle}{fg=UOWRed}
+%\setbeamercolor{block title}{bg=UOWPurple!28!white,fg=UOWRed}
+%\setbeamercolor{block body}{bg=UOWPurple!15!white}
+%\setbeamercolor{title}{fg = UOWRed}
+%\setbeamercolor{logo}{bg=UOWPurple}

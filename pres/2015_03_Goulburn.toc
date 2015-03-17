@@ -1,0 +1,14 @@
+\beamer@endinputifotherversion {3.24pt}
+\beamer@sectionintoc {1}{Introduction}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Multivariate models in practice}{4}{0}{1}
+\beamer@subsectionintoc {1}{2}{Current approaches}{9}{0}{1}
+\beamer@sectionintoc {2}{Causal spatial models}{13}{0}{2}
+\beamer@subsectionintoc {2}{1}{Bivariate models}{14}{0}{2}
+\beamer@subsectionintoc {2}{2}{Multivariate models}{23}{0}{2}
+\beamer@subsectionintoc {2}{3}{Min-max temperature dataset}{29}{0}{2}
+\beamer@sectionintoc {3}{Atmospheric trace-gas inversion in the UK and Ireland}{36}{0}{3}
+\beamer@subsectionintoc {3}{1}{Lognormal causal spatio-temporal model}{41}{0}{3}
+\beamer@subsectionintoc {3}{2}{Inference}{47}{0}{3}
+\beamer@subsectionintoc {3}{3}{Simulation studies}{54}{0}{3}
+\beamer@subsectionintoc {3}{4}{Case study with real data}{61}{0}{3}
+\beamer@sectionintoc {4}{Conclusion}{63}{0}{4}
