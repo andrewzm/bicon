@@ -20,7 +20,7 @@ To download the vignettes without reproducing them on your machine, please view 
 Presentation
 -----
 
-To access the presentation I gave for the Goulburn 2015 Research Fellows Meeting, please [click here](https://github.com/andrewzm/bicon/blob/master/pres/2015_03_Goulburn.pdf?raw=true).
+To access the presentation I gave for the 27th Goulburn Research Fellows Meeting (2015), please [click here](https://github.com/andrewzm/bicon/blob/master/pres/2015_03_Goulburn.pdf?raw=true).
 
 
 Reproducibility 
