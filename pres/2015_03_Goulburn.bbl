@@ -21,6 +21,11 @@ Gneiting, T., Kleiber, W., and Schlather, M. (2010).
 \newblock {\em Journal of the American Statistical Association},
   105:1167--1177.
 
+\bibitem[\protect\astroncite{Lauritzen}{1996}]{Lauritzen_1996}
+Lauritzen, S.~L. (1996).
+\newblock {\em Graphical Models}.
+\newblock Oxford University Press, Oxford, UK.
+
 \bibitem[\protect\astroncite{Neal}{2011}]{Neal_2011}
 Neal, R. (2011).
 \newblock {MCMC using Hamiltonian dynamics}.
@@ -52,18 +57,18 @@ Zammit-Mangion, A., Bamber, J.~L., Schoen, N.~W., and Rougier, J.~C. ({2015}a).
   and time.
 \newblock {\em Annals of Glaciology, in press}.
 
-\bibitem[\protect\astroncite{Zammit-Mangion et~al.}{2015b}]{Zammit_2015a}
-Zammit-Mangion, A., Rougier, J., Schoen, N., Lindgren, F., and Bamber, J.
-  (2015b).
-\newblock Multivariate spatio-temporal modelling for assessing {A}ntarctica's
-  present-day contribution to sea-level rise.
-\newblock {\em Environmetrics}, \hspace{-0.02in}:doi: 10.1002/env.2323, in
-  press.
-
 \bibitem[\protect\astroncite{Zammit-Mangion et~al.}{2014}]{Zammit_2014}
 Zammit-Mangion, A., Rougier, J.~C., Bamber, J.~L., and Schoen, N.~W. (2014).
 \newblock Resolving the {A}ntarctic contribution to sea-level rise: a
   hierarchical modelling framework.
 \newblock {\em Environmetrics}, 25:245--264.
+
+\bibitem[\protect\astroncite{Zammit-Mangion et~al.}{2015b}]{Zammit_2015a}
+Zammit-Mangion, A., Rougier, J.~C., Schoen, N., Lindgren, F., and Bamber, J.
+  (2015b).
+\newblock Multivariate spatio-temporal modelling for assessing {A}ntarctica's
+  present-day contribution to sea-level rise.
+\newblock {\em Environmetrics}, \hspace{-0.02in}:doi: 10.1002/env.2323, in
+  press.
 
 \end{thebibliography}

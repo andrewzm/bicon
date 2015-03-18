@@ -3,44 +3,44 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: 2015_03_Goulburn.aux
 The style file: apa.bst
 Database file #1: ../vignettes/Bibliography.bib
-You've used 11 entries,
+You've used 12 entries,
             1940 wiz_defined-function locations,
-            552 strings with 5788 characters,
-and the built_in function-call counts, 4597 in all, are:
-= -- 438
-> -- 205
-< -- 5
-+ -- 73
-- -- 68
-* -- 414
-:= -- 808
-add.period$ -- 34
-call.type$ -- 11
-change.case$ -- 85
-chr.to.int$ -- 10
-cite$ -- 11
-duplicate$ -- 156
-empty$ -- 317
-format.name$ -- 85
-if$ -- 877
+            559 strings with 5891 characters,
+and the built_in function-call counts, 4879 in all, are:
+= -- 464
+> -- 212
+< -- 6
++ -- 75
+- -- 70
+* -- 434
+:= -- 860
+add.period$ -- 37
+call.type$ -- 12
+change.case$ -- 90
+chr.to.int$ -- 11
+cite$ -- 12
+duplicate$ -- 170
+empty$ -- 340
+format.name$ -- 88
+if$ -- 932
 int.to.chr$ -- 2
 int.to.str$ -- 0
-missing$ -- 13
-newline$ -- 58
-num.names$ -- 35
-pop$ -- 78
+missing$ -- 15
+newline$ -- 63
+num.names$ -- 38
+pop$ -- 85
 preamble$ -- 1
-purify$ -- 87
+purify$ -- 93
 quote$ -- 0
-skip$ -- 111
+skip$ -- 121
 stack$ -- 0
-substring$ -- 354
-swap$ -- 22
+substring$ -- 366
+swap$ -- 24
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 62
+type$ -- 66
 warning$ -- 0
-while$ -- 34
+while$ -- 36
 width$ -- 0
-write$ -- 143
+write$ -- 156

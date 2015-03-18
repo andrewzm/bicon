@@ -53,102 +53,106 @@
 \headcommand {\slideentry {2}{1}{9}{22/22}{Bivariate models}{0}}
 \headcommand {\beamer@framepages {22}{22}}
 \headcommand {\beamer@subsectionentry {0}{2}{2}{23}{Multivariate models}}\headcommand {\beamer@subsectionpages {14}{22}}
-\headcommand {\slideentry {2}{2}{1}{23/23}{Multivariate models}{0}}
-\headcommand {\beamer@framepages {23}{23}}
-\headcommand {\slideentry {2}{2}{2}{24/24}{Multivariate models}{0}}
-\headcommand {\beamer@framepages {24}{24}}
-\headcommand {\slideentry {2}{2}{3}{25/25}{Multivariate models}{0}}
-\headcommand {\beamer@framepages {25}{25}}
-\headcommand {\slideentry {2}{2}{4}{26/26}{Multivariate models}{0}}
+\headcommand {\slideentry {2}{2}{1}{23/25}{Multivariate models}{0}}
+\headcommand {\beamer@framepages {23}{25}}
+\headcommand {\slideentry {2}{2}{2}{26/26}{Multivariate models}{0}}
 \headcommand {\beamer@framepages {26}{26}}
-\headcommand {\slideentry {2}{2}{5}{27/27}{Multivariate models}{0}}
+\headcommand {\slideentry {2}{2}{3}{27/27}{Multivariate models}{0}}
 \headcommand {\beamer@framepages {27}{27}}
-\headcommand {\slideentry {2}{2}{6}{28/28}{Multivariate models}{0}}
+\headcommand {\slideentry {2}{2}{4}{28/28}{Multivariate models}{0}}
 \headcommand {\beamer@framepages {28}{28}}
-\headcommand {\beamer@subsectionentry {0}{2}{3}{29}{Min-max temperature dataset}}\headcommand {\beamer@subsectionpages {23}{28}}
-\headcommand {\slideentry {2}{3}{1}{29/29}{Min-max temperature dataset}{0}}
+\headcommand {\slideentry {2}{2}{5}{29/29}{Multivariate models}{0}}
 \headcommand {\beamer@framepages {29}{29}}
-\headcommand {\slideentry {2}{3}{2}{30/30}{Min-max temperature dataset}{0}}
+\headcommand {\slideentry {2}{2}{6}{30/30}{Multivariate models}{0}}
 \headcommand {\beamer@framepages {30}{30}}
-\headcommand {\slideentry {2}{3}{3}{31/31}{Min-max temperature dataset}{0}}
+\headcommand {\beamer@subsectionentry {0}{2}{3}{31}{Min-max temperature dataset}}\headcommand {\beamer@subsectionpages {23}{30}}
+\headcommand {\slideentry {2}{3}{1}{31/31}{Min-max temperature dataset}{0}}
 \headcommand {\beamer@framepages {31}{31}}
-\headcommand {\slideentry {2}{3}{4}{32/32}{Min-max temperature dataset}{0}}
+\headcommand {\slideentry {2}{3}{2}{32/32}{Min-max temperature dataset}{0}}
 \headcommand {\beamer@framepages {32}{32}}
-\headcommand {\slideentry {2}{3}{5}{33/33}{Min-max temperature dataset}{0}}
+\headcommand {\slideentry {2}{3}{3}{33/33}{Min-max temperature dataset}{0}}
 \headcommand {\beamer@framepages {33}{33}}
-\headcommand {\slideentry {2}{3}{6}{34/34}{Min-max temperature dataset}{0}}
+\headcommand {\slideentry {2}{3}{4}{34/34}{Min-max temperature dataset}{0}}
 \headcommand {\beamer@framepages {34}{34}}
-\headcommand {\slideentry {2}{3}{7}{35/35}{Min-max temperature dataset}{0}}
+\headcommand {\slideentry {2}{3}{5}{35/35}{Min-max temperature dataset}{0}}
 \headcommand {\beamer@framepages {35}{35}}
-\headcommand {\sectionentry {3}{Atmospheric trace-gas inversion in the UK and Ireland}{36}{Atmospheric trace-gas inversion in the UK and Ireland}{0}}
-\headcommand {\beamer@sectionpages {13}{35}}
-\headcommand {\beamer@subsectionpages {29}{35}}
-\headcommand {\slideentry {3}{0}{8}{36/36}{}{0}}
+\headcommand {\slideentry {2}{3}{6}{36/36}{Min-max temperature dataset}{0}}
 \headcommand {\beamer@framepages {36}{36}}
-\headcommand {\slideentry {3}{0}{9}{37/37}{}{0}}
+\headcommand {\slideentry {2}{3}{7}{37/37}{Min-max temperature dataset}{0}}
 \headcommand {\beamer@framepages {37}{37}}
-\headcommand {\slideentry {3}{0}{10}{38/38}{}{0}}
+\headcommand {\slideentry {2}{3}{8}{38/38}{Min-max temperature dataset}{0}}
 \headcommand {\beamer@framepages {38}{38}}
-\headcommand {\slideentry {3}{0}{11}{39/39}{}{0}}
+\headcommand {\slideentry {2}{3}{9}{39/39}{Min-max temperature dataset}{0}}
 \headcommand {\beamer@framepages {39}{39}}
-\headcommand {\slideentry {3}{0}{12}{40/40}{}{0}}
+\headcommand {\sectionentry {3}{Atmospheric trace-gas inversion in the UK and Ireland}{40}{Atmospheric trace-gas inversion in the UK and Ireland}{0}}
+\headcommand {\beamer@sectionpages {13}{39}}
+\headcommand {\beamer@subsectionpages {31}{39}}
+\headcommand {\slideentry {3}{0}{10}{40/40}{}{0}}
 \headcommand {\beamer@framepages {40}{40}}
-\headcommand {\beamer@subsectionentry {0}{3}{1}{41}{Lognormal causal spatio-temporal model}}\headcommand {\beamer@subsectionpages {36}{40}}
-\headcommand {\slideentry {3}{1}{1}{41/41}{Lognormal causal spatio-temporal model}{0}}
+\headcommand {\slideentry {3}{0}{11}{41/41}{}{0}}
 \headcommand {\beamer@framepages {41}{41}}
-\headcommand {\slideentry {3}{1}{2}{42/42}{Lognormal causal spatio-temporal model}{0}}
+\headcommand {\slideentry {3}{0}{12}{42/42}{}{0}}
 \headcommand {\beamer@framepages {42}{42}}
-\headcommand {\slideentry {3}{1}{3}{43/43}{Lognormal causal spatio-temporal model}{0}}
+\headcommand {\slideentry {3}{0}{13}{43/43}{}{0}}
 \headcommand {\beamer@framepages {43}{43}}
-\headcommand {\slideentry {3}{1}{4}{44/45}{Lognormal causal spatio-temporal model}{0}}
-\headcommand {\beamer@framepages {44}{45}}
-\headcommand {\slideentry {3}{1}{5}{46/46}{Lognormal causal spatio-temporal model}{0}}
+\headcommand {\slideentry {3}{0}{14}{44/44}{}{0}}
+\headcommand {\beamer@framepages {44}{44}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{45}{Lognormal causal spatio-temporal model}}\headcommand {\beamer@subsectionpages {40}{44}}
+\headcommand {\slideentry {3}{1}{1}{45/45}{Lognormal causal spatio-temporal model}{0}}
+\headcommand {\beamer@framepages {45}{45}}
+\headcommand {\slideentry {3}{1}{2}{46/46}{Lognormal causal spatio-temporal model}{0}}
 \headcommand {\beamer@framepages {46}{46}}
-\headcommand {\beamer@subsectionentry {0}{3}{2}{47}{Inference}}\headcommand {\beamer@subsectionpages {41}{46}}
-\headcommand {\slideentry {3}{2}{1}{47/47}{Inference}{0}}
+\headcommand {\slideentry {3}{1}{3}{47/47}{Lognormal causal spatio-temporal model}{0}}
 \headcommand {\beamer@framepages {47}{47}}
-\headcommand {\slideentry {3}{2}{2}{48/51}{Inference}{0}}
-\headcommand {\beamer@framepages {48}{51}}
-\headcommand {\slideentry {3}{2}{3}{52/52}{Inference}{0}}
-\headcommand {\beamer@framepages {52}{52}}
-\headcommand {\slideentry {3}{2}{4}{53/53}{Inference}{0}}
-\headcommand {\beamer@framepages {53}{53}}
-\headcommand {\beamer@subsectionentry {0}{3}{3}{54}{Simulation studies}}\headcommand {\beamer@subsectionpages {47}{53}}
-\headcommand {\slideentry {3}{3}{1}{54/54}{Simulation studies}{0}}
-\headcommand {\beamer@framepages {54}{54}}
-\headcommand {\slideentry {3}{3}{2}{55/55}{Simulation studies}{0}}
-\headcommand {\beamer@framepages {55}{55}}
-\headcommand {\slideentry {3}{3}{3}{56/56}{Simulation studies}{0}}
+\headcommand {\slideentry {3}{1}{4}{48/49}{Lognormal causal spatio-temporal model}{0}}
+\headcommand {\beamer@framepages {48}{49}}
+\headcommand {\slideentry {3}{1}{5}{50/50}{Lognormal causal spatio-temporal model}{0}}
+\headcommand {\beamer@framepages {50}{50}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{51}{Inference}}\headcommand {\beamer@subsectionpages {45}{50}}
+\headcommand {\slideentry {3}{2}{1}{51/51}{Inference}{0}}
+\headcommand {\beamer@framepages {51}{51}}
+\headcommand {\slideentry {3}{2}{2}{52/55}{Inference}{0}}
+\headcommand {\beamer@framepages {52}{55}}
+\headcommand {\slideentry {3}{2}{3}{56/56}{Inference}{0}}
 \headcommand {\beamer@framepages {56}{56}}
-\headcommand {\slideentry {3}{3}{4}{57/57}{Simulation studies}{0}}
+\headcommand {\slideentry {3}{2}{4}{57/57}{Inference}{0}}
 \headcommand {\beamer@framepages {57}{57}}
-\headcommand {\slideentry {3}{3}{5}{58/58}{Simulation studies}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{58}{Simulation studies}}\headcommand {\beamer@subsectionpages {51}{57}}
+\headcommand {\slideentry {3}{3}{1}{58/58}{Simulation studies}{0}}
 \headcommand {\beamer@framepages {58}{58}}
-\headcommand {\slideentry {3}{3}{6}{59/59}{Simulation studies}{0}}
+\headcommand {\slideentry {3}{3}{2}{59/59}{Simulation studies}{0}}
 \headcommand {\beamer@framepages {59}{59}}
-\headcommand {\slideentry {3}{3}{7}{60/60}{Simulation studies}{0}}
+\headcommand {\slideentry {3}{3}{3}{60/60}{Simulation studies}{0}}
 \headcommand {\beamer@framepages {60}{60}}
-\headcommand {\beamer@subsectionentry {0}{3}{4}{61}{Case study with real data}}\headcommand {\beamer@subsectionpages {54}{60}}
-\headcommand {\slideentry {3}{4}{1}{61/61}{Case study with real data}{0}}
+\headcommand {\slideentry {3}{3}{4}{61/61}{Simulation studies}{0}}
 \headcommand {\beamer@framepages {61}{61}}
-\headcommand {\slideentry {3}{4}{2}{62/62}{Case study with real data}{0}}
+\headcommand {\slideentry {3}{3}{5}{62/62}{Simulation studies}{0}}
 \headcommand {\beamer@framepages {62}{62}}
-\headcommand {\sectionentry {4}{Conclusion}{63}{Conclusion}{0}}
-\headcommand {\beamer@sectionpages {36}{62}}
-\headcommand {\beamer@subsectionpages {61}{62}}
-\headcommand {\slideentry {4}{0}{3}{63/63}{}{0}}
+\headcommand {\slideentry {3}{3}{6}{63/63}{Simulation studies}{0}}
 \headcommand {\beamer@framepages {63}{63}}
-\headcommand {\slideentry {4}{0}{4}{64/64}{}{0}}
+\headcommand {\slideentry {3}{3}{7}{64/64}{Simulation studies}{0}}
 \headcommand {\beamer@framepages {64}{64}}
-\headcommand {\sectionentry {5}{\translate {References}}{65}{\translate {References}}{0}}
-\headcommand {\beamer@sectionpages {63}{64}}
-\headcommand {\beamer@subsectionpages {63}{64}}
-\headcommand {\slideentry {5}{0}{5}{65/65}{}{0}}
+\headcommand {\beamer@subsectionentry {0}{3}{4}{65}{Case study with real data}}\headcommand {\beamer@subsectionpages {58}{64}}
+\headcommand {\slideentry {3}{4}{1}{65/65}{Case study with real data}{0}}
 \headcommand {\beamer@framepages {65}{65}}
-\headcommand {\slideentry {5}{0}{5}{65/66}{}{0}}
-\headcommand {\beamer@framepages {65}{66}}
-\headcommand {\beamer@partpages {1}{66}}
-\headcommand {\beamer@subsectionpages {63}{66}}
-\headcommand {\beamer@sectionpages {63}{66}}
-\headcommand {\beamer@documentpages {66}}
-\headcommand {\def \inserttotalframenumber {62}}
+\headcommand {\slideentry {3}{4}{2}{66/66}{Case study with real data}{0}}
+\headcommand {\beamer@framepages {66}{66}}
+\headcommand {\sectionentry {4}{Conclusions}{67}{Conclusions}{0}}
+\headcommand {\beamer@sectionpages {40}{66}}
+\headcommand {\beamer@subsectionpages {65}{66}}
+\headcommand {\slideentry {4}{0}{3}{67/67}{}{0}}
+\headcommand {\beamer@framepages {67}{67}}
+\headcommand {\slideentry {4}{0}{4}{68/68}{}{0}}
+\headcommand {\beamer@framepages {68}{68}}
+\headcommand {\sectionentry {5}{\translate {References}}{69}{\translate {References}}{0}}
+\headcommand {\beamer@sectionpages {67}{68}}
+\headcommand {\beamer@subsectionpages {67}{68}}
+\headcommand {\slideentry {5}{0}{5}{69/69}{}{0}}
+\headcommand {\beamer@framepages {69}{69}}
+\headcommand {\slideentry {5}{0}{5}{69/70}{}{0}}
+\headcommand {\beamer@framepages {69}{70}}
+\headcommand {\beamer@partpages {1}{70}}
+\headcommand {\beamer@subsectionpages {67}{70}}
+\headcommand {\beamer@sectionpages {67}{70}}
+\headcommand {\beamer@documentpages {70}}
+\headcommand {\def \inserttotalframenumber {64}}

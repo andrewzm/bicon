@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.10.15)  17 MAR 2015 10:27
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.10.15)  18 MAR 2015 07:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1278,12 +1278,12 @@ Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 150.
 <./Obs.png, id=292, 552.8655pt x 325.215pt>
 File: ./Obs.png Graphic file (type png)
  <use ./Obs.png>
-Package pdftex.def Info: ./Obs.png used on input line 164.
+Package pdftex.def Info: ./Obs.png used on input line 166.
 (pdftex.def)             Requested size: 289.07999pt x 170.05066pt.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 164.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 166.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [7
 
@@ -1291,14 +1291,14 @@ Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 164.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 183.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 185.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [8
 
 ]
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
  <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 208.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 210.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [9
 
@@ -1306,14 +1306,14 @@ Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 208.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 227.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 229.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [10
 
 ]
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
  <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 241.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 243.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [11
 
@@ -1321,12 +1321,12 @@ Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 241.
 <rain.png, id=438, 578.16pt x 433.62pt>
 File: rain.png Graphic file (type png)
  <use rain.png>
-Package pdftex.def Info: rain.png used on input line 256.
+Package pdftex.def Info: rain.png used on input line 258.
 (pdftex.def)             Requested size: 216.81pt x 162.6071pt.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 256.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 258.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [12
 
@@ -1336,138 +1336,138 @@ Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 256.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 283.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 285.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [14
 
 ]
 
-LaTeX Font Warning: Command \small invalid in math mode on input line 306.
+LaTeX Font Warning: Command \small invalid in math mode on input line 308.
 
-LaTeX Font Info:    Calculating math sizes for size <> on input line 306.
+LaTeX Font Info:    Calculating math sizes for size <> on input line 308.
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <0.7> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <0.5> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `T1/cmr/m/n' in size <> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `T1/cmr/m/n' in size <0.7> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `T1/cmr/m/n' in size <0.5> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <0.7> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <0.5> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <0.7> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <0.5> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <0.7> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <0.5> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <0.7> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/b/it' in size <0.5> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <0.7> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/b/n' in size <0.5> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `T1/cmss/m/n' in size <> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `T1/cmss/m/n' in size <0.7> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `T1/cmss/m/n' in size <0.5> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `T1/cmss/m/it' in size <> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `T1/cmss/m/it' in size <0.7> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `T1/cmss/m/it' in size <0.5> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `T1/cmss/bx/n' in size <> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `T1/cmss/bx/n' in size <0.7> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 
 LaTeX Font Warning: Font shape `T1/cmss/bx/n' in size <0.5> not available
-(Font)              size <5> substituted on input line 306.
+(Font)              size <5> substituted on input line 308.
 
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 306.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 308.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [15
 
@@ -1475,11 +1475,11 @@ Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 306.
 File: Sigma.png Graphic file (type png)
 
 <use Sigma.png>
-Package pdftex.def Info: Sigma.png used on input line 321.
+Package pdftex.def Info: Sigma.png used on input line 323.
 (pdftex.def)             Requested size: 180.67499pt x 158.09023pt.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
  <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 321.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 323.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [16
 
@@ -1487,14 +1487,14 @@ Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 321.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 336.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 338.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [17
 
 ]
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
  <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 353.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 355.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [18
 
@@ -1502,12 +1502,12 @@ Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 353.
 <./sim_obs.png, id=647, 505.89pt x 289.08pt>
 File: ./sim_obs.png Graphic file (type png)
  <use ./sim_obs.png>
-Package pdftex.def Info: ./sim_obs.png used on input line 362.
+Package pdftex.def Info: ./sim_obs.png used on input line 364.
 (pdftex.def)             Requested size: 289.07999pt x 165.19194pt.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 362.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 364.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [19
 
@@ -1515,12 +1515,12 @@ Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 362.
 <./sim_est.png, id=677, 505.89pt x 289.08pt>
 File: ./sim_est.png Graphic file (type png)
  <use ./sim_est.png>
-Package pdftex.def Info: ./sim_est.png used on input line 371.
+Package pdftex.def Info: ./sim_est.png used on input line 373.
 (pdftex.def)             Requested size: 289.07999pt x 165.19194pt.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 371.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 373.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [20
 
@@ -1528,14 +1528,14 @@ Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 371.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 391.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 393.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [21
 
 ]
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
  <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 411.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 413.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [22
 
@@ -1543,63 +1543,52 @@ Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 411.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 439.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 441.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [23
+
+Overfull \vbox (7.80157pt too high) detected at line 441
+ []
+
+[23
 
 ]
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
  <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 462.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 441.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [24
+
+Overfull \vbox (7.80157pt too high) detected at line 441
+ []
+
+[24
 
 ]
-File: NiasraUowShorthandRev.PNG Graphic file (type png)
-
-<use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 477.
-(pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [25
-
-]
-Missing character: There is no [ in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no w in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no d in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no h in font nullfont!
-Missing character: There is no = in font nullfont!
-Missing character: There is no 1 in font nullfont!
-Missing character: There is no p in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no ] in font nullfont!
-Missing character: There is no [ in font nullfont!
-Missing character: There is no l in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no e in font nullfont!
-Missing character: There is no w in font nullfont!
-Missing character: There is no i in font nullfont!
-Missing character: There is no d in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no h in font nullfont!
-Missing character: There is no = in font nullfont!
-Missing character: There is no 1 in font nullfont!
-Missing character: There is no p in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no ] in font nullfont!
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
  <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 548.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 441.
+(pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
+
+Overfull \vbox (7.80157pt too high) detected at line 441
+ []
+
+[25
+
+]
+File: NiasraUowShorthandRev.PNG Graphic file (type png)
+ <use NiasraUowShorthandRev.PNG>
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 464.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [26
 
 ]
+File: NiasraUowShorthandRev.PNG Graphic file (type png)
+ <use NiasraUowShorthandRev.PNG>
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 479.
+(pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
+
+[27
+
+]
 Missing character: There is no [ in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no i in font nullfont!
@@ -1615,17 +1604,30 @@ Missing character: There is no 1 in font nullfont!
 Missing character: There is no p in font nullfont!
 Missing character: There is no t in font nullfont!
 Missing character: There is no ] in font nullfont!
-pdfTeX warning (ext4): destination with the same identifier (name{fig:exchangea
-ble}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.575 \end{frame}
-                 
+Missing character: There is no [ in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no w in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no = in font nullfont!
+Missing character: There is no 1 in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no ] in font nullfont!
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
  <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 575.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 550.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [27
+
+Overfull \vbox (14.64558pt too high) detected at line 550
+ []
+
+[28
 
 ]
 Missing character: There is no [ in font nullfont!
@@ -1647,389 +1649,457 @@ pdfTeX warning (ext4): destination with the same identifier (name{fig:exchangea
 ble}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.608 \end{frame}
+l.577 \end{frame}
                  
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
  <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 608.
-(pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [28
-
-]
-File: NiasraUowShorthandRev.PNG Graphic file (type png)
-
-<use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 631.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 577.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [29
 
 ]
-<meshplot.png, id=967, 505.89pt x 289.08pt>
+Missing character: There is no [ in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no w in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no = in font nullfont!
+Missing character: There is no 1 in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no ] in font nullfont!
+pdfTeX warning (ext4): destination with the same identifier (name{fig:exchangea
+ble}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.610 \end{frame}
+                 
+File: NiasraUowShorthandRev.PNG Graphic file (type png)
+ <use NiasraUowShorthandRev.PNG>
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 610.
+(pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
+ [30
+
+]
+File: NiasraUowShorthandRev.PNG Graphic file (type png)
+
+<use NiasraUowShorthandRev.PNG>
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 633.
+(pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
+ [31
+
+]
+<meshplot.png, id=1024, 505.89pt x 289.08pt>
 File: meshplot.png Graphic file (type png)
  <use meshplot.png>
-Package pdftex.def Info: meshplot.png used on input line 646.
+Package pdftex.def Info: meshplot.png used on input line 648.
 (pdftex.def)             Requested size: 289.07999pt x 165.19194pt.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 646.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 648.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [30
+ [32
 
  <./meshplot.png>]
-<ice_mesh.png, id=997, 1003.75pt x 1003.75pt>
+<ice_mesh.png, id=1054, 1003.75pt x 1003.75pt>
 File: ice_mesh.png Graphic file (type png)
  <use ice_mesh.png>
-Package pdftex.def Info: ice_mesh.png used on input line 657.
+Package pdftex.def Info: ice_mesh.png used on input line 659.
 (pdftex.def)             Requested size: 216.81pt x 216.79758pt.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 657.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 659.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
 
-Overfull \vbox (13.63365pt too high) detected at line 657
+Overfull \vbox (13.63365pt too high) detected at line 659
  []
 
-[31
+[33
 
- <./ice_mesh.png>] <vor3.png, id=1028, 358.33875pt x 338.26375pt>
+ <./ice_mesh.png>] <vor3.png, id=1085, 358.33875pt x 338.26375pt>
 File: vor3.png Graphic file (type png)
 
 <use vor3.png>
-Package pdftex.def Info: vor3.png used on input line 677.
+Package pdftex.def Info: vor3.png used on input line 679.
 (pdftex.def)             Requested size: 144.54pt x 136.44377pt.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
  <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 677.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 679.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [32
+ [34
 
  <./vor3.png>]
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 710.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 711.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [33
+ [35
 
 ]
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
  <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 739.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 740.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [34
+ [36
 
 ]
-<Fig3.pdf, id=1116, 2023.56pt x 1156.32pt>
-File: Fig3.pdf Graphic file (type pdf)
- <use Fig3.pdf>
-Package pdftex.def Info: Fig3.pdf used on input line 748.
-(pdftex.def)             Requested size: 325.215pt x 185.8266pt.
+<Fig3a1.png, id=1173, 998.7714pt x 591.1686pt>
+File: Fig3a1.png Graphic file (type png)
+ <use Fig3a1.png>
+Package pdftex.def Info: Fig3a1.png used on input line 751.
+(pdftex.def)             Requested size: 216.81pt x 128.32555pt.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 748.
-(pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [35
-
- <./Fig3.pdf>] [36
-
-]
-File: NiasraUowShorthandRev.PNG Graphic file (type png)
-
-<use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 770.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 751.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [37
 
+ <./Fig3a1.png (PNG copy)>]
+<Fig3a2.png, id=1204, 1003.1076pt x 572.3784pt>
+File: Fig3a2.png Graphic file (type png)
+ <use Fig3a2.png>
+Package pdftex.def Info: Fig3a2.png used on input line 759.
+(pdftex.def)             Requested size: 216.81pt x 123.71399pt.
+File: NiasraUowShorthandRev.PNG Graphic file (type png)
+
+<use NiasraUowShorthandRev.PNG>
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 759.
+(pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
+ [38
+
+ <./Fig3a2.png (PNG copy)>]
+<Fig3b.png, id=1232, 1027.6794pt x 1156.32pt>
+File: Fig3b.png Graphic file (type png)
+ <use Fig3b.png>
+Package pdftex.def Info: Fig3b.png used on input line 772.
+(pdftex.def)             Requested size: 144.54pt x 162.62474pt.
+File: NiasraUowShorthandRev.PNG Graphic file (type png)
+
+<use NiasraUowShorthandRev.PNG>
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 772.
+(pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
+
+Overfull \vbox (16.73277pt too high) detected at line 772
+ []
+
+[39
+
+ <./Fig3b.png (PNG copy)>] [40
+
 ]
-<NAEI.png, id=1214, 462.528pt x 484.209pt>
+File: NiasraUowShorthandRev.PNG Graphic file (type png)
+ <use NiasraUowShorthandRev.PNG>
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 796.
+(pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
+ [41
+
+]
+<NAEI.png, id=1318, 462.528pt x 484.209pt>
 File: NAEI.png Graphic file (type png)
  <use NAEI.png>
-Package pdftex.def Info: NAEI.png used on input line 786.
+Package pdftex.def Info: NAEI.png used on input line 812.
 (pdftex.def)             Requested size: 108.405pt x 113.48619pt.
 
-<TAC_01_01.png, id=1215, 462.528pt x 484.209pt>
+<TAC_01_01.png, id=1319, 462.528pt x 484.209pt>
 File: TAC_01_01.png Graphic file (type png)
  <use TAC_01_01.png>
-Package pdftex.def Info: TAC_01_01.png used on input line 786.
+Package pdftex.def Info: TAC_01_01.png used on input line 812.
 (pdftex.def)             Requested size: 108.405pt x 113.48619pt.
 
 
 LaTeX Font Warning: Font shape `T1/cmss/m/sc' undefined
-(Font)              using `T1/cmss/m/n' instead on input line 786.
+(Font)              using `T1/cmss/m/n' instead on input line 812.
 
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 786.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 812.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [38
 
- <./NAEI.png (PNG copy)> <./TAC_01_01.png (PNG copy)>] <TAC_01.png, id=1244, 72
-2.7pt x 267.399pt>
+Overfull \vbox (15.79437pt too high) detected at line 812
+ []
+
+[42
+
+ <./NAEI.png (PNG copy)> <./TAC_01_01.png (PNG copy)>]
+<TAC_01.png, id=1348, 722.7pt x 267.399pt>
 File: TAC_01.png Graphic file (type png)
  <use TAC_01.png>
-Package pdftex.def Info: TAC_01.png used on input line 809.
+Package pdftex.def Info: TAC_01.png used on input line 835.
 (pdftex.def)             Requested size: 289.07999pt x 106.9577pt.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 809.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 835.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [39
+ [43
 
  <./TAC_01.png (PNG copy)>]
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 826.
-(pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [40
-
-]
-File: NiasraUowShorthandRev.PNG Graphic file (type png)
- <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 851.
-(pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [41
-
-]
-File: NiasraUowShorthandRev.PNG Graphic file (type png)
-
-<use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 867.
-(pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [42
-
-]
-File: NiasraUowShorthandRev.PNG Graphic file (type png)
- <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 895.
-(pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [43
-
-]
-File: NiasraUowShorthandRev.PNG Graphic file (type png)
-
-<use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 920.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 852.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [44
 
 ]
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
  <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 920.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 877.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [45
 
 ]
-<Qsparse.png, id=1442, 571.13374pt x 457.71pt>
-File: Qsparse.png Graphic file (type png)
- <use Qsparse.png>
-Package pdftex.def Info: Qsparse.png used on input line 928.
-(pdftex.def)             Requested size: 252.94499pt x 202.71301pt.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 928.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 893.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [46
 
- <./Qsparse.png (PNG copy)>]
+]
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
-
-<use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 940.
+ <use NiasraUowShorthandRev.PNG>
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 921.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [47
 
 ]
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
- <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 951.
+
+<use NiasraUowShorthandRev.PNG>
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 946.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [48
+
+Overfull \vbox (6.91896pt too high) detected at line 946
+ []
+
+[48
 
 ]
+File: NiasraUowShorthandRev.PNG Graphic file (type png)
+ <use NiasraUowShorthandRev.PNG>
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 946.
+(pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
+
+Overfull \vbox (6.91896pt too high) detected at line 946
+ []
+
+[49
+
+] <Qsparse.png, id=1547, 571.13374pt x 457.71pt>
+File: Qsparse.png Graphic file (type png)
+ <use Qsparse.png>
+Package pdftex.def Info: Qsparse.png used on input line 961.
+(pdftex.def)             Requested size: 180.67499pt x 144.794pt.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 951.
-(pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [49
-
-]
-File: NiasraUowShorthandRev.PNG Graphic file (type png)
- <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 951.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 961.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [50
 
-]
+ <./Qsparse.png (PNG copy)>]
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 951.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 973.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [51
 
 ]
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
  <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 964.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 984.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
  [52
 
 ]
-<HMC2.png, id=1642, 1001.7425pt x 530.98375pt>
+File: NiasraUowShorthandRev.PNG Graphic file (type png)
+
+<use NiasraUowShorthandRev.PNG>
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 984.
+(pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
+ [53
+
+]
+File: NiasraUowShorthandRev.PNG Graphic file (type png)
+ <use NiasraUowShorthandRev.PNG>
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 984.
+(pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
+ [54
+
+]
+File: NiasraUowShorthandRev.PNG Graphic file (type png)
+
+<use NiasraUowShorthandRev.PNG>
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 984.
+(pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
+ [55
+
+]
+File: NiasraUowShorthandRev.PNG Graphic file (type png)
+ <use NiasraUowShorthandRev.PNG>
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 997.
+(pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
+ [56
+
+]
+<HMC2.png, id=1747, 1001.7425pt x 530.98375pt>
 File: HMC2.png Graphic file (type png)
  <use HMC2.png>
-Package pdftex.def Info: HMC2.png used on input line 975.
+Package pdftex.def Info: HMC2.png used on input line 1008.
 (pdftex.def)             Requested size: 289.07999pt x 153.22783pt.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 975.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1008.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [53
+ [57
 
  <./HMC2.png (PNG copy)>]
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 990.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1023.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [54
+ [58
 
 ]
-<B_plot.png, id=1699, 867.24pt x 377.2494pt>
+<B_plot.png, id=1804, 867.24pt x 377.2494pt>
 File: B_plot.png Graphic file (type png)
  <use B_plot.png>
-Package pdftex.def Info: B_plot.png used on input line 1002.
+Package pdftex.def Info: B_plot.png used on input line 1035.
 (pdftex.def)             Requested size: 289.07999pt x 125.74756pt.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1002.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1035.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [55
+ [59
 
  <./B_plot.png>]
-<Sim_plot.png, id=1730, 722.7pt x 289.08pt>
+<Sim_plot.png, id=1834, 722.7pt x 289.08pt>
 File: Sim_plot.png Graphic file (type png)
  <use Sim_plot.png>
-Package pdftex.def Info: Sim_plot.png used on input line 1014.
+Package pdftex.def Info: Sim_plot.png used on input line 1047.
 (pdftex.def)             Requested size: 289.07999pt x 115.62994pt.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1014.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1047.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [56
+ [60
 
  <./Sim_plot.png>]
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1026.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1059.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [57
+ [61
 
 ]
-<Sim1_samples.png, id=1789, 722.7pt x 377.2494pt>
+<Sim1_samples.png, id=1894, 722.7pt x 377.2494pt>
 File: Sim1_samples.png Graphic file (type png)
  <use Sim1_samples.png>
-Package pdftex.def Info: Sim1_samples.png used on input line 1039.
+Package pdftex.def Info: Sim1_samples.png used on input line 1072.
 (pdftex.def)             Requested size: 289.07999pt x 150.89708pt.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1039.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1072.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [58
+ [62
 
  <./Sim1_samples.png>]
-<density_sim1.png, id=1819, 289.08pt x 289.08pt>
+<density_sim1.png, id=1924, 289.08pt x 289.08pt>
 File: density_sim1.png Graphic file (type png)
  <use density_sim1.png>
-Package pdftex.def Info: density_sim1.png used on input line 1054.
+Package pdftex.def Info: density_sim1.png used on input line 1087.
 (pdftex.def)             Requested size: 144.54pt x 144.53964pt.
 
-<density_sim10.png, id=1820, 289.08pt x 289.08pt>
+<density_sim10.png, id=1925, 289.08pt x 289.08pt>
 File: density_sim10.png Graphic file (type png)
  <use density_sim10.png>
-Package pdftex.def Info: density_sim10.png used on input line 1054.
+Package pdftex.def Info: density_sim10.png used on input line 1087.
 (pdftex.def)             Requested size: 144.54pt x 144.53964pt.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1054.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1087.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
 
-Overfull \vbox (6.4132pt too high) detected at line 1054
+Overfull \vbox (6.4132pt too high) detected at line 1087
  []
 
-[59
+[63
 
  <./density_sim1.png> <./density_sim10.png>]
-<histUK.png, id=1850, 289.08pt x 289.08pt>
+<histUK.png, id=1955, 289.08pt x 289.08pt>
 File: histUK.png Graphic file (type png)
  <use histUK.png>
-Package pdftex.def Info: histUK.png used on input line 1071.
+Package pdftex.def Info: histUK.png used on input line 1104.
 (pdftex.def)             Requested size: 144.54pt x 144.53964pt.
 
-<variogram_est.png, id=1851, 289.08pt x 289.08pt>
+<variogram_est.png, id=1956, 289.08pt x 289.08pt>
 File: variogram_est.png Graphic file (type png)
  <use variogram_est.png>
-Package pdftex.def Info: variogram_est.png used on input line 1071.
+Package pdftex.def Info: variogram_est.png used on input line 1104.
 (pdftex.def)             Requested size: 144.54pt x 144.53964pt.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1071.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1104.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
 
-Overfull \vbox (6.4132pt too high) detected at line 1071
+Overfull \vbox (6.4132pt too high) detected at line 1104
  []
 
-[60
+[64
 
  <./histUK.png> <./variogram_est.png>]
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
  <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1087.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1120.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
 
-[61
+[65
 
-] <NAEI_land_only.png, id=1911, 462.528pt x 484.209pt>
+] <NAEI_land_only.png, id=2015, 462.528pt x 484.209pt>
 File: NAEI_land_only.png Graphic file (type png)
 
 <use NAEI_land_only.png>
-Package pdftex.def Info: NAEI_land_only.png used on input line 1097.
+Package pdftex.def Info: NAEI_land_only.png used on input line 1130.
 (pdftex.def)             Requested size: 144.54pt x 151.31493pt.
- <Em95.png, id=1912, 462.528pt x 484.209pt>
+ <Em95.png, id=2016, 462.528pt x 484.209pt>
 File: Em95.png Graphic file (type png)
 
 <use Em95.png>
-Package pdftex.def Info: Em95.png used on input line 1097.
+Package pdftex.def Info: Em95.png used on input line 1130.
 (pdftex.def)             Requested size: 144.54pt x 151.31493pt.
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
  <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1097.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1130.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
 
-Overfull \vbox (10.151pt too high) detected at line 1097
+Overfull \vbox (10.151pt too high) detected at line 1130
  []
 
-[62
+[66
 
- <./NAEI_land_only.png (PNG copy)> <./Em95.png (PNG copy)>] [63
+ <./NAEI_land_only.png (PNG copy)> <./Em95.png (PNG copy)>] [67
 
 ]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 1118
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 1151
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
@@ -2038,24 +2108,24 @@ File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1118.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1151.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [64
+ [68
 
 ] (./2015_03_Goulburn.bbl)
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
 
 <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1128.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1161.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [65
+ [69
 
 ]
 File: NiasraUowShorthandRev.PNG Graphic file (type png)
  <use NiasraUowShorthandRev.PNG>
-Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1128.
+Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1161.
 (pdftex.def)             Requested size: 81.89725pt x 22.76228pt.
- [66
+ [70
 
 
 ]
@@ -2068,15 +2138,15 @@ Package pdftex.def Info: NiasraUowShorthandRev.PNG used on input line 1128.
 \tf@snm=\write8
 \openout8 = `2015_03_Goulburn.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1130.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1130.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1163.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1163.
 
 (./2015_03_Goulburn.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1130.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1130.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1163.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1163.
 
 Package rerunfilecheck Info: File `2015_03_Goulburn.out' has not changed.
-(rerunfilecheck)             Checksum: 940C0E784BD39BA9502ADC1CBDA3BFB4;889.
+(rerunfilecheck)             Checksum: 761E5397E9532CFDAA01D6B8484FBD55;890.
 
 
 LaTeX Font Warning: Size substitutions with differences
@@ -2088,16 +2158,16 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1130.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1163.
  ) 
 Here is how much of TeX's memory you used:
- 20241 strings out of 495028
- 372464 string characters out of 6181496
- 458692 words of memory out of 5000000
- 22749 multiletter control sequences out of 15000+600000
+ 20270 strings out of 495028
+ 372901 string characters out of 6181496
+ 459583 words of memory out of 5000000
+ 22768 multiletter control sequences out of 15000+600000
  46712 words of font info for 115 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 61i,21n,70p,915b,724s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 61i,22n,70p,915b,724s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/andrew/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.600pk> </home/
 andrew/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecsi0600.600pk> </home/andrew/.te
 xmf-var/fonts/pk/ljfour/jknappen/ec/ecss0500.600pk> </home/andrew/.texmf-var/fo
@@ -2127,10 +2197,10 @@ cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on 2015_03_Goulburn.pdf (66 pages, 4342061 bytes).
+Output written on 2015_03_Goulburn.pdf (70 pages, 4105963 bytes).
 PDF statistics:
- 2682 PDF objects out of 2984 (max. 8388607)
- 1963 compressed objects within 20 object streams
- 150 named destinations out of 1000 (max. 500000)
- 689 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2797 PDF objects out of 2984 (max. 8388607)
+ 2064 compressed objects within 21 object streams
+ 158 named destinations out of 1000 (max. 500000)
+ 723 words of extra memory for PDF output out of 10000 (max. 10000000)
 

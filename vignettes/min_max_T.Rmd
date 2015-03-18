@@ -699,7 +699,7 @@ Mesh["diffY"] <- Mesh["Y2"] - Mesh["Y1"]
 
 Y1plot <- plot_interp(Mesh,"Y1",ds=200,min=-7.9,max=7.9,leg_title="Y1 (degC)",reverse=T) %>% 
   meshplot(include_obs=0L) %>%
-  mesh_cities()
+  mesh_cities(txt_size=10)
 
 Y1plot2 <- LinePlotTheme() %>% ## BW version
   meshplot(include_obs=0L) %>% 
@@ -711,7 +711,7 @@ Y1plot2 <- LinePlotTheme() %>% ## BW version
 
 Y2plot <- plot_interp(Mesh,"Y2",ds=200,min=-7.9,max=7.9,leg_title="Y2 (degC)",reverse=T) %>% 
   meshplot(include_obs=0L)  %>%
-  mesh_cities()
+  mesh_cities(txt_size=10)
 
 Y2plot2 <- LinePlotTheme() %>%   ## BW version
   meshplot(include_obs=0L) %>% 
@@ -801,9 +801,9 @@ if(model==3) {
   plot_h <- function(g,h,col="red",al=0.9) {
     g + geom_ribbon(data=h,aes(x = he, ymin = lq, ymax = uq),
                     fill=col,alpha=al) +
-      geom_line(data=h,aes(x=he,y=lq),linetype=2,size=0.4) +
-      geom_line(data=h,aes(x=he,y=mq),linetype=1,size=0.4) +
-      geom_line(data=h,aes(x=he,y=uq),linetype=2,size=0.4) 
+      geom_line(data=h,aes(x=he,y=lq),linetype=2,size=2) +
+      geom_line(data=h,aes(x=he,y=mq),linetype=1,size=2) +
+      geom_line(data=h,aes(x=he,y=uq),linetype=2,size=2) 
   }
   g <- plot_h(LinePlotTheme(),hprior,col="light grey",al=1) %>%
   plot_h(hpost,col="black",al=0.5) + 
@@ -815,7 +815,8 @@ if(model==3) {
                                y=c(-0.15,-0.14,-0.15,-0.14),
                                group=c(1,1,2,2)),
               aes(x,y,group=group),size=4) +
-    theme(plot.margin=grid::unit(c(2.5,2.5,0,0),"mm"))
+    theme(plot.margin=grid::unit(c(2.5,2.5,0,0),"mm"),
+          panel.grid.major = element_line(colour = NA))
   gshow <- g + geom_text(data=data.frame(x=c(0.13,abs_dv+0.13),
                               y=c(-0.125,-0.125),
                               txt=c("DE","FC")),

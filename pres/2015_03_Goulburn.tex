@@ -116,9 +116,9 @@
 \frametitle{Introduction}
 
 \begin{itemize}
-\item {\bf Univariate} spatial models \vfill
+\item {\bf Univariate} spatial model. \vfill
 
-\item {\bf Multivariate} spatial models.
+\item {\bf Multivariate} spatial model.
 \begin{itemize}
     \item Two or more interacting spatial variables.
     \item Improve prediction on one of the variates by observing the others: {\bf Cokriging}.
@@ -154,13 +154,15 @@
 \begin{frame}
 \frametitle{Example 2: Antarctica Mass Balance}
 
+\begin{itemize}
+\item \citet{Zammit_2014,Zammit_2015a,Zammit_2015b}, Antarctica.
+\end{itemize}
+
+
 \begin{center}
 \includegraphics[width=4in]{./Obs.png}        
 \end{center}
 
-\begin{itemize}
-\item \citet{Zammit_2014,Zammit_2015a,Zammit_2015b}
-\end{itemize}
 \end{frame}
 
 % ###################
@@ -178,7 +180,7 @@
 
 such that {\bf any} covariance matrix derived from it is positive-definite? \vfill
 
-\item {\bf Computational}: Sometimes we struggle with univariate models -- how do we scale up? \vfill
+\item {\bf Computational}: Sometimes we struggle with univariate models -- how do our algorithms scale to multivariate models? \vfill
 \end{itemize}
 \end{frame}
 
@@ -191,19 +193,19 @@ such that {\bf any} covariance matrix derived from it is positive-definite? \vfi
 
 \begin{itemize}
 
-\item {\bf Linear model of co-regionalisation} \citep{Wackernagel1995}: Define
+\item {\bf Linear model of co-regionalisation} \citep[LMC,][]{Wackernagel1995}: Define
 \begin{align}
     Y_1(\cdot) &= a_{11}\Yt_1(\cdot) + a_{12}\Yt_2(\cdot),\\
     Y_2(\cdot) &= a_{21}\Yt_1(\cdot) + a_{22}\Yt_2(\cdot),
 \end{align}
-where
+where, independently,
 \begin{align}
     \Yt_1(\cdot) &\sim \mathcal{N}(\mu_1(\cdot), C_{1}(\cdot,\cdot)),\\
     \Yt_2(\cdot) &\sim \mathcal{N}(\mu_2(\cdot), C_{2}(\cdot,\cdot)).
 \end{align}
 
 \item $C_{ij}(\cdot,\cdot) = a_{i1}a_{j1}C_{1}(\cdot,\cdot) + a_{i2}a_{j2}C_{2}(\cdot,\cdot)$.
-\item CCFM is positive definite for any $\{a_{ij}: i,j = 1,\dots,2\}$. 
+\item CCFM is positive-definite for any $\{a_{ij}: i,j = 1,\dots,2\}$. 
 \end{itemize}
 \end{frame}
 
@@ -219,7 +221,7 @@ where
     C_{ij}^o(\cdot) & \equiv \beta_{ij}M(\cdot; \nu_{ij}, \kappa_{ij}),
 \end{align}
 
-where $M(\cdot)$ is a Matérn covariance function. If we let $\kappa_{ii} = \kappa_{ij} = \kappa$ and set $\nu_{ij} = (\nu_{ii} + \nu_{jj})/2$ then if  $(\beta_{ij},i,j = 1,2)$ is positive definite, the CCFM is positive definite.\vfill
+where $M(\cdot)$ is a Matérn covariance function. Let $\kappa_{ii} = \kappa_{ij} = \kappa$ and set $\nu_{ij} = (\nu_{ii} + \nu_{jj})/2$. Then if  $(\beta_{ij}:i,j = 1,2)$ is positive-definite, the CCFM is positive-definite.\vfill
   
 \item {\bf Bivariate full Matérn model}:  Relaxes assumptions on smoothness and scales, but finding valid parameters is much more involved.\vfill
 \end{itemize}
@@ -232,10 +234,10 @@ where $M(\cdot)$ is a Matérn covariance function. If we let $\kappa_{ii} = \kap
 \frametitle{Current approaches (limitations)}
 
 \begin{itemize}
-\item Stuck with homogeneous models (e.g. convolution methods). \vfill
+\item Stuck with homogeneous models (e.g., convolution methods). \vfill
 \item Stuck with fixed scales (parsimonious Matérn). \vfill
-\item Stuck with Matérn models (e.g. full Matérn models). \vfill
-\item {\bf Stuck with symmetry (e.g. LMC)}. \vfill
+\item Stuck with Matérn models (e.g., full Matérn models). \vfill
+\item {\bf Stuck with symmetry (e.g., LMC)}. \vfill
 \end{itemize}
 
 \end{frame}
@@ -301,7 +303,7 @@ C_{22}(\s,\u) = C_{2\mid 1}(\s,\u)+\int_D\int_D \red{b(\s,\v)} \blue{C_{11}(\v,\
 
 and is always valid (we will outline the proof soon). \vfill
 
-\item Asymmetry is guaranteed if $b(\cdot,\cdot)$ is not symmetric. \vfill
+\item Asymmetry (i.e., $C_{12}(\svec,\uvec) \ne C_{21}(\svec,\uvec)$) is guaranteed if $b(\cdot,\cdot)$ is not symmetric. \vfill
 \end{itemize}
 \end{frame}
 
@@ -326,7 +328,7 @@ and is always valid (we will outline the proof soon). \vfill
 \frametitle{Properties of causal spatial models}
 
 \begin{itemize}
-\item Heterogeneity since $C_{11}(\cdot,\cdot)$, $C_{2|1}(\cdot,\cdot)$ need not be homogeneous and $b(\svec,\uvec)$ need not be symmetric. \vfill
+\item Heterogeneity, since $C_{11}(\cdot,\cdot)$, $C_{2|1}(\cdot,\cdot)$ need not be homogeneous and $b(\svec,\uvec)$ need not be symmetric. \vfill
 
 \item We are not restricted to Matérn fields. The bivariate parsimonious Matérn field is a {\bf special case}.\vfill
 
@@ -342,11 +344,11 @@ and is always valid (we will outline the proof soon). \vfill
 
 \begin{itemize}
 \item Assume all parameters are known and $Y_1(\cdot)$ is only partially observed. \vfill
-\item Use simple cokriging kriging {\bf or} simple kriging to estimate $Y_1(\cdot)$:
+\item Use simple cokriging {\bf or} simple kriging to estimate $Y_1(\cdot)$:
 
 \begin{align*}
-\hat Y_1(\svec_0) &\equiv \E(Y_1(\svec_0) \mid  \Zvec_1, \Zvec_2)~~~~\textrm{cokriging predictor}, \\
-\widetilde Y_1(\svec_0) &\equiv \E(Y_1(\svec_0) \mid  \Zvec_1)~~~~~~~~~\textrm{kriging predictor}.
+\hat Y_1(\svec_0) &\equiv \E(Y_1(\svec_0) \mid  \Zvec_1, \Zvec_2)~~~~\textrm{simple cokriging predictor}, \\
+\widetilde Y_1(\svec_0) &\equiv \E(Y_1(\svec_0) \mid  \Zvec_1)~~~~~~~~~\textrm{simple kriging predictor}.
 \end{align*}\vfill
 \end{itemize}
 
@@ -376,9 +378,9 @@ and is always valid (we will outline the proof soon). \vfill
 \frametitle{Is the bivariate model always valid?}
 
 \begin{itemize}
-\item If $C_{11}(\svec,\uvec)$ and $C_{2|1}(\svec,\uvec)$ are positive definite, then $C_{22}(\cdot,\cdot)$ is positive definite (recall quadratic form).
+\item If $C_{11}(\svec,\uvec)$ and $C_{2|1}(\svec,\uvec)$ are positive-definite, then $C_{22}(\cdot,\cdot)$ is positive-definite (recall quadratic form).
 \item $C_{12}(\svec,\uvec) = C_{21}(\uvec,\svec)$.
-\item CCFM is positive definite if for any $n_1,n_2$ such that $n_1 + n_2 > 0$, locations $\{\svec_{1k}\}, \{\svec_{2l}\}$ and any real numbers $\{a_{1k}\},\{a_{2l}\}$,
+\item CCFM is positive-definite if, for any $n_1,n_2$ such that $n_1 + n_2 > 0$, any locations $\{\svec_{1k}\}, \{\svec_{2l}\}$ and any real numbers $\{a_{1k}\},\{a_{2l}\}$,
 
 \small
 \begin{align*}
@@ -421,13 +423,13 @@ a(\s)\equiv \sum_{k=1}^{n_1}a_{1k}\delta(\s-\s_{1k})+\sum_{l=1}^{n_2}a_{2l}b(\s_
 \item  $[Y_1(\cdot),\dots,Y_p(\cdot)]$ can be decomposed as,
 
 \begin{equation*}
-[Y_p(\cdot) \mid  Y_{p-1}(\cdot),Y_{p-2}(\cdot),\dots,Y_1(\cdot)]\dots [Y_1(\cdot)].                  \end{equation*}
+[Y_p(\cdot) \mid  Y_{p-1}(\cdot),Y_{p-2}(\cdot),\dots,Y_1(\cdot)]\dots [Y_1(\cdot)].                  \end{equation*} \pause
 
 \item The conditional expectation is
 \begin{align*}
 \E(Y_q(\svec) \mid  \{Y_r(\cdot) : r = 1,\dots,(q-1)\}) \equiv \sum_{r = 1}^{q-1} \int_D b_{qr}(\svec,\v)Y_r(\v) \intd \v; \\
  \qquad \qquad \svec \in D.
-\end{align*}
+\end{align*} \pause
 
 \item The conditional covariance is
 \begin{align*}
@@ -443,7 +445,7 @@ where $\{b_{qr}(\cdot,\cdot) : r = 1,\dots,(q-1) ;~q = 2,\dots,p\}$ are integrab
 \begin{frame}
 \frametitle{Is the multivariate model always valid?}
 
-We need to show that the $p$-variate process is well defined. Proof by induction:
+We need to show that the $p$-variate process is well defined. The proof is by induction:
 \begin{itemize}
   \item We know that the bivariate process is well defined.
   \item Assume that the $(p-1)$-variate process is well defined.
@@ -469,9 +471,9 @@ a_q(\svec) \equiv \left(\sum_{k=1}^{n_q}a_{qk}\delta(\svec - \svec_{qk}) + \sum_
 The following can all be shown to be special cases of causal spatial models:
 
 \begin{itemize}
-\item The parsimonious Matern model of \cite{Gneitingetal2010},
-\item The full Matern model of \cite{Gneitingetal2010},
-\item The linear model of coregionalsiation \cite{Wackernagel1995},
+\item The parsimonious Mat{\'e}rn model of \cite{Gneitingetal2010},
+\item The full Mat{\'e}rn model of \cite{Gneitingetal2010},
+\item The linear model of coregionalisation, used for example by \cite{Wackernagel1995},
 \item The moving average model of \cite{verHoef_1998}.
 \end{itemize}
 \end{frame}
@@ -482,7 +484,7 @@ The following can all be shown to be special cases of causal spatial models:
 \frametitle{Graphical structure}
 
 \begin{itemize}
-\item No restriction on graphical structure.
+\item No restriction on graphical structure. It could be undirected, directed, or a chain graph \citep{Lauritzen_1996}.
 \item Computationally-efficient algorithms available for some structures.
 \end{itemize}
 
@@ -503,7 +505,7 @@ The following can all be shown to be special cases of causal spatial models:
 \draw [->] (dots) to (Yp);
 
 \end{tikzpicture}
-\caption{Chains}\label{fig:exchangeable}
+\caption{Ordered nodes}\label{fig:exchangeable}
 \end{center}
 \end{figure}
 
@@ -570,7 +572,7 @@ The following can all be shown to be special cases of causal spatial models:
 \end{center}
 \end{figure}
 
-Available building blocks: $C_{11}(\cdot,\cdot)$, $C_{2\mid 1}(\cdot,\cdot)$, $b(\cdot,\cdot)$.
+Available building blocks: Three functions, $C_{11}(\cdot,\cdot)$, $C_{2\mid 1}(\cdot,\cdot)$, $b(\cdot,\cdot)$.
 
 \end{frame}
 
@@ -603,7 +605,7 @@ Available building blocks: $C_{11}(\cdot,\cdot)$, $C_{2\mid 1}(\cdot,\cdot)$, $b
 \end{figure}
 
 \vspace{-0.3cm}
-Available building blocks: $C_{11}(\cdot,\cdot)$, $C_{2\mid 1}(\cdot,\cdot)$, $C_{3|1,2}(\cdot,\cdot)$, $b_{21}(\cdot,\cdot)$, $b_{31}(\cdot,\cdot)$, $b_{32}(\cdot,\cdot)$.
+Available building blocks: Six functions, $C_{11}(\cdot,\cdot)$, $C_{2\mid 1}(\cdot,\cdot)$, $C_{3|1,2}(\cdot,\cdot)$, $b_{21}(\cdot,\cdot)$, $b_{31}(\cdot,\cdot)$, $b_{32}(\cdot,\cdot)$.
 
 \end{frame}
 
@@ -612,12 +614,12 @@ Available building blocks: $C_{11}(\cdot,\cdot)$, $C_{2\mid 1}(\cdot,\cdot)$, $C
 \subsection{Min-max temperature dataset}
 
 \begin{frame}
-\frametitle{Illustrative example: Min-max temperatures in Colorado, USA}
+\frametitle{Min-max temperatures in Colorado, USA}
 
 \begin{itemize}
-\item Minimum and maximum temperatures taken on September 19, 2004.
-\item 94 measurement stations (collocated measurements).
-\item Maximum temperature residual later in the afternoon ($Y_2(\cdot)$) highly dependent on minimum temperature residual (from state-wide mean) in the early morning hours ($Y_1(\cdot)$).
+\item Minimum and maximum temperatures taken on September 19, 2004 in the state of Colorado, USA.
+\item 94 measurement stations (collocated measurements); residuals are obtained by subtraction of statewide mean.
+\item Maximum-temperature residual later in the afternoon ($Y_2(\cdot)$) highly dependent on minimum-temperature residual in the early morning hours ($Y_1(\cdot)$).
 \item Fit three models and compare using DIC:
 
 \begin{equation*}
@@ -686,14 +688,13 @@ where $\{\eta_k\}$ are the tessellation areas.
 \begin{align*}
 \left.\begin{pmatrix} \Zvec_1 \\ \Zvec_2 \end{pmatrix}
 \right|
-\begin{pmatrix} \Yvec_1 \\ \Yvec_2 \end{pmatrix} , \thetab
+\begin{pmatrix} \Yvec_1 \\ \Yvec_2 \end{pmatrix} \hspace{-0.02in} ,\thetab
 \sim
 \mathcal{N}\left(
-\begin{pmatrix} \Dmat\Yvec_1 \\ \Dmat\Yvec_2 \end{pmatrix},
-\sigma^2_\varepsilon\begin{pmatrix} \Imat & \rho_\varepsilon\Imat \\ \rho_\varepsilon\Imat & \Imat \end{pmatrix}
+\begin{pmatrix} \Dmat\Yvec_1 \\ \Dmat\Yvec_2 \end{pmatrix}  \hspace{-0.02in}, \sigma^2_\varepsilon\begin{pmatrix} \Imat & \rho_\varepsilon\Imat \\ \rho_\varepsilon\Imat & \Imat \end{pmatrix}
 \right),
 \end{align*}
-where $\Dmat$ is an incidence matrix.
+where $\Dmat$ is an incidence matrix and $\thetab$ includes $\sigma^2_\varepsilon$ and $\rho_\varepsilon$.
 \item Process model:
 \begin{equation*}
 \left.\begin{pmatrix} \Yvec_1 \\ \Yvec_2 \end{pmatrix}\right| \thetab \sim \mathcal{N} 
@@ -705,7 +706,7 @@ where $\Dmat$ is an incidence matrix.
 \end{pmatrix}
 \right),
 \end{equation*}
-\noindent where $\bSigma_{11}, \bSigma_{2|1}$ and $\Bmat$ depend on $\thetab$.
+\noindent where $\bSigma_{11}, \bSigma_{2|1}$ and $\Bmat$ depend on parameters in $\thetab$.
 \end{itemize}
 \end{frame}
 
@@ -715,7 +716,7 @@ where $\Dmat$ is an incidence matrix.
 \frametitle{We have many unknown parameters!}
 
 \begin{itemize}
-\item Assume that $C_{11}(\cdot)$ and $C_{2|1}(\cdot)$ areMat{\'e}rn covariance functions with smoothness parameter $\nu = 3/2$.
+\item Assume that $C_{11}(\cdot)$ and $C_{2|1}(\cdot)$ are Mat{\'e}rn covariance functions with smoothness parameter $\nu = 3/2$.
 \end{itemize}
 \small
 \begin{center}
@@ -741,11 +742,36 @@ where $\Dmat$ is an incidence matrix.
 % ###################
 
 \begin{frame}
+\frametitle{Median fields}
+
+\begin{figure}
+\includegraphics[width=3in]{Fig3a1.png}
+\caption{Interpolated map in degrees Celsius (degC) of $\E(\Yvec_1 \mid  \Zvec_1,\Zvec_2)$.}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Median fields}
+\begin{figure}
+\includegraphics[width=3in]{Fig3a2.png}
+\caption{Interpolated map in degrees Celsius (degC) of $\E(\Yvec_2 \mid  \Zvec_1,\Zvec_2)$.}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
 \frametitle{Interaction function}
 
-\includegraphics[width=4.5in]{Fig3.pdf}
+
+\vspace{-0.1in}
+\begin{figure}
+\includegraphics[width=2in]{Fig3b.png}
+\caption{\small Prior (light grey) and posterior (dark grey) median (solid line) and inter-quartile ranges (enclosed by dashed lines) of the interaction function $b_o(\cdot)$ of Model 3, along a unit vector $\mathbf{e}$ originating at Denver (DE) in the direction of Fort Collins (FC)} 
+\end{figure}
 
 \end{frame}
+
+\normalsize
 
 % ###################
 
@@ -780,7 +806,7 @@ where $\Dmat$ is an incidence matrix.
 \begin{figure}
 \includegraphics[width=1.5in]{NAEI.png}  
 \includegraphics[width=1.5in]{TAC_01_01.png}
-\caption{Emissions map obtained from the NAEI for January 2014 (left panel) and the sensitivity function $b_t(\s,\cdot)$ obtained from the Met Office's NAME  with $\s$ set to the coordinates of the Angus measurement station (\textsc{TTA}), Scotland (right panel).}
+\caption{Emissions map obtained from the NAEI for January 2014 (left panel) and the interaction function $b_t(\s,\cdot)$ obtained from the Met Office's NAME  with $\s$ set to the coordinates of the Angus measurement station (\textsc{TTA}), Scotland (right panel).}
 \end{figure}
 \end{center}
 \end{frame}
@@ -799,7 +825,7 @@ where $\Dmat$ is an incidence matrix.
 
 \begin{itemize}
 \small
-\item The inversion is an ill-posed problem: We need to estimate a (spatial) emissions field from measurements which aggregate spatio-temporally.
+\item The inversion is an ill-posed problem: We need to estimate a (spatial) emissions field from measurements that aggregate spatio-temporally.
 %\item Current methods use data assimilation methods with prior expectations set to what is reported in the inventories.
 %\item Inversions are sometimes orders of magnitude off.
 \end{itemize}
@@ -832,19 +858,19 @@ where $\Dmat$ is an incidence matrix.
 
 \begin{itemize}
 
-\item Now we have a causal {\bf spatio-temporal} bivariate model:
+\item We have a causal {\bf spatio-temporal} bivariate model:
 
 \begin{align*}
 \E\left(Y_{2,t}(\s)\mid Y_1(\cdot)\right)&\,=\int_D{b_t(\s,\v)Y_1(\v)\,\d \v};\quad \s\in D,\\
 \cov\left(Y_{2,t}(\s),Y_{2,t'}(\u)\mid Y_1(\cdot)\right)&\,=C_{2\mid 1,t,t'}(\s,\u);\quad \s,\u\in \mathbb{R}^d,
 \end{align*}
-with the mole-fraction covariance
+with the mole-fraction covariance:
 
 \begin{equation*}
 C_{22,t,t'}(\s,\u) = C_{2\mid 1,t,t'}(\s,\u)+\int_D\int_D {b_t(\s,\v)} {C_{11}(\v,\w)} {b_{t'}(\w,\u)}\d\v\d\w.
 \end{equation*}
 
-\item The conditional covariance $C_{2\mid 1,t,t'}$ is used to account for simulator discrepancy (boundary conditions, model discretisation, linearisation etc.).
+\item The conditional covariance $C_{2\mid 1,t,t'}$ is used to account for simulator discrepancy (boundary conditions, model discretisation, linearisation, etc.).
 
 \end{itemize}
 
@@ -855,13 +881,13 @@ C_{22,t,t'}(\s,\u) = C_{2\mid 1,t,t'}(\s,\u)+\int_D\int_D {b_t(\s,\v)} {C_{11}(\
 \frametitle{Expectations and covariances}
 
 \begin{align*}
-\Yvec_\cdot(\cdot) \sim \Dist\begin{pmatrix} \begin{pmatrix} \mu_1(\cdot) \\ \mu_{2,\cdot}(\cdot) \end{pmatrix},\begin{pmatrix}  C_{11}(\cdot,\cdot) &  C_{12,\cdot}(\cdot,\cdot) \\  C_{21,\cdot}(\cdot,\cdot) &  C_{22,\cdot,\cdot}(\cdot,\cdot) \end{pmatrix} \end{pmatrix},
+\Yvec_t(\cdot) \sim \Dist\begin{pmatrix} \begin{pmatrix} \mu_1(\cdot) \\ \mu_{2,t}(\cdot) \end{pmatrix},\begin{pmatrix}  C_{11}(\cdot,\cdot) &  C_{12,t'}(\cdot,\cdot) \\  C_{21,t}(\cdot,\cdot) &  C_{22,t,t'}(\cdot,\cdot) \end{pmatrix} \end{pmatrix},\quad t,t' \in \mathbb{R}^+.
 \end{align*}
 
 \begin{itemize}
 %\item Our problem is the size of $\bSigma$, which can become very large.
 \item What to choose for $C_{2|1,t,t'}(\svec,\uvec)$? \vfill
-\item \emph{Strategy 1}: If dim$(\Zvec_{2,t}) < 10$, then use standard spatio-temporal covariance functions which yield (dense) covariance matrices, and evaluate $Y_{2,t}(\cdot)$ only where we take observations. \vfill
+\item \emph{Strategy 1}: If dim$(\Zvec_{2,t}) < 10$, say, then use standard spatio-temporal covariance functions, which yield (dense) covariance matrices, and evaluate $Y_{2,t}(\cdot)$ only where we take observations. \vfill
 \item \emph{Strategy 2}: If dim$(\Zvec_{2,t}) \gg 10$, then we need to use sequential estimation methods,  dimensionality reduction and/or {\bf matrix sparsity}. \vfill
 \end{itemize}
 \end{frame}
@@ -871,7 +897,7 @@ C_{22,t,t'}(\s,\u) = C_{2\mid 1,t,t'}(\s,\u)+\int_D\int_D {b_t(\s,\v)} {C_{11}(\
 
 \begin{itemize}
 
-\item The discrepancy is a separable spatio-temporal Guassian process with
+\item The discrepancy is a separable spatio-temporal Gaussian process with
 \begin{align*}
 C_{2|1,t,t'}(\svec,\uvec) &= \sigma^2_{2|1}\rho_s(\svec,\uvec; d)\rho_t(t,t'; a),\\
 \rho_s(\svec,\uvec; d) &\equiv \exp(\| \svec - \uvec \| / d);\quad d>0, \\
@@ -879,7 +905,7 @@ C_{2|1,t,t'}(\svec,\uvec) &= \sigma^2_{2|1}\rho_s(\svec,\uvec; d)\rho_t(t,t'; a)
 \end{align*}
 
 \item Then $\bSigma_{2|1} = \sigma^2_{2|1} \widetilde\bSigma_{2|1,t} \otimes \widetilde\bSigma_{2|1,s}$.
-\item $\Bmat$ is obtained by concatenating $\{\Bmat_t, t = 1,2,\dots\}$
+\item $\Bmat$ is obtained by concatenating $\{\Bmat_t: t = 1,2,\dots\}$
 \begin{equation*}
 \bSigma = 
 \begin{pmatrix}
@@ -909,21 +935,28 @@ C_{2|1,t,t'}(\svec,\uvec) &= \sigma^2_{2|1}\rho_s(\svec,\uvec; d)\rho_t(t,t'; a)
 \item Large benefit by making sure the (very large) matrix $\Qmat_{2|1}$ is sparse.
 \pause \item We define
 \begin{equation*}
-\Qmat_{2|1} \equiv \sigma_{2|1}^{-2}\widetilde\Qmat_{2|1,t} \otimes \widetilde\Qmat_{2|1,s},
+\Qmat_{2|1} \equiv \sigma_{2|1}^{-2}\widetilde\Qmat_{2|1,t} \otimes \widetilde\Qmat_{2|1,s}~~,
 \end{equation*}
 \noindent where
 \begin{equation*}
 \widetilde\Qmat_{2|1,t} \equiv \begin{pmatrix} 1 & -a &0&&&& 0\\ -a & (1 + a^2) & -a &&&&0  \\ &&&\ddots&&& \\ 0&&&& -a& (1 + a^2) & -a \\ 0&&&&0&-a & 1 \end{pmatrix}.
 \end{equation*}
-\noindent and we get $\Qmat_{2|1,s}$ from an intrinsic GMRF specification.
+\noindent and we get $\Qmat_{2|1,s}$ from an intrinsic Gaussian Markov random field specification.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{$\bSigma^{-1}$ is sparse}
 
+\begin{equation*}
+\bSigma^{-1} = \begin{pmatrix} 
+\Bmat'\Qmat_{2|1}\Bmat + \Qmat_{11} & -\Bmat'\Qmat_{2|1} \\
+-\Qmat_{2|1}\Bmat & \Qmat_{2|1}
+\end{pmatrix}.
+\end{equation*}
+
 \begin{center}
-\includegraphics[width=3.5in]{Qsparse.png}
+\includegraphics[width=2.5in]{Qsparse.png}
 \end{center}
 \end{frame}
 
@@ -934,8 +967,8 @@ C_{2|1,t,t'}(\svec,\uvec) &= \sigma^2_{2|1}\rho_s(\svec,\uvec; d)\rho_t(t,t'; a)
 
 \begin{itemize}
 \item $b_t(\svec,\uvec)$ is assumed known from NAME. \vfill
-\item We can obtain reasonable estimates of the parameters appearing in $C_{11}(\svec,\uvec)$ from inventories (range, marginal variance and nugget). \vfill
-\item We have no idea what the parameters appearing in $C_{2|1}(\svec,\uvec)$ are, these need to be estimated. \vfill
+\item We can obtain reasonable estimates of the parameters appearing in $C_{11}(\svec,\uvec)$ from inventories (range, marginal variance, and nugget). \vfill
+\item We have no idea what the parameters appearing in $C_{2|1}(\svec,\uvec)$ are. These need to be estimated. \vfill
 \end{itemize}
 \end{frame}
 
@@ -945,8 +978,8 @@ C_{2|1,t,t'}(\svec,\uvec) &= \sigma^2_{2|1}\rho_s(\svec,\uvec; d)\rho_t(t,t'; a)
 \begin{itemize}
 \item This is an ill-posed problem: MCMC chains where both the parameters and the fields are unknown will not mix well. \pause \vfill 
 \item We know the first two moments -- use a {\bf Laplace-approximated-EM} to estimate the parameters, then fix the parameters and use MCMC for inferring the fields. \vfill \pause
-\item This is known as an empirical hierarchical model \citep[EHM][]{CressieWikle2011}. \vfill \pause
-\item We can compute all the (horrible) gradients analytically, use an MCMC method which takes advantage of these (HMC). \vfill
+\item This is known as an empirical hierarchical model \citep[EHM;][]{CressieWikle2011}. \vfill \pause
+\item We can compute all the (horrible) gradients analytically, use an MCMC method that takes advantage of these. This is known as Hamiltonian Monte Carlo (HMC). \vfill
 \end{itemize}
 \end{frame}
 
@@ -982,9 +1015,9 @@ C_{2|1,t,t'}(\svec,\uvec) &= \sigma^2_{2|1}\rho_s(\svec,\uvec; d)\rho_t(t,t'; a)
 \frametitle{Simulation study}
 
 \begin{enumerate}
-\item Assume the properties of the lognormal flux spatial process (i.e., $\widetilde{C}_{11}$ and $\widetilde{\mu}_{1}$ are known, and simulate a realisation. \vfill
+\item Assume the properties of the lognormal flux spatial process (i.e., $\widetilde{C}_{11}$ and $\widetilde{\mu}_{1}$ are known), and simulate a realisation. \vfill
 \item Simulate a spatio-temporal interaction function (assumed known).\vfill
-\item Simulate mole fraction observations at (Model 1) a few locations and (Model 2) many 1000 locations.\vfill
+\item Simulate mole fraction observations at a few locations (Model 1) and at many (1000) locations (Model 2).\vfill
 \item Infer the flux $Y_1(\svec)$ from the data in both cases.\vfill
 \end{enumerate}
 \end{frame}
@@ -993,7 +1026,7 @@ C_{2|1,t,t'}(\svec,\uvec) &= \sigma^2_{2|1}\rho_s(\svec,\uvec; d)\rho_t(t,t'; a)
 \frametitle{Simulation study}
 
 \begin{itemize}
-\item Simulated interaction function
+\item Simulated interaction function.
 \end{itemize}
 
 \begin{center}
@@ -1005,7 +1038,7 @@ C_{2|1,t,t'}(\svec,\uvec) &= \sigma^2_{2|1}\rho_s(\svec,\uvec; d)\rho_t(t,t'; a)
 \frametitle{Simulation study}
 
 \begin{itemize}
-\item Flux and time-averaged mole fraction field.
+\item Flux and time-averaged mole-fraction field.
 \end{itemize}
 
 \begin{center}
@@ -1018,10 +1051,10 @@ C_{2|1,t,t'}(\svec,\uvec) &= \sigma^2_{2|1}\rho_s(\svec,\uvec; d)\rho_t(t,t'; a)
 
 \begin{itemize}
 \item Laplace-EM proved relatively straightforward to implement.
-\item Convergence with Model 1 $\sim$ 80 iterations.
-\item Convergence with Model 2 $\sim$ 5 iterations (much more data).
-\item Convergence may be hard to achieve when mode is close to zero and tails are heavy (zooming in gradient descents).
-\item ``Bouncing method'' needs to be implemented for the HMC to respect positivity constraint \citep{Neal_2011}.
+\item Convergence with Model 1 $\simeq$ 80 iterations.
+\item Convergence with Model 2 $\simeq$ 5 iterations (much more data).
+\item Convergence may be hard to achieve when mode is close to zero and tails are heavy (gradient descents with varying tolerance for convergence).
+\item ``Bouncing method'' needs to be implemented for the HMC chain to respect positivity constraint \citep{Neal_2011}.
 \end{itemize}
 \end{frame}
 
@@ -1065,7 +1098,7 @@ C_{2|1,t,t'}(\svec,\uvec) &= \sigma^2_{2|1}\rho_s(\svec,\uvec; d)\rho_t(t,t'; a)
 \begin{figure}
 \includegraphics[width=2.0in]{histUK.png}  
 \includegraphics[width=2.0in]{variogram_est.png}  
-	\caption{Histogram of NAEI fluxes in the UK and Ireland following regridding (left panel) and the empirical (open circles) and fitted (solid line) variogram as a function of lag distance in degrees lat/lon. } \label{fig:var_est}
+	\caption{Histogram of NAEI fluxes in the UK and Ireland following regridding (left panel) and the empirical (open circles) and fitted (solid line) semi-variogram as a function of lag distance in degrees lat/lon. } \label{fig:var_est}
 \end{figure}
 \end{center}
 \end{frame}
@@ -1075,7 +1108,7 @@ C_{2|1,t,t'}(\svec,\uvec) &= \sigma^2_{2|1}\rho_s(\svec,\uvec; d)\rho_t(t,t'; a)
 \begin{frame}
 \frametitle{UK and Ireland emissions}
 \begin{itemize}
-\item Used Model 1 since we only have 4 stations. \vfill
+\item We used Model 1 since we only have 4 stations. \vfill
 \item Laplace-EM converged in $\simeq$ 30 iterations. \vfill
 \item Simulator discrepancy is not negligible: \vfill
 \begin{enumerate}
@@ -1098,7 +1131,7 @@ C_{2|1,t,t'}(\svec,\uvec) &= \sigma^2_{2|1}\rho_s(\svec,\uvec; d)\rho_t(t,t'; a)
 
 
 
-\section{Conclusion}
+\section{Conclusions}
 
 \begin{frame}
 \sectionpage
@@ -1106,12 +1139,12 @@ C_{2|1,t,t'}(\svec,\uvec) &= \sigma^2_{2|1}\rho_s(\svec,\uvec; d)\rho_t(t,t'; a)
 
 
 \begin{frame}
-\frametitle{Conclusion}
+\frametitle{Conclusions}
 
 \begin{itemize}
-\item Bivariate and multivariate models appear in several environmental studies. Usually, one or more of these are `explained away' prior to commencing the analysis.
-\item Causal models allow for a (very) flexible model class through interaction functions which can be arbitrarily complex.
-\item Computation is key: For large, non-Gaussian systems approximate message passing + variational techniques probably needed \citep{Cseke_2014}.
+\item Bivariate and multivariate models often appear in environmental studies. Usually, one or more of these are `explained away' prior to commencing the analysis.
+\item Causal models allow for a (very) flexible model class through interaction functions that can be arbitrarily complex.
+\item Computation is key: For large, non-Gaussian systems, approximate message passing + variational techniques are probably needed \citep{Cseke_2014}.
 \item Slides and reproducible code available at \texttt{https://github.com/andrewzm/bicon}.
 \item Thanks for Anita Ganesan and Matthew Rigby (University of Bristol) for help with the application case study.
 \end{itemize}
