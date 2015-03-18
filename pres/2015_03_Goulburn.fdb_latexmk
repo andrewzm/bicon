@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex 2015_03_Goulburn"] 1426622942 "2015_03_Goulburn.aux" "2015_03_Goulburn.bbl" "2015_03_Goulburn" 1426622948
+["bibtex 2015_03_Goulburn"] 1426622942 "2015_03_Goulburn.aux" "2015_03_Goulburn.bbl" "2015_03_Goulburn" 1426720749
   "../vignettes/Bibliography.bib" 1426583132 47260 f87cd06ee22db02e6eb5d3e9180d6a6d ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/beebe/apa.bst" 1136766823 23582 e3c8338eb1efb7432441aa8861285f53 ""
-  "2015_03_Goulburn.aux" 1426622948 18607 235366c86f7836494a6f38b4270bac29 ""
+  "2015_03_Goulburn.aux" 1426720736 18607 235366c86f7836494a6f38b4270bac29 ""
   "2015_03_Goulburn.bcf" 0 -1 0 ""
   (generated)
   "2015_03_Goulburn.bbl"
   "2015_03_Goulburn.blg"
-["pdflatex"] 1426622942 "2015_03_Goulburn.tex" "2015_03_Goulburn.pdf" "2015_03_Goulburn" 1426622948
+["pdflatex"] 1426720730 "2015_03_Goulburn.tex" "2015_03_Goulburn.pdf" "2015_03_Goulburn" 1426720749
   "/etc/texmf/web2c/texmf.cnf" 1413368561 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/andrew/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk" 1414630227 23784 8dc68836e636d4ef4815c6ef506e8ae1 ""
   "/home/andrew/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk" 1425856136 26208 91f26e9281221155a5e153f92ea07f5b ""
@@ -278,12 +278,12 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1392645748 31083 1dfd8bf685ce0009c40532fedf8a7c53 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1424315624 1006445 970ea026b65ec199e46fe0f390fe7296 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1413368568 722336 f631f2d47d7f250fb79d0ec08fa6ead0 ""
-  "2015_03_Goulburn.aux" 1426622948 18607 235366c86f7836494a6f38b4270bac29 ""
+  "2015_03_Goulburn.aux" 1426720736 18607 235366c86f7836494a6f38b4270bac29 ""
   "2015_03_Goulburn.bbl" 1426622942 3180 3aa1fd90e943728835f9ef9bd66d272b "bibtex 2015_03_Goulburn"
-  "2015_03_Goulburn.nav" 1426622948 9283 7d27ba8ba461498bed72c5cef748c4ec ""
-  "2015_03_Goulburn.out" 1426622948 890 761e5397e9532cfdaa01d6b8484fbd55 ""
-  "2015_03_Goulburn.tex" 1426622922 37991 bbb2cd3aeeb6e71d948d95cbd3c5f80a ""
-  "2015_03_Goulburn.toc" 1426622948 870 551428eb5d3656c76ffa06324cb2d4f0 ""
+  "2015_03_Goulburn.nav" 1426720736 9283 7d27ba8ba461498bed72c5cef748c4ec ""
+  "2015_03_Goulburn.out" 1426720736 890 761e5397e9532cfdaa01d6b8484fbd55 ""
+  "2015_03_Goulburn.tex" 1426720715 37991 366251f96a35c06b1ab66c0bff226e3e ""
+  "2015_03_Goulburn.toc" 1426720736 870 551428eb5d3656c76ffa06324cb2d4f0 ""
   "Antarctica.png" 1411619257 692926 e0176113e72cedc96cd76126d01e42f0 ""
   "B_plot.png" 1426025678 81737 f312f8a269de77c4daabb0a8d61e0dd2 ""
   "Em95.png" 1424899288 193950 534824419a8b9f7a3cd94fd9841563bd ""
@@ -319,10 +319,10 @@
   "variogram_est.png" 1424406448 29532 4260289e3bcbadfb2acf3d6a02d99aad ""
   "vor3.png" 1425878802 3853 dfa27eb42dd5b8057b21bf4b7bbcaeec ""
   (generated)
-  "2015_03_Goulburn.snm"
-  "2015_03_Goulburn.out"
-  "2015_03_Goulburn.log"
-  "2015_03_Goulburn.pdf"
   "2015_03_Goulburn.nav"
+  "2015_03_Goulburn.snm"
+  "2015_03_Goulburn.pdf"
+  "2015_03_Goulburn.out"
   "2015_03_Goulburn.toc"
   "2015_03_Goulburn.aux"
+  "2015_03_Goulburn.log"
