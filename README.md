@@ -16,6 +16,15 @@ To download the vignettes without reproducing them on your machine, please view 
 [Vignette 1 (Section 3.2)](https://github.com/andrewzm/bicon/blob/master/vignettes/bivariate_sim.pdf?raw=true)
 
 [Vignette 2 (Section 5)](https://github.com/andrewzm/bicon/blob/master/vignettes/min_max_T.pdf?raw=true)
+
+Presentation
+-----
+
+To access the presentation I gave for the Goulburn 2015 Research Fellows Meeting, please [click here](https://github.com/andrewzm/bicon/blob/master/pres/2015_03_Goulburn.pdf?raw=true).
+
+
+Reproducibility 
+-------
     
 If you wish to reproduce the results, you will need to install the package and its dependencies. Three of the dependencies, `INLA`, `slice` and `gpclib` need to be installed manually. For `INLA` please visit the [INLA project page](http://www.r-inla.org/download) for installation instructions. For `slice`, which is needed for slice sampling, please visit the [personal webpage of Jonathan Rougier](http://www.maths.bris.ac.uk/~MAZJCR/), download `slice_x.x.tar.gz` and install using
 
