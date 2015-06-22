@@ -3,3 +3,14 @@
 .RData
 ..Rcheck
 paper
+/pres/*.log
+/pres/*.out
+/pres/*.snm
+/pres/*.toc
+/pres/*.fls
+/pres/*.bbl
+/pres/*.aux
+/pres/*.nav
+/pres/*.tex~
+/pres/*.fdb*
+/pres/*.blg
