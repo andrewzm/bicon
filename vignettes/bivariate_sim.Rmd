@@ -73,6 +73,7 @@ library(ggplot2)
 library(gridExtra)
 library(grid)
 library(extrafont)
+loadfonts()
 ```
 
 Finally, the package `bicon` provides the machinery for bivariate modelling using the conditional approach with (i) bisquare interaction functions and (ii) Matérn covariance functions for $C_{11}(\cdot)$ and $C_{2|1}(\cdot)$.
@@ -89,7 +90,7 @@ We start off by setting up some parameters in the program -- these are described
 ###---------------
 img_path <- "../paper/art"   ## Where to save the figures
 show_figs <- 1               ## Show the figures in document
-print_figs <-  0             ## Print figures to file
+print_figs <-  1             ## Print figures to file
 ```
 
 Now we set up the simulation domain. We choose $D = [-1,1]$, and a spacing $\eta_i = 0.01, i = 1,\dots,200$. We collect the grid information in a data frame `df`, to which extra columns will be added further on in the program. We also define `n1` as the number of grid cells for $\Yvec_1$ and `n2` as the number of grid cells for $\Yvec_2$. In this study, `n1` = `n2` = 200 and we define `n` = `n1` + `n2` = 400.
@@ -168,6 +169,24 @@ Sigma <- makeSY(r = Dvec,
                 B = B)                ## Build covariance matrix
 ```
 
+The covariance functions are given as
+
+```{r}
+Cov11 <- Sigma[n1/2,1:n1]
+Cov12 <- Sigma[n1/2,(n1+1):n]
+Cov21 <- Sigma[n1+n2/2,1:n1]
+Cov22 <- Sigma[n1+n2/2,(n1+1):n]
+
+Cov_df <- expand.grid(s=df$s,proc1=c("Y1","Y2"),proc2=c("Y1","Y2"))
+Cov_df$cov <- c(Cov11,Cov21,Cov12,Cov22)
+
+g_cov <- LinePlotTheme() + geom_line(data=Cov_df,aes(s,cov)) + facet_grid(proc1 ~ proc2)
+if(print_figs) ggsave(g_cov, 
+                      filename = file.path(img_path,"cov_functions.png"),
+                      width=12,height=10,family="Arial") 
+if(show_figs) print(g_cov)
+```
+
 Given the covariance matrix, we can simulate from the bivariate field *jointly*. Observations are simulated from this field by simply adding Gaussian error to the generated fields. These simulations are all added to the data frame `df`:
 
 ```{r}
@@ -215,32 +234,6 @@ In the following cokriging function, we require four input variables. These are:
 
 The function first constructs the required $\bSigma$ (through `makeSY`), and then implements the above equations. The function stores the results in the data frame `df`.
 
-```{r}
-###--------------------
-### Cokriging function
-###-------------------
-
-co_krige <- function(df,A,obs_ind,name=NULL) {
-  
-  B <- A*bisquare_1d(H,delta=delta,r=r)*ds          ## Form B matrix
-  Sigma <- makeSY(r = Dvec,
-                  var1 = sigma2_1,
-                  var2 = sigma2_21,
-                  kappa1 = kappa1,
-                  kappa2 = kappa21,
-                  B = B)
-  Zobs <- Z[obs_ind,]                               ## Subset the observations
-  mu <- Sigma[,obs_ind] %*%
-                  solve(Sigma[obs_ind,obs_ind] + 
-                            sigmav^2 * Imat(length(obs_ind))) %*% 
-                  Zobs                              ## Cokriging equations
-
-  df[paste0(name,"_mu1")] <- mu[1:n1]               ## Save results
-  df[paste0(name,"_mu2")] <- mu[-(1:n1)]
-  df
-}
-```
-
 To call the function `co_krige`, we first specify which observations to keep in the variable `obs_ind`:
 
 ```{r}
@@ -250,11 +243,82 @@ obs_ind <- c(keep_Z1,keep_Z2 + n1)
 ```
 
 We can then pipe our original `df` through `co_krige` using differing values of `A`: (i) `A = 0` (independent variates) and (ii) `A = A` (true model). Note that case (i) is identical to simple kriging on $Y_1$ using only $Z_1$, since under independence the system is *autokrigeable* [see @Wackernagel1995, p.149].
+
+```{r}
+
+loglik_Model <- function(theta,model_num,i=NULL) {
+  # theta1: A
+  # theta2: r
+  df2 <- subset(df, s > 0)
+  H2 <- t(outer(df2$s,df2$s,FUN = "-"))              ## Find displacement
+  D2 <- abs(H2)
+  Dvec2 <- as.double(c(D2))                 ## Find distances
+  Z2 <- matrix(c(df2$Z1,df2$Z2))                     ## Save concatenated observations in Z
+  
+  if(theta[2] < 0.0005) {
+    return(Inf)
+  } else {
+    B <- theta[1]*bisquare_1d(H2,delta =0,r = theta[2])*ds   ## Find Bmat
+    Sigma <- makeSY(r = Dvec2,
+                    var1 = sigma2_1,
+                    var2 = sigma2_21,
+                    kappa1 = kappa1,
+                    kappa2 = kappa21,
+                    B = B) + 
+      sigmav^2 * Imat(nrow(df2)*2)
+    cholZ <- chol(Sigma)
+    loglik <- 
+      -(-0.5 * logdet(cholZ) -
+          0.5 * t(Z2) %*% chol2inv(cholZ) %*% Z2 -
+          0.5 * nrow(Z2)*log(2*pi)) %>% as.numeric()
+       return(loglik)
+     }
+} 
+non_symm_par <-  optim(par=c(1,1),
+        fn = loglik_Model,
+        hessian=FALSE,
+        control=list(trace=6,
+                     pgtol=0, 
+                     maxit=3000))$par
+```
+
+```{r}
+###--------------------
+### Cokriging function
+###-------------------
+
+co_krige <- function(df,A,delta,r,obs_ind,name=NULL) {
+  
+  B <- A*bisquare_1d(H,delta=delta,r=r)*ds          ## Form B matrix
+  Sigma <- makeSY(r = Dvec,
+                  var1 = sigma2_1,
+                  var2 = sigma2_21,
+                  kappa1 = kappa1,
+                  kappa2 = kappa21,
+                  B = B)
+  Zobs <- Z[obs_ind,]                               ## Subset the observations
+  Q <- solve(Sigma[obs_ind,obs_ind] + 
+               sigmav^2 * Imat(length(obs_ind)))
+  mu <- Sigma[,obs_ind] %*% Q %*% Zobs              ## Cokriging equations
+  sd <- diag(Sigma -  Sigma[,obs_ind] %*% Q %*% t(Sigma[,obs_ind]))
+
+  df[paste0(name,"_mu1")] <- mu[1:n1]               ## Save results
+  df[paste0(name,"_mu2")] <- mu[-(1:n1)]
+  df[paste0(name,"_sd1")] <- sd[1:n1]          
+  df[paste0(name,"_sd2")] <- sd[-(1:n1)]
+  df
+}
+```
+
+
 ```{r}
 df <- df %>%
-  co_krige(A=0,obs_ind = obs_ind,name="ind_model") %>%
-  co_krige(A=A,obs_ind = obs_ind,name="true_model") 
+  co_krige(A=0,delta= 0, r = r, obs_ind = obs_ind,name="ind_model") %>%
+  co_krige(A=non_symm_par[1],delta=0,r = non_symm_par[2],obs_ind = obs_ind,name="symm_model") %>%
+  co_krige(A=A,delta=delta,r = r,obs_ind = obs_ind,name="true_model")
 ```
+
+
 
 ## Plotting
 
@@ -264,21 +328,25 @@ The rest of the code (and the biggest part!) is devoted to plotting. Since this 
 ###---------------------
 ### Plotting
 ###---------------------
-
 df_obs <- df %>%
-  select(s,Z1,Z2,keep_Z1,keep_Z2) %>%
+  dplyr::select(s,Z1,Z2,keep_Z1,keep_Z2) %>%
   gather(obs,z,Z1:Z2) %>%
   filter((keep_Z2 == TRUE & obs == "Z2") | (keep_Z1 == TRUE & obs == "Z1"))
 
 df_estY1 <- df %>%
-  select(s,samp1,ind_model_mu1,true_model_mu1) %>%
-  gather(process,z,samp1,ind_model_mu1,true_model_mu1)
+  dplyr::select(s,samp1,ind_model_mu1,symm_model_mu1,true_model_mu1) %>%
+  gather(process,z,samp1,ind_model_mu1,symm_model_mu1,true_model_mu1) %>%
+  mutate(group = substr(process,1,3))
+
 
 
 df_estY2 <- df %>%
-  select(s,samp2,ind_model_mu2,true_model_mu2) %>%
-  gather(process,z,samp2,ind_model_mu2,true_model_mu2)
+  dplyr::select(s,samp2,ind_model_mu2,symm_model_mu2,true_model_mu2) %>%
+  gather(process,z,samp2,ind_model_mu2,symm_model_mu2,true_model_mu2)
 
+# df_estY2 <- df %>%
+#  dplyr::select(-areas,-samp1,-Z1,-Z2,-keep_Z1,-keep_Z2) %>%
+#  gather(process,z,-s)
 
 obs_plot <- LinePlotTheme() + 
   geom_point(data=df_obs,
@@ -289,13 +357,13 @@ obs_plot <- LinePlotTheme() +
   scale_shape_manual(values=c(1,20),guide=F) +
   ylab("") 
 
-est_plotY1 <- LinePlotTheme() + 
+est_plotY1_no_CIs <- LinePlotTheme() + 
   geom_line(data=df_estY1,
             aes(x=s,y=z,colour=process,linetype=process,size=process)) +
-  scale_linetype_manual(values=c("solid","dashed","dotted"),
+  scale_linetype_manual(values=c("solid","dashed","dotted","dotdash"),
                         guide=FALSE) +
-  scale_size_manual(values=c(0.4,1.3,1.3),guide=F) +
-  scale_colour_manual(values=c("black","black","black"),
+  scale_size_manual(values=c(0.4,1.3,1.3,1.3),guide=F) +
+  scale_colour_manual(values=c("black","black","black","black"),
                       labels=c("Y1",
                                expression(paste(tilde(Y),1)),
                                expression(paste(hat(Y),1))),
@@ -303,25 +371,40 @@ est_plotY1 <- LinePlotTheme() +
                       guide=F) +
   ylab("")
 
+est_plotY1 <- est_plotY1_no_CIs +
+  geom_ribbon(data=df,aes(s,ymax=ind_model_mu1 + ind_model_sd1, 
+                          ymin = ind_model_mu1 - ind_model_sd1),alpha=0.2,fill="red") +
+  geom_ribbon(data=df,aes(s,ymax=true_model_mu1 + true_model_sd1, 
+                          ymin = true_model_mu1 - true_model_sd1),alpha=0.2,fill="black") +
+  geom_ribbon(data=df,aes(s,ymax=symm_model_mu1 + symm_model_sd1, 
+                          ymin = symm_model_mu1 - symm_model_sd1),alpha=0.2,fill="green") 
+
 
 est_plotY2 <- LinePlotTheme() + 
   geom_line(data=df_estY2,
             aes(x=s,y=z,colour=process,linetype=process,size=process)) +
-  scale_linetype_manual(values=c("solid","dashed","dotted"),
+  scale_linetype_manual(values=c("solid","dashed","dotted","dotdash"),
                         guide=FALSE) +
-  scale_size_manual(values=c(1,1.3,1.3),guide=F) +
-  scale_colour_manual(values=c("black","orange","blue"),
+  scale_size_manual(values=c(1,1.3,1.3,1.3),guide=F) +
+  scale_colour_manual(values=c("black","orange","blue","red"),
                       labels=c("Y2","IM","TM"),
                       name="") +
   ylab("") 
+
 ```
 
 ```{r,fig.cap="Cokriging using spatial covariances defined by the conditional approach. Top panel: The simulated observations $Z_1$ (open circles) and $Z_2$ (dots). Bottom panel: The hidden value $Y_1$ (solid line), the kriging predictor of $Y_1$ (dashed line), and the cokriging predictor of $Y_1$ (dotted line)."}
 if(print_figs) ggsave(obs_plot, 
                       filename = file.path(img_path,"sim_obs.eps"),
                       width=7,height=4,family="Arial")  
+if(print_figs) ggsave(est_plotY1_no_CIs, 
+                      filename = file.path(img_path,"sim_est_no_CIs.eps"),
+                      width=7,height=4,family="Arial") 
 if(print_figs) ggsave(est_plotY1, 
                       filename = file.path(img_path,"sim_est.eps"),
+                      width=7,height=4,family="Arial") 
+if(print_figs) ggsave(est_plotY1, 
+                      filename = file.path(img_path,"sim_est.png"),
                       width=7,height=4,family="Arial") 
 if(show_figs) print(arrangeGrob(obs_plot,est_plotY1,ncol=1),
                     width=16,height=7,family="Arial")
@@ -345,11 +428,14 @@ if(show_figs) print(Sigma_plot,width=16,height=7,family="Arial")
 
 ```{r}
 g_all <- arrangeGrob(Sigma_plot,
-                     arrangeGrob(obs_plot,est_plotY1,ncol=1),
+                     arrangeGrob(obs_plot,est_plotY1_no_CIs,ncol=1),
                      ncol=2,widths=c(1,1))
-if(print_figs) ggsave(g_all , 
-                      filename = file.path(img_path,"Fig1.eps"),
+if(print_figs) {
+  cairo_ps(filename = file.path(img_path,"Fig1.eps"),
                       width=16,height=7,family="Arial") 
+   print(g_all)
+    dev.off()
+}
 ```
 
 ## References

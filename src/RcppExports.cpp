@@ -9,35 +9,40 @@ using namespace Rcpp;
 NumericVector bisquare_call(NumericVector h1, NumericVector h2, NumericVector delta, double r, double A);
 RcppExport SEXP bicon_bisquare_call(SEXP h1SEXP, SEXP h2SEXP, SEXP deltaSEXP, SEXP rSEXP, SEXP ASEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< NumericVector >::type h1(h1SEXP );
-        Rcpp::traits::input_parameter< NumericVector >::type h2(h2SEXP );
-        Rcpp::traits::input_parameter< NumericVector >::type delta(deltaSEXP );
-        Rcpp::traits::input_parameter< double >::type r(rSEXP );
-        Rcpp::traits::input_parameter< double >::type A(ASEXP );
-        NumericVector __result = bisquare_call(h1, h2, delta, r, A);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericVector >::type h1(h1SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type h2(h2SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type delta(deltaSEXP);
+    Rcpp::traits::input_parameter< double >::type r(rSEXP);
+    Rcpp::traits::input_parameter< double >::type A(ASEXP);
+    __result = Rcpp::wrap(bisquare_call(h1, h2, delta, r, A));
+    return __result;
+END_RCPP
+}
+// covMat1_call
+NumericVector covMat1_call(NumericVector h, double var, double kappa);
+RcppExport SEXP bicon_covMat1_call(SEXP hSEXP, SEXP varSEXP, SEXP kappaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericVector >::type h(hSEXP);
+    Rcpp::traits::input_parameter< double >::type var(varSEXP);
+    Rcpp::traits::input_parameter< double >::type kappa(kappaSEXP);
+    __result = Rcpp::wrap(covMat1_call(h, var, kappa));
+    return __result;
 END_RCPP
 }
 // covMat3_call
 NumericVector covMat3_call(NumericVector h, double var, double kappa);
 RcppExport SEXP bicon_covMat3_call(SEXP hSEXP, SEXP varSEXP, SEXP kappaSEXP) {
 BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< NumericVector >::type h(hSEXP );
-        Rcpp::traits::input_parameter< double >::type var(varSEXP );
-        Rcpp::traits::input_parameter< double >::type kappa(kappaSEXP );
-        NumericVector __result = covMat3_call(h, var, kappa);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericVector >::type h(hSEXP);
+    Rcpp::traits::input_parameter< double >::type var(varSEXP);
+    Rcpp::traits::input_parameter< double >::type kappa(kappaSEXP);
+    __result = Rcpp::wrap(covMat3_call(h, var, kappa));
+    return __result;
 END_RCPP
 }

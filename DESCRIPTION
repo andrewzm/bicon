@@ -32,7 +32,8 @@ Imports:
     deldir,
     network,
     akima,
-    scales
+    scales,
+    fields
 LinkingTo: Rcpp
 LazyData: true
 Depends:

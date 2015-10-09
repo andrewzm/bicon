@@ -93,18 +93,18 @@ bisquare_notC <- function(h,delta,r,A) {
 #' B <- diag(100)
 #' Sigma <- makeSY(r=r,var1=1,var2=1,kappa1=0.5,kappa2=0.1,B=B)
 #' image(Sigma)
-makeSY <- function(r, var1,var2,kappa1,kappa2,B) {
-    S11 <- makeS(r,var1,kappa1)
-    S2_1 <-  makeS(r,var2,kappa2)
+makeSY <- function(r, var1,var2,kappa1,kappa2,B,nu1 = 3/2, nu2 = 3/2) {
+    S11 <- makeS(r,var1,kappa1,nu1)
+    S2_1 <-  makeS(r,var2,kappa2,nu2)
     BS_21 <- B %*% S11
     rbind(cbind(S11,t(BS_21)),cbind(BS_21, tcrossprod(BS_21,B) + S2_1))
 }
 
 #' @rdname makeCov
 #' @export
-makeQY <- function(r,var1,var2,kappa1,kappa2,B) {
-    Q11 <- makeQ(r,var1,kappa1)
-    Q2_1 <-  makeQ(r,var2,kappa2)
+makeQY <- function(r,var1,var2,kappa1,kappa2,B,nu1 = 3/2, nu2 = 3/2) {
+    Q11 <- makeQ(r,var1,kappa1,nu1)
+    Q2_1 <-  makeQ(r,var2,kappa2,nu2)
     B <- B
     BQ_21 <- crossprod(B, Q2_1)
     rBind(cBind(crossprod(chol(Q2_1) %*% B) + Q11,-BQ_21),cBind(-t(BQ_21), Q2_1))
@@ -112,14 +112,23 @@ makeQY <- function(r,var1,var2,kappa1,kappa2,B) {
 
 #' @rdname makeCov
 #' @export
-makeQ <- function(r,var,kappa) {
-    chol2inv(chol(Matern32(r,var,kappa)))
+makeQ <- function(r,var,kappa,nu) {
+  S <- makeS(r=r,var=var,kappa=kappa,nu=nu)
+  chol2inv(chol(S))
 }
 
 #' @rdname makeCov
 #' @export
-makeS <- function(r,var,kappa) {
-    Matern32(r,var,kappa)
+makeS <- function(r,var,kappa,nu) {
+    if(nu == 3/2)  {
+        S <- Matern32(r,var,kappa)
+    } else if (nu == 1/2) {
+        S <- Matern12(r,var,kappa)
+    } else {
+        svec <- Matern(d=r,scale=var,alpha=kappa,smoothness = nu)  
+        S <- matrix(svec, nrow = sqrt(length(r)))
+    }
+    S
 }
 ###-----------------------------
 ### Matern functions
@@ -131,6 +140,10 @@ Matern32 <- function(r,var,kappa) {
   matrix(X,nrow=sqrt(length(r)))
 }
 
+Matern12 <- function(r,var,kappa) { 
+  X <- covMat1_call(r,var,kappa)
+  matrix(X,nrow=sqrt(length(r)))
+}
 
 
 ###--------------------
@@ -203,4 +216,20 @@ Findalphabeta_gamma <- function(pars,p5,p95) {
     } else {
         return( sum((qgamma(c(0.05,0.95),shape=pars[1],rate=pars[2]) - c(1/p95^2,1/p5^2))^2/c(1/p95^2,1/p5^2)))
     }
+}
+
+### ------------------
+### Find attribute from grid
+### ------------------
+
+## g is a data frame of grid of size n x 3
+## p is a data frame of points of size n x 2
+grid_to_point <- function(g,p) {
+  pz <- rep(0,nrow(p))
+  for (i in 1:nrow(p)) {
+    idx_min <- which.min(abs(p[i,1] - g[,1]) + abs(p[i,2] - g[,2]))
+    pz[i] <- g[idx_min,3]
+  }
+  p[,3] <- pz
+  p
 }

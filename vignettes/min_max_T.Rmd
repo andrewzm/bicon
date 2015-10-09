@@ -85,13 +85,14 @@ Finally, we will also need the package `bicon` to facilitate matrix construction
 library(bicon)
 ```
 
-As detailed in @CressieZammit2015, we consider three models in this case study. These vary only through the interaction function $b_o(h)$ that, for each model, is given as
+As detailed in @CressieZammit2015, we consider four models in this case study. These vary only through the interaction function $b_o(h)$ that, for each model, is given as
 
 \begin{equation*}
 \begin{array}{ll}
 \textrm{Model 1 (independence):} &b_o(\h) \equiv 0, \\
 \textrm{Model 2 (pointwise dependence):} &b_o(\h) \equiv A\delta(\h), \\
-\textrm{Model 3 (diffused dependence):} &b_o(\h) \equiv \left\{\begin{array}{ll} A\{1 - (\|\h - \Deltab\|/r)^2\}^2, & \| \h - \Deltab\| \le r \\ 0, & \textrm{otherwise}, \end{array} \right. 
+\textrm{Model 3 (diffused/shifted dependence):} &b_o(\h) \equiv \left\{\begin{array}{ll} A\{1 - (\|\h - \Deltab\|/r)^2\}^2, & \| \h - \Deltab\| \le r \\ 0, & \textrm{otherwise}, \end{array} \right. 
+\textrm{Model 4 (diffused dependence):} & \textrm{Model 3 with~} \Deltab = 0}
 \end{array}
 \end{equation*}
 
@@ -103,13 +104,17 @@ The first thing we need to do is specify which model we are going to analyse. Si
 ### Model choice
 ### 1. Independent
 ### 2. Pointwise interaction
-### 3. Smoothing
-model = 3
-model_name <- switch(model,"independent","pointwise","moving_average")
+### 3. Diffusion + shift
+### 4. Diffusion only
+### 5. Diffusion + shift + elevation in distance metric for b(.,.)
+model = 4
+model_name <- switch(model,"independent","pointwise","moving_average","moving_average_delta0",
+                            "independent_rev","pointwise_rev","moving_average_rev","moving_average_delta0_rev")
 img_path <- "../paper/art"                  ## Where to save the figures
 show_figs <- 1                              ## Show the figures in document
 print_figs <-  0                            ## Print figures to file (leave =0)
-long_analysis <- 0                          ## Run a long MCMC chain (1) or not (0)
+long_analysis <- 1                          ## Run a long MCMC chain (1) or not (0)
+write_results <- 1                          ## Write out results to text file
 ```
 
 ## The data
@@ -142,6 +147,13 @@ From this data frame we extract $Z_1$ and $Z_2$ and concatenate them into one lo
 ```{r}
 Z1 <- matrix(temps$minT)
 Z2 <- matrix(temps$maxT)
+
+if(model %in% 5:8) { ## Reverse Z2 and Z1 / direction of arrow in DAG
+  temp <- Z1
+  Z1 <- Z2
+  Z2 <- temp
+}
+
 Z <- rbind(Z1,Z2)
 m1 <- length(Z1)
 m2 <- length(Z2)
@@ -163,7 +175,9 @@ We approximate the processes as a sum of elemental basis functions (tent functio
 ```{r,warning=FALSE}
 ### Construct mesh
 ###------------
-mesh <- inla.mesh.2d(loc= temps[c("lon","lat")],cutoff=0.04,max.edge=0.3)
+
+#mesh <- inla.mesh.2d(loc= temps[c("lon","lat")],cutoff=0.04,max.edge=0.3)
+mesh <- inla.mesh.2d(loc= temps[c("lon","lat")],cutoff=0.05,max.edge=0.4)
 D <- as.matrix(dist(mesh$loc[,1:2]))
 Dvec <- as.double(c(D))
 distmat11 <- distmat12 <- distmat21 <- distmat22 <- 
@@ -209,9 +223,9 @@ The displacements (`h1`,`h2`) and the areas `areas` can then be used to construc
 ###################
 ### Model specifics
 ###################
-if (model == 1) B <- matrix(0,n2,n1)
-if (model == 2) B <- diag(n1)
-if (model == 3) B <- bisquare_B(h1 = h1_double,
+if (model %in% c(1,5)) B <- matrix(0,n2,n1)
+if (model %in% c(2,6)) B <- diag(n1)
+if (model %in% c(3,4,7,8)) B <- bisquare_B(h1 = h1_double,
                                 h2 = h2_double,
                                 delta=c(0,0),r=0.3,
                                 n1 = n1,n2=n2,areas = areas)
@@ -350,6 +364,7 @@ slice_log_kappa1 <- slice::slice(1)
 slice_log_kappa2 <- slice::slice(1)
 slice_rho_trans <- slice::slice(1)
 slice_bisquare <- slice::slice(3)
+slice_logr <- slice::slice(1)
 ```
 
 We can now start the Gibbs sampler, for which we will be requiring the conditional distributions. Denote $\theta = (\sigma_\varepsilon^2,\rho_\varepsilon, \sigma^2_{11}, \sigma^2_{2|1}, \kappa_{11}, \kappa_{2|1},A,r)'$ as the collection of unknown parameters and $\tilde\theta = (\sigma_\varepsilon^{-2},\tilde\rho_\varepsilon, \sigma^{-2}_{11}, \sigma^{-2}_{2|1}, \tilde\kappa_{11}, \tilde\kappa_{2|1},A,\tilde{r})'$ as the transformed parameters we actually sample from. Recall from @CressieZammit2015 that $\rho_\varepsilon = 2\Phi(\tilde\rho_\varepsilon) - 1$, $r = \exp(\tilde{r})$ and $\kappa_i = \exp(\tilde\kappa_i)$. Then
@@ -431,7 +446,7 @@ for(i in 2:N) {
   ### Interaction parameters
   
   ## Sample A
-  if(model %in% 2:3) {
+  if(model %in% c(2:4,6:8)) {
     Q2_1 <- prec2_samp[i]*Q2_1base
     Y1_sub <- B %*% Y1i
     precA_new <- t(Y1_sub) %*% Q2_1 %*% Y1_sub + prec_A
@@ -440,7 +455,7 @@ for(i in 2:N) {
   }
   
   ## Sample delta,r
-  if(model == 3) {
+  if(model %in% c(3,7)) {
     Q2_1 <- prec2_samp[i]*Q2_1base
     logf_B <- function(x) {
       BB <- bisquare_B(h1_double,h2_double,
@@ -460,6 +475,22 @@ for(i in 2:N) {
     log_r_samp[i] <- all_samp[3]
     B <- bisquare_B(h1_double,h2_double,
                     delta=all_samp[1:2],r=exp(all_samp[3]),
+                    n1 = n1,n2=n2,areas = areas)
+  }
+  
+  if(model %in% c(4,8)) {
+    Q2_1 <- prec2_samp[i]*Q2_1base
+    logf_B <- function(x) {
+      BB <- bisquare_B(h1_double,h2_double,
+                       delta=c(0,0),r=exp(x[1]),
+                       n1 = n1,n2=n2,areas = areas)
+      (-0.5*t(Y2i - A_samp[i]*BB %*% Y1i) %*% Q2_1 %*% (Y2i - A_samp[i]*BB %*% Y1i) -
+       0.5*(x[1] - mu_log_r)^2*prec_log_r)[,1]
+       
+    }
+    log_r_samp[i] <-  slice_logr(log_r_samp[i-1],logf_B, learn = i <= burn_in)
+    B <- bisquare_B(h1_double,h2_double,
+                    delta=c(0,0),r = log_r_samp[i],
                     n1 = n1,n2=n2,areas = areas)
   }
     
@@ -554,38 +585,38 @@ and now re-load these results using
 
 ```{r}
 if(!long_analysis) {
-  if(model == 1)  load(system.file("extdata","independent.rda", package = "bicon"))
-  if(model == 2)  load(system.file("extdata","pointwise.rda", package = "bicon"))
-  if(model == 3)  load(system.file("extdata","moving_average.rda", package = "bicon"))
+  load(system.file("extdata",paste0(model_name,".rda"), package = "bicon"))
 }
 ```
 
-If we wish to write out the results to a text file we can use the following code (not evaluated)
+If we wish to write out the results to a text file we can use the following code
 
-```{r,eval=FALSE}
-fileConn<-file(paste0("../paper/",model_name,".txt"))
-print_row <- function(x) {
-  fline <- paste0(round(median(x[MCMC_sub]),digits=2)," [",
-                  round(quantile(x[MCMC_sub],c(0.25)),digits=2),", ",
-                  round(quantile(x[MCMC_sub],c(0.75)),digits=2),"]")  
-  
+```{r}
+if(write_results) {
+  fileConn<-file(paste0("../paper/",model_name,".txt"))
+  print_row <- function(x) {
+    fline <- paste0(round(median(x[MCMC_sub]),digits=2)," [",
+                    round(quantile(x[MCMC_sub],c(0.25)),digits=2),", ",
+                    round(quantile(x[MCMC_sub],c(0.75)),digits=2),"]")  
+    
+  }
+  writeLines(c(print_row(1/prec0_samp),
+               print_row(2*pnorm(rho_trans_samp)-1),
+               print_row(1/prec1_samp),
+               print_row(1/prec2_samp),
+               print_row(exp(log_kappa1_samp[1,])),
+               print_row(exp(log_kappa2_samp[1,])),
+               print_row(A_samp),
+               print_row(exp(log_r_samp)),
+               print_row(d1_samp),
+               print_row(d2_samp),
+               print_row(Deviance_samp),
+               paste0(round(mean(Deviance_samp[MCMC_sub]),digits=2)),
+               paste0(round(mean(Deviance_samp[MCMC_sub]) - Deviance_mean,digits=2)),
+               paste0(round(DIC,digits=2))),
+             fileConn)
+  close(fileConn)
 }
-writeLines(c(print_row(1/prec0_samp),
-             print_row(2*pnorm(rho_trans_samp)-1),
-             print_row(1/prec1_samp),
-             print_row(1/prec2_samp),
-             print_row(exp(log_kappa1_samp[1,])),
-             print_row(exp(log_kappa2_samp[1,])),
-             print_row(A_samp),
-             print_row(exp(log_r_samp)),
-             print_row(d1_samp),
-             print_row(d2_samp),
-             print_row(Deviance_samp),
-             paste0(round(mean(Deviance_samp[MCMC_sub]),digits=2)),
-             paste0(round(mean(Deviance_samp[MCMC_sub]) - Deviance_mean,digits=2)),
-             paste0(round(DIC,digits=2))),
-           fileConn)
-close(fileConn)
 ```
 
 ### Plotting

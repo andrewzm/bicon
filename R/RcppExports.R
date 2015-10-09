@@ -5,6 +5,10 @@ bisquare_call <- function(h1, h2, delta, r, A) {
     .Call('bicon_bisquare_call', PACKAGE = 'bicon', h1, h2, delta, r, A)
 }
 
+covMat1_call <- function(h, var, kappa) {
+    .Call('bicon_covMat1_call', PACKAGE = 'bicon', h, var, kappa)
+}
+
 covMat3_call <- function(h, var, kappa) {
     .Call('bicon_covMat3_call', PACKAGE = 'bicon', h, var, kappa)
 }
