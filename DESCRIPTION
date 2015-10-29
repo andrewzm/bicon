@@ -14,7 +14,13 @@ Suggests:
     extrafont,
     INLA,
     slice,
-    maptools
+    maptools,
+    verification,
+    mapproj,
+    foreach,
+    doParallel,
+    verification,
+    RandomFields
 Description: This is a supplement package to the paper 'Multivariate Spatial
     Covariance Models: A Conditional Approach' by Noel Cressie and Andrew
     Zammit-Mangion (2015, submitted). This package can be used for the
