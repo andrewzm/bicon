@@ -15,12 +15,14 @@ To download the vignettes without reproducing them on your machine, please view 
 
 [Vignette 1 (Section 3.2)](https://github.com/andrewzm/bicon/blob/master/vignettes/bivariate_sim.pdf?raw=true)
 
-[Vignette 2 (Section 5)](https://github.com/andrewzm/bicon/blob/master/vignettes/min_max_T.pdf?raw=true)
+[Vignette 2 (Section 5)](https://github.com/andrewzm/bicon/blob/master/vignettes/temperature_pressure.pdf?raw=true)
+
+[Vignette 3 (min-max temperature example)](https://github.com/andrewzm/bicon/blob/master/vignettes/min_max_T.pdf?raw=true)
 
 Presentation
 -----
 
-To access the presentation I gave for the 27th Goulburn Research Fellows Meeting (2015), please [click here](https://github.com/andrewzm/bicon/blob/master/pres/2015_03_Goulburn.pdf?raw=true).
+To access the presentation I gave for the 27th Goulburn Research Fellows Meeting (2015) on this topic please [click here](https://github.com/andrewzm/bicon/blob/master/pres/2015_03_Goulburn.pdf?raw=true).
 
 
 Reproducibility 
