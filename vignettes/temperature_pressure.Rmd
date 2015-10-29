@@ -409,7 +409,8 @@ if(LK_analysis) {
   fit_all_data <- fit_all_models(NULL)
   save(fit_all_data, file=paste0("../inst/extdata/temp_pressure/LK_fits.rda"))
 } else {
-  load("../inst/extdata/temp_pressure/LK_fits.rda")
+  #load("../inst/extdata/temp_pressure/LK_fits.rda")
+  load(system.file("extdata/temp_pressure","LK_fits.rda", package = "bicon"))
 }
 ```
 
@@ -540,8 +541,8 @@ If we decided not to run the LOOCV, we load the results from cache.
 
 ```{r}
 if(!LOO_analysis) {
-  #load(system.file("extdata/temp_pressure/all_predictions.rda"), package = "bicon")
-  load("../inst/extdata/temp_pressure/all_predictions.rda")
+  load(system.file("extdata/temp_pressure/all_predictions.rda", package = "bicon"))
+  #load("../inst/extdata/temp_pressure/all_predictions.rda")
 }
 ```
 
@@ -623,7 +624,8 @@ if(RF_estimation) {
 
 } else {
   ## otherwise load
-   load("../inst/extdata/temp_pressure/RF_CV_results.rda")
+  #load("../inst/extdata/temp_pressure/RF_CV_results.rda")
+  load(system.file("extdata/temp_pressure","RF_CV_results.rda", package = "bicon"))
 }
 ```
 
@@ -740,9 +742,10 @@ table(best_performing$best_model_CRPS)
 
 ```{r,fig.width=10,fig.cap=' State boundaries and province boundaries of a region of the U.S.A. and Canada (dark solid lines), with the domain of interest enclosed by a bounding polygon (dashed line). The irregular triangular grid used for discretizing $D$ (light solid lines) and the observation locations given by $D^O$ (dots) are also shown. The discretized spatial domain $D^L$ consists of the vertices of the triangular grid.'}
 # Load shapefiles
-#shapefile_path <- system.file("extdata", "cb_2013_us_state_5m.shp", package = "bicon")
-shape1 <- "../inst//extdata//cb_2013_us_state_5m.shp"
-shape2 <- "../inst//extdata//Canada_provinces.SHP"
+shape1 <- system.file("extdata", "cb_2013_us_state_5m.shp", package = "bicon")
+shape2 <- system.file("extdata", "Canada_provinces.SHP", package = "bicon")
+#shape1 <- "../inst//extdata//cb_2013_us_state_5m.shp"
+#shape2 <- "../inst//extdata//Canada_provinces.SHP"
 US_States <- maptools::readShapeSpatial(shape1)
 Ca_States <- maptools::readShapeSpatial(shape2)
 
