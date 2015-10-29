@@ -250,7 +250,7 @@ Next, we require a function that, given the parameter vector `theta` and the mod
 \begin{equation}\label{eqn:cov-matrix}
 \cov\left( (\Yvec_1^\T, \Yvec_2^\T)^\T\right) =  \begin{bmatrix}\bSigma_{11} & \bSigma_{11}\bB^\T \\ \bB \bSigma_{11} & \bSigma_{2\mid 1}+\bB\bSigma_{11}\bB^\T  \end{bmatrix},                                
 \end{equation}
-the observation error covariance matrix and the vector $\Zvec$ that, recall, is equal to $[\Zvec_1',\Zvec_2']$ or $[\Zvec_2',\Zvec_1']$, depending on the model number. If `whole_mesh` is `TRUE`, then the process covariance matrix is evaluated over the entire mesh (used for co-kriging at unobserved locations).
+the observation error covariance matrix and the vector $\Zvec$ that, recall, is equal to $[\Zvec_1^\T,\Zvec_2^\T]^\T$ or $[\Zvec_2^\T,\Zvec_1^\T]^\T$, depending on the model number. If `whole_mesh` is `TRUE`, then the process covariance matrix is evaluated over the entire mesh (used for co-kriging at unobserved locations).
 
 ```{r}
 construct_mats <- function(theta,model_num,whole_mesh=F) {
@@ -360,7 +360,7 @@ loglik_Model <- function(theta,model_num,i=NULL) {
 } 
 ```
 
-For optimising we will use the `R` function `optim` (BFGS). We allow for 3000 maximum iterations and set `trace=6` for detailed output. We choose to not compute the Hessian since this is not required in our analysis. Recall that the parameter `i` here contains the indices of the observations we do not wish to include in the fit. If `i = NULL` then all observations are inlcuded. The function `optim_loglik` is that is called for each model in the program later on.
+For optimising we will use the `R` function `optim` (BFGS). We allow for 3000 maximum iterations and set `trace=6` for detailed output. We choose to not compute the Hessian since this is not required in our analysis. Recall that the parameter `i` here contains the indices of the observations we do not wish to include in the fit. If `i = NULL` then all observations are inlcuded. The function `optim_loglik` is called for each model in the program later on.
 
 ```{r}
 optim_loglik <- function(par,model_num, i = NULL){
@@ -401,7 +401,7 @@ fit_all_models <- function(i) {
 }
 ```
 
-With all functions in place we now call `fit_all_data <- fit_all_models(NULL)`. All this does is fit all the models using all the observations (since `i = NULL`). If `LK_analysis = 1` then this is done from scratch (takes about 30 minutes), otherwise the data is lodaded from cache.
+With all functions in place we now call `fit_all_data <- fit_all_models(NULL)`. All this does is fit all the models using all the observations (since `i = NULL`). If `LK_analysis = 1` then this is done from scratch (takes about 30 minutes), otherwise the data is loaded from cache.
 
 ```{r}
 ## First we carry out the analysis with all data in
@@ -547,7 +547,7 @@ if(!LOO_analysis) {
 
 ## Displaying and plotting results 
 
-The following code is only documented in-line since it just involves data manipulation for obtaining the results shown in the paper. For verification we find the mean absolute error (MAE), the root mean-squared prediction error (RMSPE) and the continuous probability rank score (CRPS) @Gneiting_2005.
+The following code is only documented in-line since it just involves data manipulation for obtaining the results shown in the paper. For verification we find the mean absolute error (MAE), the root mean-squared prediction error (RMSPE) and the continuous probability rank score (CRPS) as described by @Gneiting_2005.
 
 ```{r,message=FALSE}
 ### Analyse results
@@ -790,7 +790,7 @@ if(show_figs) {
 
 
 
-```{r,fig.width=25,fig.height=25,out.width='16cm',out.height='16cm'}
+```{r,fig.width=25,fig.height=25,out.width='16cm',out.height='16cm',fig.cap="The cokriged surface using maximum likelihood estimates for the parameters with Model 1 (left panels) and Model 4 (right panels) for the temperature (top panels) and pressure (bottom panels) error fields. "}
 g1M1 <- plot_interp(Mesh,"y1_Model1",150,max=5,min=-5,leg_title="degC") %>% 
   meshplot(include_obs = 0L)
 g1M4 <- plot_interp(Mesh,"y1_Model4",150,max=5,min=-5,leg_title="degC") %>%
@@ -930,7 +930,7 @@ if(print_figs) {
 }
 ```
 
-```{r,out.width='12cm',fig.width=28,fig.height=16}
+```{r,out.width='12cm',fig.width=28,fig.height=16,fig.cap='A scatter plot of the kriging standard errors of $Y_1$ obtained with Model 4 against those obtained with Model 1 at each of the mesh vertices. The colour illustrates the difference between the two, with green denoting the higher standard error of Model 4 and purple the higher standard error of Model 1.' }
 Mesh["M1T_errors"] <- sqrt(pmax(ALL1$var_pred,0))[1:n1]
 Mesh["M4T_errors"] <- sqrt(pmax(ALL4$var_pred,0))[1:n1]
 Mesh["diffT_errors"] <- Mesh["M1T_errors"] - Mesh["M4T_errors"]

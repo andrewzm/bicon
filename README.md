@@ -6,7 +6,7 @@ This page hosts a supplement package to the paper 'Multivariate Spatial
     (2015, submitted). This package can be used for the construction of
     covariance matrices for bivariate processes modelled using the
     conditional approach. The covariance functions are assumed to be Matern
-    (3/2) covariance functions whilst functionality is provided for
+    covariance functions whilst functionality is provided for
     constructing interaction matrices using the bisquare function as the
     interaction function. The accompanying vignettes may be used to replicate
     the studies found in the paper.
@@ -17,8 +17,6 @@ To download the vignettes without reproducing them on your machine, please view 
 
 [Vignette 2 (Section 5)](https://github.com/andrewzm/bicon/blob/master/vignettes/temperature_pressure.pdf?raw=true)
 
-[Vignette 3 (min-max temperature example)](https://github.com/andrewzm/bicon/blob/master/vignettes/min_max_T.pdf?raw=true)
-
 Presentation
 -----
 
@@ -28,11 +26,7 @@ To access the presentation I gave for the 27th Goulburn Research Fellows Meeting
 Reproducibility 
 -------
     
-If you wish to reproduce the results, you will need to install the package and its dependencies. Three of the dependencies, `INLA`, `slice` and `gpclib` need to be installed manually. For `INLA` please visit the [INLA project page](http://www.r-inla.org/download) for installation instructions. For `slice`, which is needed for slice sampling, please visit the [personal webpage of Jonathan Rougier](http://www.maths.bris.ac.uk/~MAZJCR/), download `slice_x.x.tar.gz` and install using
-
-    install.packages("slice_x.x.tar.gz", type = "source",repos=NULL)
-    
-For `gpclib` please type
+If you wish to reproduce the results, you will need to install the package and its dependencies. Two of the dependencies, `INLA` and `gpclib` need to be installed manually. For `INLA` please visit the [INLA project page](http://www.r-inla.org/download) for installation instructions. For `gpclib` please type
 
     install.packages("gpclib", type = "source")
 
