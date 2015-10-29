@@ -20,7 +20,7 @@ Suggests:
     foreach,
     doParallel,
     verification,
-    RandomFields
+    RandomFields (== 3.0.62)
 Description: This is a supplement package to the paper 'Multivariate Spatial
     Covariance Models: A Conditional Approach' by Noel Cressie and Andrew
     Zammit-Mangion (2015, submitted). This package can be used for the

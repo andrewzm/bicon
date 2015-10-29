@@ -597,6 +597,7 @@ Now we need to carry out LOOCV on the parsimonious and full Matérn models using
 ```{r}
 Dist.mat <- as.vector(RFearth2dist(as.matrix(weather[, 3:4])))   # Compute distances
 PT <- as.matrix(weather[, 1:2])                                  # Change data into matrix
+## Note the below code only works with RandomFields v3.0.62
 if(RF_estimation) {
   
   ## Parsimonious Matern model
