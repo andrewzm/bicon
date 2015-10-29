@@ -1,7 +1,7 @@
 ---
 title: 'Bivariate conditional spatial models: Case study in Section 5'
 author: "Noel Cressie and Andrew Zammit-Mangion"
-date: "Sunday, March 01, 2015"
+date: "Thursday, October 29, 2015"
 output:
   pdf_document:
     fig_caption: yes
