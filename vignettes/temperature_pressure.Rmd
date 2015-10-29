@@ -803,7 +803,6 @@ g2M1 <- plot_interp(Mesh,"y2_Model1",150,max=500,min=-500,leg_title="Pa") %>%
   meshplot(include_obs = 0L)
 g2M4 <- plot_interp(Mesh,"y2_Model4",150,max=500,min=-500,leg_title="Pa") %>%
   meshplot(include_obs = 0L)
-
 if(show_figs) {
   print(arrangeGrob(g1M1,g1M4,g2M1,g2M4,ncol=2))
 }
