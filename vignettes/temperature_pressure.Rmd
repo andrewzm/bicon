@@ -959,7 +959,7 @@ std_diff_scatter <- LinePlotTheme() +
   xlab("Model 1 standard errors for Y1 (deg. C)") +
   ylab("Model 4 standard errors for Y1 (deg. C)") +
   theme(text = element_text(size = 30), axis.title.y = element_text(vjust=2));
-print(std_diff_scatter)
+if (show_figs) print(std_diff_scatter)
 
 
 
