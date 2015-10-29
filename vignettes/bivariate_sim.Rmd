@@ -171,7 +171,7 @@ Sigma <- makeSY(r = Dvec,
 
 The covariance functions are given as
 
-```{r}
+```{r,fig.cap='The correlation and cross-correlation functions estimated using Model 4, depicted as a function of displacement $h$ in degrees latitude/longitude, at the point $s = (-123,45)$. Contour lines denote intervals of 0.2.'}
 Cov11 <- Sigma[n1/2,1:n1]
 Cov12 <- Sigma[n1/2,(n1+1):n]
 Cov21 <- Sigma[n1+n2/2,1:n1]
