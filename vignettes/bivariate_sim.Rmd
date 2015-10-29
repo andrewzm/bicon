@@ -90,7 +90,7 @@ We start off by setting up some parameters in the program -- these are described
 ###---------------
 img_path <- "../paper/art"   ## Where to save the figures
 show_figs <- 1               ## Show the figures in document
-print_figs <-  1             ## Print figures to file
+print_figs <-  0             ## Print figures to file
 ```
 
 Now we set up the simulation domain. We choose $D = [-1,1]$, and a spacing $\eta_i = 0.01, i = 1,\dots,200$. We collect the grid information in a data frame `df`, to which extra columns will be added further on in the program. We also define `n1` as the number of grid cells for $\Yvec_1$ and `n2` as the number of grid cells for $\Yvec_2$. In this study, `n1` = `n2` = 200 and we define `n` = `n1` + `n2` = 400.

@@ -14,3 +14,10 @@ paper
 /pres/*.tex~
 /pres/*.fdb*
 /pres/*.blg
+src-*
+*.tar.gz
+*.o
+*.so
+*.out
+*.err
+*~
