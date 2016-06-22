@@ -89,11 +89,11 @@ As detailed in @CressieZammit2015, we consider four models that vary only throug
 \begin{array}{ll}
 \textrm{Model 1 (independent Mat{\'e}rns):} &b_o(\h) \equiv 0, \\
 \textrm{Model 2 (pointwise dependence):} &b_o(\h) \equiv A\delta(\h), \\
-\textrm{Model 3 (diffused dependence):} & \textrm{Model 3 with~} \Deltab = 0 \\
+\textrm{Model 3 (diffused dependence):} & \textrm{Model 4 with~} \Deltab = 0 \\
 \textrm{Model 4 (asymmetric dependence):} &b_o(\h) \equiv \left\{\begin{array}{ll} A\{1 - (\|\h - \Deltab\|/r)^2\}^2, & \| \h - \Deltab\| \le r \\ 0, & \textrm{otherwise}, \end{array} \right. 
 \end{array}
 \end{equation*}
-where $\Deltab = (\Delta_1, \Delta_2)^\T$ is a shift parameter vector that captures asymmetry, $r$ is the aperture parameter, and $A$ is the amplitude. In Model 3, $b_o(\h)$ is a shifted bisquare function in $\mathbb{R}^2$. The covariance functions $C_{11}(\cdot)$ and $C_{2|1}(\cdot)$ are Matérn covariance functions with $\nu_{11} = \nu_{2|1} = 1.5$. For each model we also consider a \emph{reversed} dependence, where we switch $Y_2$ and $Y_1$. This gives us a total of eight models to fit and compare.
+where $\Deltab = (\Delta_1, \Delta_2)^\T$ is a shift parameter vector that captures asymmetry, $r$ is the aperture parameter, and $A$ is the amplitude. In Models 3 and 4, $b_o(\h)$ is a shifted bisquare function in $\mathbb{R}^2$. The covariance functions $C_{11}(\cdot)$ and $C_{2|1}(\cdot)$ are Matérn covariance functions. For each model we also consider a \emph{reversed} dependence, where we switch $Y_2$ and $Y_1$. This gives us a total of eight models to fit and compare.
 
 
 The first thing we do is set some options. is to indicate whether we want to run the full program. We use a flag `LOO_analysis` to indicate whether we want to run the leave-one-out cross-validation study (without re-fitting) while the flag `LK_analysis` indicates whether we want to carry out a standard likelihood fit of all 8 models using the entire dataset (requires about 30 minutes of computing time). In this vignette we set both flags to zero; the results are instead loaded from cache.
@@ -103,9 +103,10 @@ The first thing we do is set some options. is to indicate whether we want to run
 model_names <- c("independent","pointwise","moving_average_delta0","moving_average")
 img_path <- "../paper/art"                  ## Where to save the figures
 show_figs <- 1                              ## Show the figures in document
-print_figs <-  0                            ## Print figures to file (leave =0)
+print_figs <- 0                             ## Print figures to file (leave =0)
 LK_analysis <- 0                            ## Carry out likelihood analysis
 LOO_analysis <- 0                           ## Carry out LOO analysis
+Shifted_Pars_estimation <- 0                ## Fit shifted parimonious Matern
 RF_estimation <- 0                          ## Carry out LOO with RFields
 useMPI <- 0                                 ## MPI backend available?
 ```
@@ -235,10 +236,10 @@ Since the optimisation algorithm requires a parameter vector of the same length 
 append_theta <- function(theta,model_num) {
   if(model_num %in% c(1,5)) {
     theta <- c(theta,rep(0,4))
-    theta[9] <- 0.001
+    theta[10] <- 0.001
   } else if(model_num %in% c(2,6)) {
     theta <- c(theta,rep(0,3))
-    theta[9] <- 0.001
+    theta[10] <- 0.001
   } else if(model_num %in% c(3,7)) {
     theta <- c(theta,rep(0,2))
   }
@@ -255,15 +256,15 @@ the observation error covariance matrix and the vector $\Zvec$ that, recall, is 
 ```{r}
 construct_mats <- function(theta,model_num,whole_mesh=F) {
   
-  nu1 <- ifelse(model_num < 5,0.6,theta[7])
-  nu2 <- ifelse(model_num >=5,0.6,theta[7])
+  nu1 <- theta[7]
+  nu2 <- theta[8]
   
-  B <- theta[8]*Diagonal(n1) # Automatically zero if Model 1
+  B <- theta[9]*Diagonal(n1) # Automatically zero if Model 1
   
   if(model_num %in% c(3,4,7,8)) {
-    B <- theta[8]*bisquare_B(h1_double,h2_double,
-                             delta=theta[10:11], # Automatically zero for Model with no shift
-                             r=theta[9],
+    B <- theta[9]*bisquare_B(h1_double,h2_double,
+                             delta=theta[11:12], # Automatically zero for Model with no shift
+                             r=theta[10],
                              n1 = n1,
                              n2 = n2,
                              areas = areas)
@@ -282,8 +283,8 @@ construct_mats <- function(theta,model_num,whole_mesh=F) {
     S12 <- t(S21)
     S22 <- S2_1 + forceSymmetric(C1B %*% forceSymmetric(S11_big) %*% t(C1B))
   } else {
-    S21 <- S12 <- theta[8]*S11 
-    S22 <- S2_1 + theta[8]^2 * S11
+    S21 <- S12 <- theta[9]*S11 
+    S22 <- S2_1 + theta[9]^2 * S11
   }
   
   if(whole_mesh) {
@@ -320,17 +321,18 @@ loglik_Model <- function(theta,model_num,i=NULL) {
   # theta4:  sigma22_1
   # theta5:  kappa11
   # theta6:  kappa2_1
-  # theta7:  nu2_1
-  # theta8:  A
-  # theta9:  r/100
-  # theta10: d1/100
-  # theta11: d2/100
+  # theta7:  nu11
+  # theta8:  nu2_1
+  # theta9:  A
+  # theta10: r
+  # theta11: d1
+  # theta12: d2
 
   theta <- append_theta(theta,model_num)
   
   if(theta[1] <= 0 |  theta[2] <= 0 | theta[3] <= 0 | 
      theta[4] <= 0 | theta[5] <= 0.001 | theta[6] <= 0.001 | 
-     theta[7] <= 0.05 | theta[9] < 0.0005) {
+     theta[7] <= 0.05 | theta[8] <= 0.05 | theta[10] < 0.0005) {
        return(Inf)
      } else {
        
@@ -381,8 +383,8 @@ The last function we need to define is one that fits all the models, possibly wi
 
 ```{r}
 fit_all_models <- function(i) {
-  fit.Model1     <- optim_loglik(par=c(0.01,1,5,15,0.01,0.01,1.5),   model_num=1, i = i)
-  fit.Model1_rev <- optim_loglik(par=c(1,0.01,15,5,0.01,0.01,1.5),   model_num=5, i = i)
+  fit.Model1     <- optim_loglik(par=c(0.01,1,5,15,0.01,0.01,0.6,1.5),   model_num=1, i = i)
+  fit.Model1_rev <- optim_loglik(par=c(1,0.01,15,5,0.01,0.01,1.5,0.6),   model_num=5, i = i)
   fit.Model2     <- optim_loglik(par=c(fit.Model1$par,-0.2),    model_num=2, i = i)
   fit.Model2_rev <- optim_loglik(par=c(fit.Model1_rev$par,-0.2),model_num=6, i = i)
   fit.Model3     <- optim_loglik(par=c(fit.Model2$par,0.1),     model_num=3, i = i)
@@ -430,13 +432,14 @@ par_est <- plyr::rbind.fill(sapply(fit_all_data,function(x) data.frame(t(x$par))
 par_est1 <- par_est[1:4,]
 par_est1[,c(1,3)] <- sqrt(par_est1[,c(1,3)])
 par_est1[,c(2,4)] <- sqrt(par_est1[,c(2,4)]) * P_scale
-par_est1[,8] <- par_est1[,8] * P_scale
+par_est1[,9] <- par_est1[,9] * P_scale
 
 colnames(par_est1) <- c("$\\sigma_1$","$\\sigma_2$","$\\sigma_{11}$",
-                        "$\\sigma_{2|1}$","$\\kappa_{11}$","$\\kappa_{2|1}$","$\\nu_{2|1}$",
+                        "$\\sigma_{2|1}$","$\\kappa_{11}$","$\\kappa_{2|1}$",
+                        "$\\nu_{11}$","$\\nu_{2|1}$",
                         "$A$","$r$", "$\\Delta_1$","$\\Delta_2$")
 rownames(par_est1) <- c("Model 1","Model 2","Model 3","Model 4")
-print(xtable::xtable(par_est1,digits=c(rep(2,5),3,3,rep(2,5))),
+print(xtable::xtable(par_est1,digits=c(rep(2,5),3,3,rep(2,6))),
       sanitize.text.function=function(x){x},
       hline.after=NULL)
 ```
@@ -558,8 +561,14 @@ weather_long <- mutate(weather,loc_num = 1:nrow(weather)) %>%
   mutate(sum_D = apply(Dobs,1,function(x) sum(sort(x)[1:2]))) %>%
   gather(process,z,temperature,pressure,convert = TRUE)
 
-## put data set into long format
-pred2 <- mutate(pred,                                           # Take our LOOCV results
+## Utility wrapper around the crps function
+crps_wrapper <- function(Z,mu,sd) {
+  crps(Z,cbind(mu,sd))$crps
+}
+
+sanitise_results <- function(pred) {
+    ## put data set into long format
+    pred2 <- mutate(pred,                                           # Take our LOOCV results
                 process = ifelse((model_num < 5 & i <= m1) |    # Assign process name to row
                                    (model_num >=5 & i >  m1) ,
                                  "temperature",
@@ -568,31 +577,161 @@ pred2 <- mutate(pred,                                           # Take our LOOCV
   left_join(weather_long) %>%                                   # Join up with data
   dplyr::select(-i,-z)                                          # Remove unwanted columns
 
-## Utility wrapper around the crps function
-crps_wrapper <- function(Z,mu,sd) {
-  crps(Z,cbind(mu,sd))$crps
-}
+    results <- pred2 %>%                                    # Take the predictions
+    group_by(process,model_num) %>%                       # Group by process and model
+    summarise(MAE = mean(abs(mu_pred - Z)),               # Find MAE
+              MAE_se = sd(mu_pred - Z)/sqrt((m1-1)),      # Find MAE standard error
+              Bias = mean(mu_pred - Z),                   # Find mean bias
+              Bias_se = sd(mu_pred - Z)/sqrt((m1-1)),     # Find bias standard error
+              Bias_norm = mean((mu_pred - Z)/sqrt(var_pred)), # Find mean normalised bias
+              RMSPE = sqrt(mean((mu_pred - Z)^2)),            # Find RMSPE
+              CRPS = mean(crps_wrapper(Z,mu_pred,sqrt(var_pred))),   # Find CRPS
+              CRPS_se = sd(crps_wrapper(Z,mu_pred,sqrt(var_pred)))/sqrt(m1-1))  # Find CRPS se
 
-results <- pred2 %>%                                    # Take the predictions
-  group_by(process,model_num) %>%                       # Group by process and model
-  summarise(MAE = mean(abs(mu_pred - Z)),               # Find MAE
-            MAE_se = sd(mu_pred - Z)/sqrt((m1-1)),      # Find MAE standard error
-            Bias = mean(mu_pred - Z),                   # Find mean bias
-            Bias_se = sd(mu_pred - Z)/sqrt((m1-1)),     # Find bias standard error
-            Bias_norm = mean((mu_pred - Z)/sqrt(var_pred)), # Find mean normalised bias
-            RMSPE = sqrt(mean((mu_pred - Z)^2)),            # Find RMSPE
-            CRPS = mean(crps_wrapper(Z,mu_pred,sqrt(var_pred))),   # Find CRPS
-            CRPS_se = sd(crps_wrapper(Z,mu_pred,sqrt(var_pred)))/sqrt(m1-1))  # Find CRPS se
+    results
+}
+results <- sanitise_results(pred)
 print(results)
 
+## Deprecated:
+pred2 <- mutate(pred,                                           # Take our LOOCV results
+                process = ifelse((model_num < 5 & i <= m1) |    # Assign process name to row
+                                   (model_num >=5 & i >  m1) ,
+                                 "temperature",
+                                 "pressure"),
+                loc_num = ((i-1) %% m1)+1) %>%                  # Assign loc ID
+  left_join(weather_long) %>%                                   # Join up with data
+  dplyr::select(-i,-z)  
 results2 <- pred2 %>%                     # Take original (ungrouped) predictions
-  mutate(MAE = abs(mu_pred - Z),          # Find MAE of each obs
-        Bias = mu_pred - Z,               # Find bias of each obs
-        SR = (mu_pred - Z)/sqrt(var_pred),  # Find normalised residual
-        CRPS = crps_wrapper(Z,mu_pred,sqrt(var_pred)))  # Find CRPS
+   mutate(MAE = abs(mu_pred - Z),          # Find MAE of each obs
+         Bias = mu_pred - Z,               # Find bias of each obs
+         SR = (mu_pred - Z)/sqrt(var_pred),  # Find normalised residual
+         CRPS = crps_wrapper(Z,mu_pred,sqrt(var_pred)))  # Find CRPS
 ```
 
-Now we need to carry out LOOCV on the parsimonious and full Matérn models using the `RandomFields` package. This closely follows the approach illustrated in @Schlachter_2015.
+Next, we compare our results to the *shifted* parsimonious Mat{\'e}rn model, obtained by applying the method of @Li_2011 to the standard parsimonious model. First we define a function that constructs the matrices based on the usual parameters:
+
+```{r}
+sh_pars_mats <- function(theta) {
+    ## Now create the shifted locations for the cross-covariances
+    new_locs <- weather[,3:4] + matrix(theta[1:2],ncol=2,nrow=nrow(weather),byrow=TRUE)
+    
+    X <- rbind(new_locs,weather[,3:4])
+    tot_D <- as.matrix(RFearth2dist(as.matrix(X)))
+    D12 <- tot_D[-(1:m1),1:m1]
+    D21 <- t(D12)
+    
+    #  Dobs <- as.matrix(RFearth2dist(as.matrix(weather[,3:4])))
+    #  Dobsvec <- c(Dobs)
+    
+    sigma2_21 <- sqrt(theta[9] * theta[10])*theta[6]
+    SY11 <- makeS(r=Dobsvec,var= theta[9],kappa = theta[3],nu=theta[4])  
+    SY22 <- makeS(r=Dobsvec,var= theta[10],kappa = theta[3],nu=theta[5]) 
+    SY12 <- makeS(r=c(D21),var=sigma2_21, kappa = theta[3], nu = (theta[4] + theta[5])/2)
+    SY21 <- t(SY12)
+    So11 <- theta[7]^2 * diag(m1)
+    So22 <- theta[8]^2 * diag(m1)
+    SY <- cbind(rbind(SY11,SY12),rbind(SY21,SY22))
+    So <- bdiag(So11,So22)
+    list(SY = SY, So = So,Z = form_Z(1L,scale=F))
+}
+```
+
+Next, we define the likelihood funciton; note that the parameter definitions for the parsimonious Mat{\'e}rn are different than for the conditional approach:
+
+```{r}
+loglik_sh_pars_model <- function(theta,shift=FALSE) {
+  # theta1:  delta1
+  # theta2:  delta2
+  # theta3:  kappa
+  # theta4:  nu1 
+  # theta5:  nu2
+  # theta6:  rho
+  # theta7:  tau1
+  # theta8:  tau2/100
+  # theta9:  sigma2_11
+  # theta10: sigma2_22/10000
+  if(theta[3] < 0.00001 | theta[4] < 0.1 | theta[5] < 0.1 | 
+     abs(theta[6]) >= 1 | theta[7] <= 0 | theta[8] <= 0 |  
+     theta[9] <= 0 | theta[10] <= 0) {
+       return(Inf)
+     } else  if (abs(theta[6]) > sqrt(theta[4] * theta[5]) / 0.5*(theta[4] + theta[5]))  
+     {       
+       return(Inf)
+     }  else {
+        
+        if(!shift) {
+            theta[1] <- theta[2] <- 0
+        }  
+       
+       theta[8] <- theta[8] * 100    ## These were divided by 100 and 1000
+       theta[10] <- theta[10] * 10000  ## in the initial call, respectively
+       
+       ## Get the data
+       Z = form_Z(1L,scale=F)
+
+       ## Get the matrices
+       Matrices <- sh_pars_mats(theta)
+       S <- Matrices$SY + Matrices$So
+       cholS <- chol(S)
+       
+       loglik <- 
+         -as.numeric(-0.5 * determinant(S)$modulus -
+                       0.5 * t(Z) %*% chol2inv(cholS) %*% Z -
+                       0.5 * nrow(Z)*log(2*pi))
+       
+       return(loglik)
+     }
+}
+```
+
+Finally, we estimate the parameters:
+
+```{r}
+## Set shift=TRUE below to estimate the shift parameters; otherwise they are fixed to zero
+## and we get the same likelihood and parameter estimates of Gneiting (2010)
+if(Shifted_Pars_estimation) {
+    optim_est_sh_pars <- optim(c(0.5,-1,1/95.88,
+                     0.6,1.6,-0.5,
+                     0.019,69.66/100,
+                     6.95,
+                     67191/10000),
+                   loglik_sh_pars_model,
+                   control=list(trace=6,
+                                maxit=3000),
+                   shift=TRUE)
+    save(optim_est_sh_pars,file = "../inst/extdata/temp_pressure/Shifted_Pars_est_results.rda")
+} else {
+    load(system.file("extdata/temp_pressure","Shifted_Pars_est_results.rda", package = "bicon"))
+}
+
+print(paste0("Log-lik. and AIC of shifted parsimonious Matern are -",
+             optim_est_sh_pars$value,
+             " and ",optim_est_sh_pars$value*2 + 20,
+             ", respectively.")) # 10 parameters
+```
+
+For co-kriging (for cross-validation) we follow the same approach as earlier:
+
+```{r}
+theta_lk <- optim_est_sh_pars$par
+theta_lk[8] <- theta_lk[8] * 100    ## These were divided by 100 and 1000
+theta_lk[10] <- theta_lk[10] * 10000  ## in the initial call, respectively
+X <- sh_pars_mats(theta = theta_lk)
+
+## Loop over each observation location
+print("Running CV for shifted parsimonious Matern...")
+pred_sh_pars <- foreach(i = 1:m1,.combine = "rbind") %do% {
+                X <- sh_pars_mats(theta = theta_lk)
+                cbind(cokrige(X=X,i=c(i,i+m1)),
+                              model_num = 1)}
+## Extract our results
+sh_pars_results <- sanitise_results(pred_sh_pars) %>%          # Only consider models with Y1 temp. 
+                  dplyr::select(model_num,MAE,RMSPE,CRPS) 
+sh_pars_results$model_num <- "Shifted_Pars"
+```
+
+For completeness we also carry out LOOCV on the parsimonious and full Matérn models using the `RandomFields` package. This closely follows the approach illustrated in @Schlachter_2015.
 
 ```{r}
 Dist.mat <- as.vector(RFearth2dist(as.matrix(weather[, 3:4])))   # Compute distances
@@ -679,11 +818,13 @@ select_results <- filter(results,model_num < 5) %>%          # Only consider mod
 select_resultsRF <- dplyr::select(RFresults,model_name,MAE,RMSPE,CRPS)  
 
 ## Relabel columns
-colnames(select_results) <- c("Process","Model","MAE","RMSPE","CRPS")
-colnames(select_resultsRF) <- c("Process","Model","MAE","RMSPE","CRPS")
+colnames(select_results) <- colnames(select_resultsRF) <- colnames(sh_pars_results) <-
+    c("Process","Model","MAE","RMSPE","CRPS")
 
-## Joint our results with those from RandomFields
-all_results <- rbind(select_results,select_resultsRF) %>% as.data.frame() %>% arrange(Process)
+
+## Join our results with those from RandomFields and the shifted parsimonious Matern
+all_results <- rbind(select_results,select_resultsRF,sh_pars_results) %>% 
+    as.data.frame() %>% arrange(Process)
 
 ## Print the LaTeX table
 print(xtable::xtable(all_results,digits=3),
@@ -691,7 +832,6 @@ print(xtable::xtable(all_results,digits=3),
       sanitize.text.function=function(x){x},
       hline.after=NULL,include.rownames=FALSE)
 ```
-
 
 
 ```{r}
@@ -734,7 +874,7 @@ if(show_figs) {
     scale_fill_grey(guide_legend(title="process")) + 
     xlab("best model for CRPS")
   
-  print(arrangeGrob(g1,g2,g3,nrow=1))
+  plot(arrangeGrob(g1,g2,g3,nrow=1))
 }
 
 table(best_performing$best_model_MAE)
@@ -805,7 +945,7 @@ g2M1 <- plot_interp(Mesh,"y2_Model1",150,max=500,min=-500,leg_title="Pa") %>%
 g2M4 <- plot_interp(Mesh,"y2_Model4",150,max=500,min=-500,leg_title="Pa") %>%
   meshplot(include_obs = 0L)
 if(show_figs) {
-  print(arrangeGrob(g1M1,g1M4,g2M1,g2M4,ncol=2))
+  plot(arrangeGrob(g1M1,g1M4,g2M1,g2M4,ncol=2))
 }
 
 ```
@@ -828,7 +968,7 @@ g1 <- LinePlotTheme() + geom_tile(data=XY,aes(h1,h2,fill=b1)) +
   greys + axes + coord_fixed() +ggtitle("Model 4")
 g2 <- LinePlotTheme() + geom_tile(data=XY,aes(h1,h2,fill=b2)) + 
   axes + greys + coord_fixed() +ggtitle("Model 8")
-if(show_figs) print(arrangeGrob(g1,g2,nrow=1))
+if(show_figs) plot(arrangeGrob(g1,g2,nrow=1))
 ```
 
 ```{r,fig.cap='Correlation between interpolated gridded maps of temperature and pressure as a function of displacement of the temperature field in latitude/longitude degrees, h. The yellow symbol indicates the maximum-likelihood estimate of the shift parameter with Model 4.'}
@@ -884,20 +1024,22 @@ for(i in 1:n2_grid) {
 }
 
 theta = fit_all_data$Model4$par
-B <- theta[8]*bisquare_B(h_grid[,1],h_grid[,2],
-                         delta=theta[10:11], # Automatically zero for Model with no shift
-                         r=theta[9],
+B <- theta[9]*bisquare_B(h_grid[,1],h_grid[,2],
+                         delta=theta[11:12], # Automatically zero for Model with no shift
+                         r=theta[10],
                          n1 = n1_grid,
                          n2 = n2_grid,
                          areas = areas_grid)
 
   S11 <- makeS(r = Dvec_grid,var = theta[3],
-               kappa = theta[5],nu = 0.6)
+               kappa = theta[5],nu = theta[7])
+  S11 <- S11 + theta[1]^2*diag(nrow(S11))
   S2_1 <- makeS(r = Dvec_grid, var = theta[4],
-                kappa = theta[6],nu = theta[7])
+                kappa = theta[6],nu = theta[8])
   S21 <- B %*% S11
   S12 <- t(S21)
   S22 <- S2_1 + Matrix::crossprod(chol(S11) %*% t(B))
+  S22 <- S22 + theta[2]^2*diag(nrow(S22))
 
 #centre_node <- which(grid_locs[,1] == 0 & grid_locs[,2] == 0)
 centre_node <- which(grid_locs[,1] == -123 & grid_locs[,2] == 45)
@@ -915,11 +1057,13 @@ H <- data.frame(h1 = h_centre[,1],
     group_by(cov_mat) %>%
     mutate(corr = C / max(abs(C)))
 
+axes <- geom_line(data=data.frame(x=c(0,0,-5,5),y=c(-5,5,0,0),grp=c(1,1,2,2)),
+                  aes(x,y,group=grp),colour="black") 
 corr_fn_plot <- LinePlotTheme() + geom_tile(data=H,aes(h1,h2,fill=corr)) + 
     geom_contour(data=H,aes(h1,h2,z=corr),binwidth=0.2,colour="black",lty="dashed") +
           facet_grid(Cgrp1~Cgrp2) + axes +
           scale_fill_gradient2(low="blue",high="red") + 
-  coord_fixed(xlim=c(-4,4),ylim=c(-4.8,4.8))  +
+  coord_fixed(xlim=c(-4,4),ylim=c(-4.2,4.2))  +
     theme(panel.margin = grid::unit(3, "lines"))
 if(print_figs) ggsave(corr_fn_plot, 
                       filename = file.path(img_path,"T-P-cov.png"),
@@ -957,8 +1101,10 @@ std_diff_scatter <- LinePlotTheme() +
              colour="black",size=4,shape=21) +    
   scale_fill_gradient2(low=muted("green"),mid="white", high=muted("magenta"),
                      guide=guide_legend(title="diff (deg. C)")) +
+  geom_line(data=data.frame(x=c(-5,5),y=c(-5,5)),aes(x,y),linetype="dashed") +
   xlab("Model 1 standard errors for Y1 (deg. C)") +
   ylab("Model 4 standard errors for Y1 (deg. C)") +
+    coord_fixed(xlim=c(0,3.5),ylim=c(0,3.5),ratio=0.8) +
   theme(text = element_text(size = 30), axis.title.y = element_text(vjust=2));
 if (show_figs) print(std_diff_scatter)
 

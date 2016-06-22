@@ -351,25 +351,28 @@ df_estY2 <- df %>%
 obs_plot <- LinePlotTheme() + 
   geom_point(data=df_obs,
              aes(x=s,y=z,shape=obs),
-             size=3,alpha=1,guide=F) +
+             size=3,alpha=1) +
   theme(legend.title=element_blank(),
         plot.margin = grid::unit(c(3, 0, 0, 0),units = "mm"))+
-  scale_shape_manual(values=c(1,20),guide=F) +
-  ylab("") 
+  scale_shape_manual(values=c(1,20),
+                     labels=c(expression(Z[1]),expression(Z[2]))) +
+  ylab("Z") 
 
+df_estY1$process <- as.factor(df_estY1$process)
+df_estY1$process <- relevel(df_estY1$process,2)
 est_plotY1_no_CIs <- LinePlotTheme() + 
   geom_line(data=df_estY1,
             aes(x=s,y=z,colour=process,linetype=process,size=process)) +
+  theme(legend.title=element_blank(),
+        plot.margin = grid::unit(c(3, 0, 0, 0),units = "mm"))+
   scale_linetype_manual(values=c("solid","dashed","dotted","dotdash"),
-                        guide=FALSE) +
+                        labels=c(expression(Y[1]),
+                                 expression(tilde(Y)[1]),
+                                 expression(Y[1]^"\u2020"),#"\u2020",
+                                 expression(hat(Y)[1]))) +
   scale_size_manual(values=c(0.4,1.3,1.3,1.3),guide=F) +
-  scale_colour_manual(values=c("black","black","black","black"),
-                      labels=c("Y1",
-                               expression(paste(tilde(Y),1)),
-                               expression(paste(hat(Y),1))),
-                      name="",
-                      guide=F) +
-  ylab("")
+  scale_colour_manual(values=c("black","black","black","black"),guide=F,name="") +
+  ylab("Y")
 
 est_plotY1 <- est_plotY1_no_CIs +
   geom_ribbon(data=df,aes(s,ymax=ind_model_mu1 + ind_model_sd1, 
@@ -427,13 +430,13 @@ if(show_figs) print(Sigma_plot,width=16,height=7,family="Arial")
 ```
 
 ```{r}
-g_all <- arrangeGrob(Sigma_plot,
+g_all <- grid.arrange(Sigma_plot,
                      arrangeGrob(obs_plot,est_plotY1_no_CIs,ncol=1),
                      ncol=2,widths=c(1,1))
 if(print_figs) {
   cairo_ps(filename = file.path(img_path,"Fig1.eps"),
                       width=16,height=7,family="Arial") 
-   print(g_all)
+   grid.draw(g_all)
     dev.off()
 }
 ```

@@ -7,7 +7,7 @@
 #' @aliases bisquare_1d
 #' @aliases bisquare_2d
 #' @aliases bisquare_B
-#' 
+#'
 #' @description The bisquare function
 #' @param h displacement (1d)
 #' @param h1 first component of displacement vector (2d)
@@ -20,14 +20,14 @@
 #' @param n2 number of columns
 #' @details The bisquare function (shifted by \eqn{\Delta}) is given by \deqn{b(s,v) \equiv \left\{\begin{array}{ll} A\{1 - (|v- s - \Delta|/r)^2\}^2, &| v -s  - \Delta| \le r \\ 0, & \textrm{otherwise}. \end{array} \right.}{b(s,v) =  A{1 - (|v- s - d|/r)^2}^2  if | v -s  - d| <= r,  0 otherwise}
 #' The function \code{bisquare_1d} accepts \code{h} in any shape or size, while for \code{bisquare_2d}, \code{h1} and \code{h2} need to be vectors of the same size. The parameter \code{delta} needs to be equal to one or two in length, depending on the spatial dimension.
-#' 
+#'
 #' The function \code{bisquare_B} is used to construct the matrix \eqn{B} given the bisquare parameters. It is meant to be used in problems of 2 dimensions.
 #' @export
-#' @examples 
+#' @examples
 #' h <- seq(-10,10,0.1)
 #' y <- bisquare_1d(h=h,delta=3,r=4)
 #' plot(h,y)
-bisquare_1d <- function(h,delta = 0,r = 1,A=1) { 
+bisquare_1d <- function(h,delta = 0,r = 1,A=1) {
   y <- abs(h - delta)
   A*(1-(y/r)^2)^2 * (y < r)
 }
@@ -54,7 +54,7 @@ bisquare_B <- function(h1,
 }
 
 ### Bisquare computation in R (slow)
-bisquare_notC <- function(h,delta,r,A) { 
+bisquare_notC <- function(h,delta,r,A) {
     y <- t(t(h)-delta)
     y <- sqrt(y[,1]^2 + y[,2]^2)
     A*(1-(y/r)^2)^2 * (y < r)
@@ -65,11 +65,11 @@ bisquare_notC <- function(h,delta,r,A) {
 ### Matrix construction
 ###--------------------
 
-#' @title Construct full (bivariate) covariance/precision matrix 
+#' @title Construct full (bivariate) covariance/precision matrix
 #' @name makeCov
 #' @aliases makeSY
 #' @aliases makeQY
-#' 
+#'
 #' @description Construct the covariance or precision matrix for the bivariate model constructed using the conditional approach.
 #' @param r vector of distances
 #' @param var variance of C
@@ -80,8 +80,8 @@ bisquare_notC <- function(h,delta,r,A) {
 #' @param kappa2 scale of C_{2|1}
 #' @param B interaction matrix
 #' @return Covariance (or precision) matrix
-#' @details  Both C_{11} and C_{2|1} are Matern covariance functions with smoothness parameter equal to 3/2. Covariance matrices are computed from Matern covariance functions using the vector of distances \code{r}, so that Sigma[1,1] = cov(Y1(s),Y1(s+r[1])), Sigma[1 + n,1] = cov(Y2(s),Y1(s+r[1])) and so on. Currently the grids on which Y1 and Y2 are evaluated need to be identical. 
-#' 
+#' @details  Both C_{11} and C_{2|1} are Matern covariance functions with smoothness parameter equal to 3/2. Covariance matrices are computed from Matern covariance functions using the vector of distances \code{r}, so that Sigma[1,1] = cov(Y1(s),Y1(s+r[1])), Sigma[1 + n,1] = cov(Y2(s),Y1(s+r[1])) and so on. Currently the grids on which Y1 and Y2 are evaluated need to be identical.
+#'
 #' The matrix \eqn{B} is the interaction matrix. The full covariance matrix returned is \deqn{\Sigma =   \left( \begin{array}{cc}\Sigma_{11} & \Sigma_{11}B' \\ B \Sigma_{11} & \Sigma_{2\mid 1}+B\Sigma_{11}B'  \end{array}\right).}{Sigma = [Sigma_{11} & Sigma_{11}B' ; B Sigma_{11} & Sigma_{2|1} + B Sigma_{11}B'].}
 #' @export
 #' @examples
@@ -125,7 +125,7 @@ makeS <- function(r,var,kappa,nu) {
     } else if (nu == 1/2) {
         S <- Matern12(r,var,kappa)
     } else {
-        svec <- Matern(d=r,scale=var,alpha=kappa,smoothness = nu)  
+        svec <- Matern(d=r,scale=var,alpha=kappa,smoothness = nu)
         S <- matrix(svec, nrow = sqrt(length(r)))
     }
     S
@@ -135,16 +135,34 @@ makeS <- function(r,var,kappa,nu) {
 ###-----------------------------
 
 
-Matern32 <- function(r,var,kappa) { 
+Matern32 <- function(r,var,kappa) {
   X <- covMat3_call(r,var,kappa)
   matrix(X,nrow=sqrt(length(r)))
 }
 
-Matern12 <- function(r,var,kappa) { 
+Matern12 <- function(r,var,kappa) {
   X <- covMat1_call(r,var,kappa)
   matrix(X,nrow=sqrt(length(r)))
 }
 
+# fields, Tools for spatial data
+# Copyright 2004-2013, Institute for Mathematics Applied Geosciences
+# University Corporation for Atmospheric Research
+# Licensed under the GPL -- www.gpl.org/licenses/gpl.html
+"Matern" <- function(d, scale = 1, range = 1, alpha = 1/range,
+                     smoothness = 0.5, nu = smoothness, phi = scale) {
+    # Matern covariance function transcribed from Stein's book page 31                                 # nu==smoothness, alpha ==  1/range                                                                # GeoR parameters map to kappa==smoothness and phi == range                                        # check for negative distances                                                                
+    if (any(d < 0))
+        stop("distance argument must be nonnegative")
+    d <- d * alpha
+    # avoid sending exact zeroes to besselK
+    d[d == 0] <- 1e-10
+    # the hairy constant ...                                                                           # this is different from Stein to make this a correlation function when
+    con <- (2^(nu - 1)) * gamma(nu)
+    con <- 1/con
+    # call to  Bessel function from R base package
+    return(phi * con * (d^nu) * besselK(d, nu))
+}
 
 ###--------------------
 ### Matrix tools
@@ -155,10 +173,10 @@ Matern12 <- function(r,var,kappa) {
 #' @description Creates a sparse identity matrix of size n x n
 #' @param n size of matrix
 #' @export
-#' @examples 
+#' @examples
 #' require(Matrix)
 #' Q <- Imat(4)
-Imat <- function (n) 
+Imat <- function (n)
 {
   sparseMatrix(i = 1:n, j = 1:n, x = 1)
 }
@@ -169,7 +187,7 @@ Imat <- function (n)
 #' @description Find the log determinant of a matrix Q from its Cholesky factor L.
 #' @param L the Cholesky factor of Q
 #' @export
-#' @examples 
+#' @examples
 #' require(Matrix)
 #' Q <- sparseMatrix(i=c(1,1,2,2),j=c(1,2,1,2),x=c(0.1,0.2,0.2,1))
 #' logdet(chol(Q))
@@ -188,21 +206,21 @@ logdet <- function(L)  {
 #' @title Quantile difference when tuning Gamma distribution hyper-parameters
 #'
 #' @description See details below.
-#' 
+#'
 #' @param pars the shape and rate parameters (in that order) of the Gamma distribution
 #' @param p5 the 5-th percentile of the desired error distribution
 #' @param p95 the 95-th percentile of the desired error distribution
 #' @return A measure of discrepancy between the Gamma distribution with parameters \code{par} and the desired 5-th 95-th percentiles of the error signal.
-#' @details Assume that in our model there is an error term (for example, observation error) \eqn{e \sim \mathcal{N}(0,\sigma^2)} and we are required to estimate the precision, \eqn{\sigma^{-2}}. Assume further that we have sufficient prior knowledge to know that \eqn{F_e(0.05)} = \code{p5} and \eqn{F_e(0.95)} = \code{p95}, where \code{F_e} is the cumulative distribution function of \eqn{e} and \code{p5} and \code{p95} are known. This function helps configure a prior distribution over \eqn{\sigma^{-2}} which reflects this prior belief. Specifically, let \eqn{\Lambda_{\alpha,\beta}} be the cumulative distribution function of the Gamma distribution with parameters \eqn{\alpha} and \eqn{\beta}. Then this function returns the discrepancy 
+#' @details Assume that in our model there is an error term (for example, observation error) \eqn{e \sim \mathcal{N}(0,\sigma^2)} and we are required to estimate the precision, \eqn{\sigma^{-2}}. Assume further that we have sufficient prior knowledge to know that \eqn{F_e(0.05)} = \code{p5} and \eqn{F_e(0.95)} = \code{p95}, where \code{F_e} is the cumulative distribution function of \eqn{e} and \code{p5} and \code{p95} are known. This function helps configure a prior distribution over \eqn{\sigma^{-2}} which reflects this prior belief. Specifically, let \eqn{\Lambda_{\alpha,\beta}} be the cumulative distribution function of the Gamma distribution with parameters \eqn{\alpha} and \eqn{\beta}. Then this function returns the discrepancy
 #' \deqn{\frac{\Lambda_{\alpha,\beta}(0.05) - 1/(p95)^2}{1/(p95)^2}  + \frac{\Lambda_{\alpha,\beta}(0.95) - 1/(p5)^2}{1/(p5)^2}}
-#' 
+#'
 #' For example, we can see how representative a Gamma distribution over the precision with shape and rate parameters in \code{pars} is of our prior belief that \code{p5} and \code{p95} are 1 and 5, respectively, by calling \code{Findalphabeta_gamma(pars,1,5)}. This function can hance be passed to an optimisation routine to find better values for \code{pars}.
 #' @keywords Gamma distribution, prior elicitation
 #' @export
 #' @examples
 #'
 #' require(actuar)
-#' # Find the Gamma distribution over the precision corresponding to the 
+#' # Find the Gamma distribution over the precision corresponding to the
 #' # prior belief of the error (1/sqrt(precision)) lying between p5=2, p95=5
 #' initpars <- c(5,0.1)
 #' hyp_pars <- optim(par=initpars,Findalphabeta_gamma, p5=1, p95=5)
