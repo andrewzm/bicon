@@ -1,13 +1,13 @@
 ---
 title: 'Bivariate conditional spatial models: Case study in Section 5'
-author: "Noel Cressie and Andrew Zammit-Mangion"
-date: "Thursday, October 29, 2015"
+author: "Andrew Zammit-Mangion and Noel Cressie"
+date: "Thursday, June 23, 2016"
 output:
   pdf_document:
     fig_caption: yes
 bibliography: Bibliography.bib
 header-includes: \usepackage{natbib}
-csl: apa.csl
+csl: elsevier-harvard.csl
 Extension: raw_tex
 vignette: >
   %\VignetteIndexEntry{Bivariate conditional spatial models: Case study in Section 5}
@@ -57,7 +57,7 @@ vignette: >
 
 ## Setting up
 
-As part of this vignette we will be needing part of the `INLA` package and installation instructions for this can be found on the [R-INLA homepage](http://www.r-inla.org/). Once this is installed we can load the required packages. As with the other vignette (simulation example in Section 3.2), we will also need `dplyr`, `tidyr`, and `Matrix` for core operations and `ggplot2`, `gridExtra`, `grid`, `extrafont` for plotting purposes. In addition, in this vignette we will need `maptools`, `mapproj`, and `RandomFields` that provides the data used in this problem. and the `verification` package that contains a handy routing for computing CRPSs. For parallel operations we will be requiring `foreach` and `doParallel` and possibly `doMPI` if an MPI backend is available.
+As part of this vignette we will be needing the `INLA` package for mesh construction, and installation instructions for this can be found on the [R-INLA homepage](http://www.r-inla.org/). Once this is installed we can load the required packages. As with the other vignette (simulation example in Section 3.2), we will also need `dplyr`, `tidyr`, and `Matrix` for core operations and `ggplot2`, `gridExtra`, `grid`, `extrafont` for plotting purposes. In addition, in this vignette we will need `maptools`, `mapproj`, and `RandomFields` that provides the data used in this problem, and the `verification` package that contains a handy routing for computing CRPSs. For parallel operations we will be requiring `foreach` and `doParallel` and possibly `doMPI` if an MPI backend is available.
 
 
 ```{r,message=FALSE,warning=FALSE}
@@ -219,7 +219,7 @@ The displacements (`h1`,`h2`) and the areas `areas` can then be used to construc
 
 ## Organising the observations
 
-In order to map the process to the observations we construct an incidence matrix, which contains a `1` wherever the observation coincides with a vertex on the triangulation and a `0` otherwise. The dimension of this incidence matrix is (`m1` + `m2`) $\times$ (`n1` + `n2`), where `m1`, `m2`, are the number of observations in $Z_1$, $Z_2$, respectively. Since in this problem we have collocated observations, we find the incidence matrix for one of the observations, $Z_1$, and then form the whole incidence matrix by simply carrying out `bdiag` (block diagonal) of the first matrix with itself. We find the points with which the observation locations coincide by using the function `left_join`, which returns an `NA` if no observation coincides with the vertex.
+In order to map the process to the observations we construct an incidence matrix, which contains a `1` wherever the observation coincides with a vertex on the triangulation and a `0` otherwise. The dimension of this incidence matrix is (`m1` + `m2`) $\times$ (`n1` + `n2`), where `m1`, `m2`, are the number of observations in $Z_1$, $Z_2$, respectively. Since in this problem we have co-located observations, we find the incidence matrix for one of the observations, $Z_1$, and then form the whole incidence matrix by simply carrying out `bdiag` (block diagonal) of the first matrix with itself. We find the points with which the observation locations coincide by using the function `left_join`, which returns an `NA` if no observation coincides with the vertex.
 
 ```{r}
 mesh_locs <- data.frame(lon=mesh_locs[,1],lat=mesh_locs[,2])        ## mesh locations
@@ -247,11 +247,11 @@ append_theta <- function(theta,model_num) {
 }
 ```
 
-Next, we require a function that, given the parameter vector `theta` and the model number `model_num`, returns the required matrices and vectors used in fitting. These are the process covariance matrix
+Next, we require a function that, given the parameter vector `theta` and the model number `model_num`, returns the required matrices and vectors used in fitting. These are the matrices
 \begin{equation}\label{eqn:cov-matrix}
-\cov\left( (\Yvec_1^\T, \Yvec_2^\T)^\T\right) =  \begin{bmatrix}\bSigma_{11} & \bSigma_{11}\bB^\T \\ \bB \bSigma_{11} & \bSigma_{2\mid 1}+\bB\bSigma_{11}\bB^\T  \end{bmatrix},                                
+\textrm{\texttt{SY}} =  \begin{bmatrix}\bSigma_{11} & \bSigma_{11}\bB^\T \\ \bB \bSigma_{11} & \bSigma_{2\mid 1}+\bB\bSigma_{11}\bB^\T \end{bmatrix}, ~~\qquad \textrm{\texttt{So}} =  \begin{bmatrix}\tau_1^2I_m  & 0\\ 0 & \tau_2^2I_m  \end{bmatrix}.                                
 \end{equation}
-the observation error covariance matrix and the vector $\Zvec$ that, recall, is equal to $[\Zvec_1^\T,\Zvec_2^\T]^\T$ or $[\Zvec_2^\T,\Zvec_1^\T]^\T$, depending on the model number. If `whole_mesh` is `TRUE`, then the process covariance matrix is evaluated over the entire mesh (used for co-kriging at unobserved locations).
+We then add these two together to obtain the matrix $\textrm{cov}((\Yvec_1^\T,\Yvec_2^\T)^\T)$ which, recall that for this example is identical to $\textrm{cov}((\Zvec_1^\T,\Zvec_2^\T)^\T)$ since the data is equal to the process at the observed locations. If `whole_mesh` is `TRUE`, then the process covariance matrix is evaluated over the entire mesh (used for co-kriging at unobserved locations).
 
 ```{r}
 construct_mats <- function(theta,model_num,whole_mesh=F) {
@@ -411,7 +411,6 @@ if(LK_analysis) {
   fit_all_data <- fit_all_models(NULL)
   save(fit_all_data, file=paste0("../inst/extdata/temp_pressure/LK_fits.rda"))
 } else {
-  #load("../inst/extdata/temp_pressure/LK_fits.rda")
   load(system.file("extdata/temp_pressure","LK_fits.rda", package = "bicon"))
 }
 ```
@@ -609,7 +608,7 @@ results2 <- pred2 %>%                     # Take original (ungrouped) prediction
          CRPS = crps_wrapper(Z,mu_pred,sqrt(var_pred)))  # Find CRPS
 ```
 
-Next, we compare our results to the *shifted* parsimonious Mat{\'e}rn model, obtained by applying the method of @Li_2011 to the standard parsimonious model. First we define a function that constructs the matrices based on the usual parameters:
+Next, we compare our results to the *shifted* parsimonious Matérn model, obtained by applying the method of @Li_2011 to the standard parsimonious model. First we define a function that constructs the matrices based on the usual parameters:
 
 ```{r}
 sh_pars_mats <- function(theta) {
@@ -956,10 +955,10 @@ par1 <- fit_all_data[[4]]$par
 par2 <- fit_all_data[[8]]$par
 x <- seq(-3,3,length=100)
 XY <- expand.grid(h1=x,h2=x)
-XY$b1 <- bisquare_2d(h1=XY[,1],h2=XY[,2],delta=par1[10:11],r=par1[9],A=par1[8])
-XY$b2 <- bisquare_2d(h1=XY[,1],h2=XY[,2],delta=par2[10:11],r=par2[9],A=par2[8])
+XY$b1 <- bisquare_2d(h1=XY[,1],h2=XY[,2],delta=par1[11:12],r=par1[10],A=par1[9])
+XY$b2 <- bisquare_2d(h1=XY[,1],h2=XY[,2],delta=par2[11:12],r=par2[10],A=par2[9])
 
-axes <- geom_line(data=data.frame(x=c(0,0,-5,5),y=c(-5,5,0,0),grp=c(1,1,2,2)),
+axes <- geom_line(data=data.frame(x=c(0,0,-3,3),y=c(-3,3,0,0),grp=c(1,1,2,2)),
                   aes(x,y,group=grp),colour="black") 
 library(scales)
 greys <- scale_fill_gradient(low="black",high="white")
@@ -989,7 +988,7 @@ Disp$corr <- foreach(i = 1:nrow(Disp),.combine="c") %dopar% {
 axes <- geom_line(data=data.frame(x=c(0,0,-4,4),y=c(-4,4,0,0),grp=c(1,1,2,2)),
                   aes(x,y,group=grp),colour="black") 
 corr_plot <- LinePlotTheme() + geom_tile(data=Disp,aes(h1,h2,fill=corr)) + axes + bluered +
-                          geom_point(data=data.frame(d1 = par1[10],d2 = par1[11]),
+                          geom_point(data=data.frame(d1 = par1[11],d2 = par1[12]),
                                      aes(d1,d2),pch=9,size=5,colour="yellow") +
                           coord_fixed(xlim=c(-2.5,2.5),ylim=c(-2.5,2.5))
 
