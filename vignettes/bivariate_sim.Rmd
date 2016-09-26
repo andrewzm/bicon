@@ -62,7 +62,9 @@ In this document we show the *R Software* [@R] code used to reproduce the result
 install_github("andrewzm/bicon") 
 ```
 
-In order to run this code, a few packages are needed. For the package versions used here, please refer to the end of the document. The first, `Matrix`, is needed for algebraic operations while `dplyr` and `tidyr` are needed for data manipulation.
+The package will take some time to download since all the results of Section 5 are dispatched with the package.
+
+In order to run this code, a few ther packages are needed. For the package versions used here, please refer to the end of the document. The first, `Matrix`, is needed for algebraic operations while `dplyr` and `tidyr` are needed for data manipulation.
 
 ```{r,message=FALSE}
 library(Matrix)
@@ -70,7 +72,7 @@ library(dplyr)
 library(tidyr)
 ```
 
-The other packages, listed below, are needed for plotting, and for arranging the figures into panels for publication.
+Other packages, listed below, are needed for plotting, and for arranging the figures into panels for publication.
 
 ```{r,message=FALSE}
 library(ggplot2)

@@ -1,7 +1,6 @@
 ---
 title: 'Bivariate conditional spatial models: Case study in Section 5'
-author: "Andrew Zammit-Mangion and Noel Cressie"
-date: "Thursday, June 23, 2016"
+author: "Noel Cressie and Andrew Zammit-Mangion"
 output:
   pdf_document:
     fig_caption: yes
@@ -58,7 +57,15 @@ vignette: >
 
 ## Setting up
 
-As part of this vignette we will be needing the `INLA` package for mesh construction, and installation instructions for this can be found on the [R-INLA homepage](http://www.r-inla.org/). Once this is installed we can load the required packages. As with the other vignette (simulation example in Section 3.2), we will also need `dplyr`, `tidyr`, and `Matrix` for core operations and `ggplot2`, `gridExtra`, `grid`, `extrafont` for plotting purposes. In addition, in this vignette we will need `maptools`, `mapproj`, and `RandomFields` that provides the data used in this problem, and the `verification` package that contains a handy routing for computing CRPSs. For parallel operations we will be requiring `foreach` and `doParallel` and possibly `doMPI` if an MPI backend is available.
+In this document we show the *R Software* [@R] code used to reproduce the results shown in Section 5 of @CressieZammit2015. The code for the application study in Section 3.2 is available in a separate document. Both these documents are available as vignettes in the package `bicon` which can be installed by first installing and loading the package `devtools` and then running
+
+```{r,eval=FALSE}
+install_github("andrewzm/bicon") 
+```
+
+The package will take some time to download since all the results of Section 5 are dispatched with the package.
+
+As part of this example we will be needing the `INLA` package for mesh construction, and installation instructions for this can be found on the [R-INLA homepage](http://www.r-inla.org/). Once this is installed we can load the required packages. As with the other document (simulation example in Section 3.2), we will also need `dplyr`, `tidyr`, and `Matrix` for core operations and `ggplot2`, `gridExtra`, `grid`, `extrafont` for plotting purposes. In addition, in this vignette we will need `maptools`, `mapproj`, and `RandomFields` (that provides the data used in this problem), and the `verification` package that contains a handy routing for computing CRPSs. For parallel operations we will be requiring `foreach` and `doParallel` and possibly `doMPI` if an MPI backend is available.
 
 
 ```{r,message=FALSE,warning=FALSE}
@@ -78,13 +85,13 @@ library(foreach)
 library(doParallel)
 ```
 
-Finally, we will also need the package `bicon` to facilitate some of the operations used here.
+Finally, we will also need the package `bicon` mentioned above.
 
-```{r,message=FALSE}
+```{r,message=FALSE,warning=FALSE}
 library(bicon)
 ```
 
-As detailed in @CressieZammit2015, we consider four models that vary only through the interaction function $b_o(h)$. Each model is given by
+As detailed in @CressieZammit2015, in this example we consider four models that vary only through the interaction function $b_o(h)$. The models are
 
 \begin{equation*}
 \begin{array}{ll}
@@ -94,10 +101,10 @@ As detailed in @CressieZammit2015, we consider four models that vary only throug
 \textrm{Model 4 (asymmetric dependence):} &b_o(\h) \equiv \left\{\begin{array}{ll} A\{1 - (\|\h - \Deltab\|/r)^2\}^2, & \| \h - \Deltab\| \le r \\ 0, & \textrm{otherwise}, \end{array} \right. 
 \end{array}
 \end{equation*}
-where $\Deltab = (\Delta_1, \Delta_2)^\T$ is a shift parameter vector that captures asymmetry, $r$ is the aperture parameter, and $A$ is the amplitude. In Models 3 and 4, $b_o(\h)$ is a shifted bisquare function in $\mathbb{R}^2$. The covariance functions $C_{11}(\cdot)$ and $C_{2|1}(\cdot)$ are Matérn covariance functions. For each model we also consider a \emph{reversed} dependence, where we switch $Y_2$ and $Y_1$. This gives us a total of eight models to fit and compare.
+where $\Deltab = (\Delta_1, \Delta_2)^\T$ is a shift parameter vector that captures asymmetry, $r$ is the aperture parameter, and $A$ is a scaling parameter. In Models 3 and 4, $b_o(\h)$ is a shifted bisquare function in $\mathbb{R}^2$. The covariance functions $C_{11}(\cdot)$ and $C_{2|1}(\cdot)$ are Matérn covariance functions. For each model we also consider a \emph{reversed} dependence, where we switch $Y_2$ and $Y_1$. This gives us a total of eight models to fit and compare.
 
 
-The first thing we do is set some options. is to indicate whether we want to run the full program. We use a flag `LOO_analysis` to indicate whether we want to run the leave-one-out cross-validation study (without re-fitting) while the flag `LK_analysis` indicates whether we want to carry out a standard likelihood fit of all 8 models using the entire dataset (requires about 30 minutes of computing time). In this vignette we set both flags to zero; the results are instead loaded from cache.
+First we set program options, indicating which parts of the program we want to run and which parts we want to skip, loading results from cache instead. The flag  `LK_analysis` indicates whether we want to carry out a standard likelihood fit of all 8 models using the entire dataset (requires about 30 minutes of computing time) and the flag `LOO_analysis` indicates whether we want to run the leave-one-out cross-validation study (without re-fitting). In this vignette we set both flags to zero; the results are instead loaded from cache. If you wish to run parts of the program from scratch, please omit or comment out any of the `save` commands encountered below.
 
 ```{r}
 ### Model choice
@@ -114,7 +121,7 @@ useMPI <- 0                                 ## MPI backend available?
 
 ## The data
 
-The data were made available through the package \texttt{RandomFields} and was studied at length in the paper of @Gneitingetal2010. We load the data and pre-process it as follows:
+The data were made available through the package \texttt{RandomFields} and was studied at length in the paper of @Gneitingetal2010. We first load the data.
 
 ```{r,eval=TRUE}
 data(weather,package = "RandomFields")
@@ -122,7 +129,7 @@ weather <- weather %>% data.frame()
 print(head(weather))
 ```
 
-The `weather` table contains four fields, with latitude, longitude, pressure forecasting errors and temperature forecasting errors for December 13, 2003 at 4 p.m. in the North American Pacific Northwest. Since pressure and temperature have different units, we find a scaling factor by taking the ratio of the variances of the two variates, and computing its square root:
+The `weather` table contains four fields, with latitude, longitude, pressure forecasting errors and temperature forecasting errors for December 13, 2003 at 4 p.m. in the North American Pacific Northwest. Since pressure and temperature have different units, we find a scaling factor by taking the ratio of the variances of the two variates, and computing its square root. We will use this factor to scale the pressure variable.
 
 ```{r}
 P_scale <- (var(weather$pressure)/var(weather$temperature)) %>%
@@ -137,37 +144,38 @@ form_Z <- function(model_num,scale=T) {
   Z1 <- matrix(weather$temperature)
   Z2 <- matrix(weather$pressure)
   if(scale) Z2 <- Z2 / P_scale # Change pressure to have similar scale
-  if(model_num > 4) {
+  if(model_num > 4) {          # Switch Z1 and Z2 
     temp <- Z1
     Z1 <- Z2
     Z2 <- temp
   }
-  Z <- rbind(Z1,Z2)
+  Z <- rbind(Z1,Z2)            # Concatenate
 }
 
-m1 <- m2 <- nrow(weather)
-m <- m1 + m2
-I_m1 <- Diagonal(m1) # identity matrix of size m1 x m1
+m1 <- m2 <- nrow(weather)   # Number of observations of Y1 and Y2
+m <- m1 + m2                # Total number of observations 
+I_m1 <- Diagonal(m1)        # Identity matrix of size m1 x m1
 ```
 
 ## Process discretisation
 
-We approximate the processes as a sum of elemental basis functions (tent functions) constructed on a triangulation. The triangulation is formed using the mesher in the `INLA` package, while we provide a tailored function `initFEbasis` which takes information from the INLA mesher and casts it into a `Mesh` object. We provide several methods associated with the `Mesh` class which will be useful for plotting later on. Importantly, the `Mesh` object also contains information on the areas of the elements in the Voronoi tesselation, which will be used to approximate the integrations.
+We approximate the processes as a sum of elemental basis functions (tent functions) constructed on a triangulation. The triangulation is formed using the mesher in the `INLA` package, while we provide a tailored function in the package `bicon`, `initFEbasis`, which takes information from the `INLA` mesher and casts it into a `Mesh` object. We provide several methods associated with the `Mesh` class which will be useful for plotting later on. Importantly, the `Mesh` object also contains information on the areas of the elements in the Voronoi tesselation, which will be used to approximate the integrations.
 
-```{r,warning=FALSE}
+```{r,warning=FALSE,message=FALSE}
 ### Construct mesh
-###------------
+###---------------
 mesh <- inla.mesh.2d(loc= weather[c("lon","lat")],
                      cutoff=0,
                      max.edge=0.75,offset = 4) ## Fine mesh
 mesh_locs <- mesh$loc[,1:2]
 
-## Compute distances as in Gneiting (2010)
+## Compute distances as in Gneiting (2010) -- great circle distances
 D <- as.matrix(RFearth2dist(as.matrix(mesh_locs)))
 Dvec <- as.double(c(D))
 Dobs <- as.matrix(RFearth2dist(as.matrix(weather[c("lon","lat")])))
 Dobsvec <- c(Dobs)
 
+## Cast into custom Mesh object
 Mesh <- initFEbasis(p = mesh_locs, 
                     t = mesh$graph$tv,
                     K = mesh$graph$vv)
@@ -190,16 +198,16 @@ Mesh <- initFEbasis(p = mesh_locs,
 We next establish the dimension of our grids. Since we will be evaluating $Y_1$ and $Y_2$ on the same grid, `n1` = `n2`.
 
 ```{r}
-### Process models
-###------------
+### Mesh sizes
+###-----------
 n1 <- nrow(mesh_locs)
 n2 <- nrow(mesh_locs)
 n <- n1 + n2
 ```
 
-As in the first vignette (simulation example in Section 3.2), we will approximate the integration using the rectangular rule. When using finite elements, this reduces to using the area of the Voronoi tessellation as the weight for the function values.
+As in the first document (simulation example in Section 3.2), we will approximate the integration using the rectangular rule. When using finite elements, this reduces to using the area of the Voronoi tessellation as integration weight.
 
-We first compute the vector of displacements $h$ which will be of length (`n2` $\times$ `n1`) and with each element associate an integration weight equal to the area of the Voronoi tessellation associated with the element:
+We first compute the vector of displacements $h$ which will be of length (`n2` $\times$ `n1`) and with each element associate an integration weight equal to the area of the Voronoi tessellation associated with the element.
 
 ```{r}
 ### Mesh integration points
@@ -214,24 +222,24 @@ h1_double <- as.double(h[,1])
 h2_double <- as.double(h[,2])
 ```
 
-The displacements (`h1`,`h2`) and the areas `areas` can then be used to construct the matrix `B` using the function `bisquare_B`.
+The displacements (`h1`,`h2`) and the areas `areas` will be used to construct the matrix `B` using the function `bisquare_B`.
 
 
 
 ## Organising the observations
 
-In order to map the process to the observations we construct an incidence matrix, which contains a `1` wherever the observation coincides with a vertex on the triangulation and a `0` otherwise. The dimension of this incidence matrix is (`m1` + `m2`) $\times$ (`n1` + `n2`), where `m1`, `m2`, are the number of observations in $Z_1$, $Z_2$, respectively. Since in this problem we have co-located observations, we find the incidence matrix for one of the observations, $Z_1$, and then form the whole incidence matrix by simply carrying out `bdiag` (block diagonal) of the first matrix with itself. We find the points with which the observation locations coincide by using the function `left_join`, which returns an `NA` if no observation coincides with the vertex.
+In order to map the process to the observations we construct an incidence matrix, which contains a `1` wherever the observation coincides with a vertex on the triangulation and a `0` otherwise. The dimension of this incidence matrix is (`m1` + `m2`) $\times$ (`n1` + `n2`), where `m1`, `m2`, are the number of observations in $Z_1$, $Z_2$, respectively. Since in this problem we have co-located observations, we find the incidence matrix for one of the observations, $Z_1$, and then form the whole incidence matrix by simply constructing a block diagonal matrix (using `bdiag`). We find the points with which the observation locations coincide by using the function `left_join`, which returns an `NA` if no observation coincides with the vertex.
 
 ```{r}
-mesh_locs <- data.frame(lon=mesh_locs[,1],lat=mesh_locs[,2])        ## mesh locations
+mesh_locs <- data.frame(lon=mesh_locs[,1],lat=mesh_locs[,2])      ## mesh locations
 idx <- which(!(is.na(left_join(mesh_locs,weather)$temperature)))  ## index of coincidence
 C1 <- sparseMatrix(i=1:m1,j=idx,x=1,dims=c(m1,n1))  ## incidence matrix of Z1
-C <- bdiag(C1,C1)       ## incidence matrix
+C <- bdiag(C1,C1)                                   ## incidence matrix
 ```
 
 ## Maximum likelihood estimation
 
-Since the optimisation algorithm requires a parameter vector of the same length (irrespective of the model number) we first define a function `append_theta` that takes the parameter vector associated with the model in question and appends it so it is of the required size (in this case of length 11)
+Since the optimisation algorithm requires a parameter vector of the same length (irrespective of the model number) we first define a function `append_theta` that takes the parameter vector associated with the model in question and appends it so it is of the required size (in this case of length 11).
 
 ```{r,message=F}
 append_theta <- function(theta,model_num) {
@@ -264,7 +272,7 @@ construct_mats <- function(theta,model_num,whole_mesh=F) {
   
   if(model_num %in% c(3,4,7,8)) {
     B <- theta[9]*bisquare_B(h1_double,h2_double,
-                             delta=theta[11:12], # Automatically zero for Model with no shift
+                             delta=theta[11:12], # Zero for Model with no shift
                              r=theta[10],
                              n1 = n1,
                              n2 = n2,
@@ -312,7 +320,7 @@ construct_mats <- function(theta,model_num,whole_mesh=F) {
 }
 ```
 
-Now we're in place to define the log-likelihood function. This is the usual Gaussian log-likelihood function. In the function we allow the dropping of certain observations for cross-validation purposes. The indices of the observations we wish to drop are stored in the parameter `i`.
+Now we're in place to define the log-likelihood function. This is the usual Gaussian log-likelihood function. In the function we allow the dropping of certain observations for cross-validation purposes. The indices of the observations we wish to drop are stored in the parameter `i`. If `i = NULL` then no observation are dropped. This argument is useful for cross-validation.
 
 ```{r}
 loglik_Model <- function(theta,model_num,i=NULL) {
@@ -331,6 +339,7 @@ loglik_Model <- function(theta,model_num,i=NULL) {
 
   theta <- append_theta(theta,model_num)
   
+  ## Hard constraints on parameters
   if(theta[1] <= 0 |  theta[2] <= 0 | theta[3] <= 0 | 
      theta[4] <= 0 | theta[5] <= 0.001 | theta[6] <= 0.001 | 
      theta[7] <= 0.05 | theta[8] <= 0.05 | theta[10] < 0.0005) {
@@ -380,12 +389,12 @@ optim_loglik <- function(par,model_num, i = NULL){
 }
 ```
 
-The last function we need to define is one that fits all the models, possibly with a set of observations in `i` removed. Note that in the function we first fit Model 1 using realistic starting values and store the results in `fit.Model1`, and then fit the reversed version (with pressure as $Y_1$) and store that in `fit.Model1_rev`. Model 2 is then fit using the results of Model 1 as starting values. Model 3 uses the maximum likelihood estimates of Model 2 and so on. The reversed version of Model 2 uses the results of the reversed version of Model 1 as starting parameters and so on.
+The last function we need to define is one that fits all the models, possibly with a set of observations in `i` removed. Below, in the function `fit_all_models`, we first fit Model 1 using realistic starting values and store the results in `fit.Model1`, and then fit the reversed version (with pressure as $Y_1$) and store that in `fit.Model1_rev`. Model 2 is then fit using the estimates of Model 1 as starting values. Model 3 uses the maximum likelihood estimates of Model 2, and so on. The reversed version of Model 2 uses the results of the reversed version of Model 1 as starting values and so on.
 
 ```{r}
 fit_all_models <- function(i) {
-  fit.Model1     <- optim_loglik(par=c(0.01,1,5,15,0.01,0.01,0.6,1.5),   model_num=1, i = i)
-  fit.Model1_rev <- optim_loglik(par=c(1,0.01,15,5,0.01,0.01,1.5,0.6),   model_num=5, i = i)
+  fit.Model1     <- optim_loglik(par=c(0.01,1,5,15,0.01,0.01,0.6,1.5),model_num=1, i = i)
+  fit.Model1_rev <- optim_loglik(par=c(1,0.01,15,5,0.01,0.01,1.5,0.6),model_num=5, i = i)
   fit.Model2     <- optim_loglik(par=c(fit.Model1$par,-0.2),    model_num=2, i = i)
   fit.Model2_rev <- optim_loglik(par=c(fit.Model1_rev$par,-0.2),model_num=6, i = i)
   fit.Model3     <- optim_loglik(par=c(fit.Model2$par,0.1),     model_num=3, i = i)
@@ -407,7 +416,7 @@ fit_all_models <- function(i) {
 With all functions in place we now call `fit_all_data <- fit_all_models(NULL)`. All this does is fit all the models using all the observations (since `i = NULL`). If `LK_analysis = 1` then this is done from scratch (takes about 30 minutes), otherwise the data is loaded from cache.
 
 ```{r}
-## First we carry out the analysis with all data in
+## First we carry out the analysis with all data
 if(LK_analysis) {
   fit_all_data <- fit_all_models(NULL)
   save(fit_all_data, file=paste0("../inst/extdata/temp_pressure/LK_fits.rda"))
@@ -416,7 +425,7 @@ if(LK_analysis) {
 }
 ```
 
-The log-likelihoods and AICs given by our fit are given in the table below. Note that Model 5 is Model 1 reversed (i.e., with pressure as $Y_1$), Model 6 is Model 2 reversed and so on.
+The log-likelihoods and AICs given by our fit are given in the table below. Note that Model 5 is Model 1 reversed (i.e., with pressure as $Y_1$), Model 6 is Model 2 reversed, and so on.
 
 ```{r}
 print("Log-likelihood for all models trained with complete dataset")
@@ -426,7 +435,7 @@ sapply(fit_all_data,function(x) x$value)*2 + 2*c(8,9,10,12) ## AIC
 
 The parameters are listed below (the output is in LaTeX for direct use in paper). Note that since `P_scale` was used to put pressure on the same scale as temperature, we scale the fitted marginal standard deviation of the pressure fields so that they are on the original scale.
 
-```{r}
+```{r,results='hide'}
 print("Estimated parameters for all models")
 par_est <- plyr::rbind.fill(sapply(fit_all_data,function(x) data.frame(t(x$par))))
 par_est1 <- par_est[1:4,]
@@ -476,7 +485,7 @@ cokrige <- function(X,i=NULL) {
 
 Below we predict at all the mesh locations using Model 1 and Model 4. First we construct the required matrices and store them in `X1` and `X4`. Then we carry out cokriging and add the mean predictions to the mesh.
 
-```{r}
+```{r,message=FALSE}
 X1 <- construct_mats(theta = append_theta(fit_all_data[[1]]$par,model_num = 1),
                      model_num = 1,whole_mesh = T)
 X4 <- construct_mats(theta = append_theta(fit_all_data[[4]]$par,model_num = 4),
@@ -490,9 +499,9 @@ Mesh["y2_Model1"] <- ALL1$mu_pred[-(1:n1)]
 Mesh["y2_Model4"] <- ALL4$mu_pred[-(1:n1)]  
 ```
 
-## LOO Analysis
+## Leave-one-out cross-validation
 
-Unlike @Gneiting_2005, here we carry out leave-one-out cross validation (LOOCV) without re-fitting the model each time. If we have an MPI cluster available we carry out the LOOCV over MPI, otherwise we parallelise using the machine's multiple cores. The two loops below iterate over the observations and models.
+Unlike @Gneitingetal2010, here we carry out leave-one-out cross validation (LOOCV) without re-fitting the model each time. If we have an MPI cluster available we carry out the LOOCV over MPI, otherwise we parallelise using the machine's multiple cores. The two loops below iterate over the observations and models.
 
 ```{r}
 ## Now we do a LOO analysis
@@ -545,71 +554,12 @@ If we decided not to run the LOOCV, we load the results from cache.
 ```{r}
 if(!LOO_analysis) {
   load(system.file("extdata/temp_pressure/all_predictions.rda", package = "bicon"))
-  #load("../inst/extdata/temp_pressure/all_predictions.rda")
 }
 ```
 
-## Displaying and plotting results 
+## The shifted parsimonious Matérn model
 
-The following code is only documented in-line since it just involves data manipulation for obtaining the results shown in the paper. For verification we find the mean absolute error (MAE), the root mean-squared prediction error (RMSPE) and the continuous probability rank score (CRPS) as described by @Gneiting_2005.
-
-```{r,message=FALSE}
-### Analyse results
-
-## put data set into long format
-weather_long <- mutate(weather,loc_num = 1:nrow(weather)) %>%
-  mutate(sum_D = apply(Dobs,1,function(x) sum(sort(x)[1:2]))) %>%
-  gather(process,z,temperature,pressure,convert = TRUE)
-
-## Utility wrapper around the crps function
-crps_wrapper <- function(Z,mu,sd) {
-  crps(Z,cbind(mu,sd))$crps
-}
-
-sanitise_results <- function(pred) {
-    ## put data set into long format
-    pred2 <- mutate(pred,                                           # Take our LOOCV results
-                process = ifelse((model_num < 5 & i <= m1) |    # Assign process name to row
-                                   (model_num >=5 & i >  m1) ,
-                                 "temperature",
-                                 "pressure"),
-                loc_num = ((i-1) %% m1)+1) %>%                  # Assign loc ID
-  left_join(weather_long) %>%                                   # Join up with data
-  dplyr::select(-i,-z)                                          # Remove unwanted columns
-
-    results <- pred2 %>%                                    # Take the predictions
-    group_by(process,model_num) %>%                       # Group by process and model
-    summarise(MAE = mean(abs(mu_pred - Z)),               # Find MAE
-              MAE_se = sd(mu_pred - Z)/sqrt((m1-1)),      # Find MAE standard error
-              Bias = mean(mu_pred - Z),                   # Find mean bias
-              Bias_se = sd(mu_pred - Z)/sqrt((m1-1)),     # Find bias standard error
-              Bias_norm = mean((mu_pred - Z)/sqrt(var_pred)), # Find mean normalised bias
-              RMSPE = sqrt(mean((mu_pred - Z)^2)),            # Find RMSPE
-              CRPS = mean(crps_wrapper(Z,mu_pred,sqrt(var_pred))),   # Find CRPS
-              CRPS_se = sd(crps_wrapper(Z,mu_pred,sqrt(var_pred)))/sqrt(m1-1))  # Find CRPS se
-
-    results
-}
-results <- sanitise_results(pred)
-print(results)
-
-## Deprecated:
-pred2 <- mutate(pred,                                           # Take our LOOCV results
-                process = ifelse((model_num < 5 & i <= m1) |    # Assign process name to row
-                                   (model_num >=5 & i >  m1) ,
-                                 "temperature",
-                                 "pressure"),
-                loc_num = ((i-1) %% m1)+1) %>%                  # Assign loc ID
-  left_join(weather_long) %>%                                   # Join up with data
-  dplyr::select(-i,-z)  
-results2 <- pred2 %>%                     # Take original (ungrouped) predictions
-   mutate(MAE = abs(mu_pred - Z),          # Find MAE of each obs
-         Bias = mu_pred - Z,               # Find bias of each obs
-         SR = (mu_pred - Z)/sqrt(var_pred),  # Find normalised residual
-         CRPS = crps_wrapper(Z,mu_pred,sqrt(var_pred)))  # Find CRPS
-```
-
-Next, we compare our results to the *shifted* parsimonious Matérn model, obtained by applying the method of @Li_2011 to the standard parsimonious model. First we define a function that constructs the matrices based on the usual parameters:
+In this section we repeat the above analysis for the *shifted* parsimonious Matérn model, obtained by applying the method of @Li_2011 to the standard parsimonious model. First we define a function that constructs the matrices based on the usual parameters.
 
 ```{r}
 sh_pars_mats <- function(theta) {
@@ -620,9 +570,6 @@ sh_pars_mats <- function(theta) {
     tot_D <- as.matrix(RFearth2dist(as.matrix(X)))
     D12 <- tot_D[-(1:m1),1:m1]
     D21 <- t(D12)
-    
-    #  Dobs <- as.matrix(RFearth2dist(as.matrix(weather[,3:4])))
-    #  Dobsvec <- c(Dobs)
     
     sigma2_21 <- sqrt(theta[9] * theta[10])*theta[6]
     SY11 <- makeS(r=Dobsvec,var= theta[9],kappa = theta[3],nu=theta[4])  
@@ -637,7 +584,7 @@ sh_pars_mats <- function(theta) {
 }
 ```
 
-Next, we define the likelihood funciton; note that the parameter definitions for the parsimonious Mat{\'e}rn are different than for the conditional approach:
+Next, we define the likelihood funciton; note that the parameter definitions for the parsimonious Matérn are different than for the conditional approach:
 
 ```{r}
 loglik_sh_pars_model <- function(theta,shift=FALSE) {
@@ -705,10 +652,12 @@ if(Shifted_Pars_estimation) {
     load(system.file("extdata/temp_pressure","Shifted_Pars_est_results.rda", package = "bicon"))
 }
 
-print(paste0("Log-lik. and AIC of shifted parsimonious Matern are -",
-             optim_est_sh_pars$value,
-             " and ",optim_est_sh_pars$value*2 + 20,
-             ", respectively.")) # 10 parameters
+
+print(paste0("Log-lik. of shifted parsimonious Matern is ",
+             optim_est_sh_pars$value))
+print(paste0("AIC of shifted parsimonious Matern is ",
+             optim_est_sh_pars$value*2 + 20)) # 10 parameters
+
 ```
 
 For co-kriging (for cross-validation) we follow the same approach as earlier:
@@ -725,13 +674,65 @@ pred_sh_pars <- foreach(i = 1:m1,.combine = "rbind") %do% {
                 X <- sh_pars_mats(theta = theta_lk)
                 cbind(cokrige(X=X,i=c(i,i+m1)),
                               model_num = 1)}
+```
+
+
+## Curing of results
+
+The following code is only documented in-line since it just involves data manipulation for obtaining the results shown in the paper. For verification we find the mean absolute error (MAE), the root mean-squared prediction error (RMSPE) and the continuous probability rank score (CRPS) as described by @Gneiting_2005.
+
+```{r,message=FALSE}
+### Analyse results
+
+## put data set into long format
+weather_long <- mutate(weather,loc_num = 1:nrow(weather)) %>%
+  mutate(sum_D = apply(Dobs,1,function(x) sum(sort(x)[1:2]))) %>%
+  gather(process,z,temperature,pressure,convert = TRUE)
+
+## Utility wrapper around the crps function
+crps_wrapper <- function(Z,mu,sd) {
+  crps(Z,cbind(mu,sd))$crps
+}
+
+sanitise_results <- function(pred) {
+    ## put data set into long format
+    pred2 <- mutate(pred,                                     # Take our LOOCV results
+                process = ifelse((model_num < 5 & i <= m1) |  # Assign process name to row
+                                   (model_num >=5 & i >  m1) ,
+                                 "temperature",
+                                 "pressure"),
+                loc_num = ((i-1) %% m1)+1) %>%                # Assign loc ID
+  left_join(weather_long) %>%                                 # Join up with data
+  dplyr::select(-i,-z)                                        # Remove unwanted columns
+
+    results <- pred2 %>%                                  # Take the predictions
+    group_by(process,model_num) %>%                       # Group by process and model
+    summarise(MAE = mean(abs(mu_pred - Z)),               # Find MAE
+              MAE_se = sd(mu_pred - Z)/sqrt((m1-1)),      # Find MAE standard error
+              Bias = mean(mu_pred - Z),                   # Find mean bias
+              Bias_se = sd(mu_pred - Z)/sqrt((m1-1)),     # Find bias standard error
+              Bias_norm = mean((mu_pred - Z)/sqrt(var_pred)), # Find mean normalised bias
+              RMSPE = sqrt(mean((mu_pred - Z)^2)),            # Find RMSPE
+              CRPS = mean(crps_wrapper(Z,mu_pred,sqrt(var_pred))),   # Find CRPS
+              CRPS_se = sd(crps_wrapper(Z,mu_pred,sqrt(var_pred)))/  # Find CRPS se
+                sqrt(m1-1))  
+
+    results
+}
+results <- sanitise_results(pred)
+print(results)
+```
+
+We next do the same for the shifted parsimonious Matérn model.
+
+```{r}
 ## Extract our results
-sh_pars_results <- sanitise_results(pred_sh_pars) %>%          # Only consider models with Y1 temp. 
+sh_pars_results <- sanitise_results(pred_sh_pars) %>%   # Only consider models with Y1 temp. 
                   dplyr::select(model_num,MAE,RMSPE,CRPS) 
 sh_pars_results$model_num <- "Shifted_Pars"
 ```
 
-For completeness we also carry out LOOCV on the parsimonious and full Matérn models using the `RandomFields` package. This closely follows the approach illustrated in @Schlachter_2015.
+For completeness we also carry out LOOCV on the (unshifted) parsimonious and full Matérn models using the `RandomFields` package. This closely follows the approach illustrated in @Schlachter_2015.
 
 ```{r}
 Dist.mat <- as.vector(RFearth2dist(as.matrix(weather[, 3:4])))   # Compute distances
@@ -745,10 +746,10 @@ if(RF_estimation) {
                                 cdiag = c(NA, NA), rhored = NA)
   RFpars <- RFfit(pars.model, distances = Dist.mat, dim = 3, data = PT)  # fit model
   print(RFpars)
-  CVresults.pars <- RFcrossvalidate(RFpars,                # carry out CV 
+  CVresults.pars <- RFcrossvalidate(RFpars,              # carry out CV 
                        x = as.matrix(weather[, 3:4]), 
                        data = PT, 
-                       full = TRUE)                        # on all the data (no re-fitting)
+                       full = TRUE)                      # on all the data (no re-fitting)
   
   ## Full Matern model
   whole.model <- nug + RMbiwm(nudiag = c(NA, NA), nured = NA,
@@ -760,16 +761,16 @@ if(RF_estimation) {
                        full = TRUE)
   
   ## cache results
-  save(CVresults.pars,RFpars,CVresults.whole,RFwhole,file = "../inst/extdata/temp_pressure/RF_CV_results.rda")
+  save(CVresults.pars,RFpars,CVresults.whole,RFwhole,
+       file = "../inst/extdata/temp_pressure/RF_CV_results.rda")
 
 } else {
   ## otherwise load
-  #load("../inst/extdata/temp_pressure/RF_CV_results.rda")
   load(system.file("extdata/temp_pressure","RF_CV_results.rda", package = "bicon"))
 }
 ```
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 ## Combine results into one long data frame
 RFpred2 <- rbind(data.frame(Z = weather$pressure,
                               mu_pred = CVresults.pars$`user's model`$predicted[,1],
@@ -834,7 +835,19 @@ print(xtable::xtable(all_results,digits=3),
 ```
 
 
-```{r}
+```{r,echo=FALSE,eval=FALSE}
+
+## Deprecated:
+pred2 <- mutate(pred,                                           # Take our LOOCV results
+                process = ifelse((model_num < 5 & i <= m1) |    # Assign process name to row
+                                   (model_num >=5 & i >  m1) ,
+                                 "temperature",
+                                 "pressure"),
+                loc_num = ((i-1) %% m1)+1) %>%                  # Assign loc ID
+  left_join(weather_long) %>%                                   # Join up with data
+  dplyr::select(-i,-z)  
+
+
 best_performing <- pred2 %>%
   filter(model_num %in% 1:4) %>% 
   group_by(lon,lat,process) %>%
@@ -848,7 +861,7 @@ best_summary <- group_by(best_performing,process,best_model_MAE) %>%
 ```
 
 
-```{r,fig.cap='QQ plots and bar charts illustrating the number of times each model does best at different spatial locations',fig.width=20,out.width='16cm'}
+```{r,fig.cap='QQ plots and bar charts illustrating the number of times each model does best at different spatial locations',fig.width=20,out.width='16cm',echo=FALSE,eval=FALSE}
 if(show_figs) {
   
   g1 <- LinePlotTheme() + 
@@ -881,12 +894,15 @@ table(best_performing$best_model_MAE)
 table(best_performing$best_model_CRPS)
 ```
 
-```{r,fig.width=10,fig.cap=' State boundaries and province boundaries of a region of the U.S.A. and Canada (dark solid lines), with the domain of interest enclosed by a bounding polygon (dashed line). The irregular triangular grid used for discretizing $D$ (light solid lines) and the observation locations given by $D^O$ (dots) are also shown. The discretized spatial domain $D^L$ consists of the vertices of the triangular grid.'}
+## Plotting
+
+The rest of the code is devoted to plotting. Since this is terse, we do not discuss it. It relies on knowledge of the packages ``ggplot2``, ``dplyr``, and ``tidyr``, the latter needed for putting the data into an appropriate format. 
+
+
+```{r,fig.width=10,fig.cap=' State boundaries and province boundaries of a region of the U.S.A. and Canada (dark solid lines), with the domain of interest enclosed by a bounding polygon (dashed line). The irregular triangular grid used for discretizing $D$ (light solid lines) and the observation locations given by $D^O$ (dots) are also shown. The discretized spatial domain $D^L$ consists of the vertices of the triangular grid.',message=FALSE,warning=FALSE}
 # Load shapefiles
 shape1 <- system.file("extdata", "cb_2013_us_state_5m.shp", package = "bicon")
 shape2 <- system.file("extdata", "Canada_provinces.SHP", package = "bicon")
-#shape1 <- "../inst//extdata//cb_2013_us_state_5m.shp"
-#shape2 <- "../inst//extdata//Canada_provinces.SHP"
 US_States <- maptools::readShapeSpatial(shape1)
 Ca_States <- maptools::readShapeSpatial(shape2)
 
@@ -896,8 +912,8 @@ Ca_States_fort <- fortify(Ca_States) %>% mutate( id= as.numeric(id)+100)
 US_State_names <- data.frame(Name = US_States$NAME, id = 0:(length(US_States$NAME)-1))
 Ca_State_names <- data.frame(Name = Ca_States$NAME, id = 0:(length(Ca_States$NAME)-1) + 100)
 
-US_States_fort <- left_join(US_States_fort,US_State_names)
-Ca_States_fort <- left_join(Ca_States_fort,Ca_State_names)
+US_States_fort <- left_join(US_States_fort,US_State_names,by="id")
+Ca_States_fort <- left_join(Ca_States_fort,Ca_State_names,by="id")
 
 All_States <- rbind(US_States_fort,Ca_States_fort) %>% 
   filter(Name %in% c("British Columbia","Alberta",
@@ -945,7 +961,7 @@ g2M1 <- plot_interp(Mesh,"y2_Model1",150,max=500,min=-500,leg_title="Pa") %>%
 g2M4 <- plot_interp(Mesh,"y2_Model4",150,max=500,min=-500,leg_title="Pa") %>%
   meshplot(include_obs = 0L)
 if(show_figs) {
-  plot(arrangeGrob(g1M1,g1M4,g2M1,g2M4,ncol=2))
+  grid.arrange(g1M1,g1M4,g2M1,g2M4,ncol=2)
 }
 
 ```
@@ -968,7 +984,7 @@ g1 <- LinePlotTheme() + geom_tile(data=XY,aes(h1,h2,fill=b1)) +
   greys + axes + coord_fixed() +ggtitle("Model 4")
 g2 <- LinePlotTheme() + geom_tile(data=XY,aes(h1,h2,fill=b2)) + 
   axes + greys + coord_fixed() +ggtitle("Model 8")
-if(show_figs) plot(arrangeGrob(g1,g2,nrow=1))
+if(show_figs) grid.arrange(g1,g2,nrow=1)
 ```
 
 ```{r,fig.cap='Correlation between interpolated gridded maps of temperature and pressure as a function of displacement of the temperature field in latitude/longitude degrees, h. The yellow symbol indicates the maximum-likelihood estimate of the shift parameter with Model 4.'}
@@ -1000,21 +1016,13 @@ if(print_figs) ggsave(corr_plot,
 ```
 
 
-```{r}
-#delta <- 0.2
-#x_grid<- seq(-5,5,by=delta)
-#y_grid <- seq(-5,5,by=delta)
+```{r,fig.cap="The correlation and cross-correlation functions estimated using Model 4, depicted as a function of displacement $h$ in degrees longitude/latitude, at the location $\\svec = (-123^\\circ,45^\\circ)$. Contour lines of correlation are in intervals of $0.2$.",fig.width=12,fig.height=12}
 delta <- 0.25
 x_grid<- seq(-131,-115,by=delta)
 y_grid <- seq(40,50,by=delta)
 grid_locs <- expand.grid(x = x_grid, y = y_grid) %>% as.matrix()
-
-# D_grid <- as.matrix(dist(grid_locs))
 D_grid <- as.matrix(RFearth2dist(grid_locs))
 Dvec_grid <- as.double(c(D_grid))
-
-# Dvec_grid <- fields::rdist(grid_locs,matrix(c(0,0),1,2))
-# h_grid <- t(t(grid_locs) -grid_locs[i,])
 
 n2_grid <- n1_grid <- nrow(grid_locs)
 h_grid <- matrix(0,n1_grid^2,2)
@@ -1041,9 +1049,7 @@ B <- theta[9]*bisquare_B(h_grid[,1],h_grid[,2],
   S22 <- S2_1 + Matrix::crossprod(chol(S11) %*% t(B))
   S22 <- S22 + theta[2]^2*diag(nrow(S22))
 
-#centre_node <- which(grid_locs[,1] == 0 & grid_locs[,2] == 0)
 centre_node <- which(grid_locs[,1] == -123 & grid_locs[,2] == 45)
-# h_centre <- t(t(grid_locs) -c(0,0))
 h_centre <- t(t(grid_locs) -c(-123,45))
 H <- data.frame(h1 = h_centre[,1],
                 h2 = h_centre[,2],
@@ -1065,6 +1071,9 @@ corr_fn_plot <- LinePlotTheme() + geom_tile(data=H,aes(h1,h2,fill=corr)) +
           scale_fill_gradient2(low="blue",high="red") + 
   coord_fixed(xlim=c(-4,4),ylim=c(-4.2,4.2))  +
     theme(panel.margin = grid::unit(3, "lines"))
+
+if(show_figs) print(corr_fn_plot)
+
 if(print_figs) ggsave(corr_fn_plot, 
                       filename = file.path(img_path,"T-P-cov.png"),
                       width=8,height=7,family="Arial") 
@@ -1077,7 +1086,7 @@ if(print_figs) {
 }
 ```
 
-```{r,out.width='12cm',fig.width=28,fig.height=16,fig.cap='A scatter plot of the kriging standard errors of $Y_1$ obtained with Model 4 against those obtained with Model 1 at each of the mesh vertices. The colour illustrates the difference between the two, with green denoting the higher standard error of Model 4 and purple the higher standard error of Model 1.' }
+```{r,out.width='12cm',fig.width=28,fig.height=16,fig.cap='A scatter plot of the kriging standard errors of $Y_1$ obtained with Model 4 against those obtained with Model 1 at each of the mesh vertices. The colour illustrates the difference between the two, with green denoting the higher standard error of Model 4 and purple the higher standard error of Model 1.',fig.align='center',message=FALSE,warning=FALSE}
 Mesh["M1T_errors"] <- sqrt(pmax(ALL1$var_pred,0))[1:n1]
 Mesh["M4T_errors"] <- sqrt(pmax(ALL4$var_pred,0))[1:n1]
 Mesh["diffT_errors"] <- Mesh["M1T_errors"] - Mesh["M4T_errors"]
@@ -1088,11 +1097,6 @@ std_diff <- (plot_interp(Mesh,"diffT_errors",150) +
                                     high=muted("magenta"),
                                     guide = guide_legend(title="diff (deg. C)"))) %>% 
               meshplot(include_obs = 1L)
-# std_diff <- (plot_interp(Mesh,"ratioT_errors",150) + 
-#                scale_fill_gradient(low="green", high="red",limits=c(0.77,1.5),
-#                                     guide =guide_legend(title="diff (deg. C)"))) %>% 
-#               meshplot(include_obs = 1L); std_diff
-
 
 X <- data.frame(M1_errors = Mesh["M1T_errors"],
                 M4_errors = Mesh["M4T_errors"])
@@ -1123,6 +1127,14 @@ if(print_figs) {
 
 ```
 
+
+## Package versions
+
+If you find that the code above is not reproducing the figures precisely, it is highly likely that this is due to some new, updated package implementing things differently. The package versions used to construct this document are listed below.
+
+```{r}
+sessionInfo()
+```
 
 
 ## References
