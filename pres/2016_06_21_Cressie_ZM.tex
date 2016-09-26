@@ -385,7 +385,7 @@ There are \textcolor{red}{no observations} on the first variable in the \textcol
 
 \begin{frame}
 \frametitle{Cokriging and kriging predictors}
-There are no observations on the first variable in the left-hand half of $D$, but \textcolor{red}{cokriging of $Y_1$ based on all observations} (\textcolor{blue}{blue dotted line}) captures the spatial variability over all of $D$ (true process is the \textbf{black line}).
+There are no observations on the first variable in the left-hand half of $D$, and kriging based only on $\Zvec_1$ does poorly there ({\bf \textcolor{orange}{orange dashed line}}). However, \textcolor{red}{cokriging of $Y_1$ based on all observations} ({\bf \textcolor{blue}{blue dotted line}}) captures the spatial variability over all of $D$. (The true process is the \textbf{black line}.)
 \vspace{-.5cm}
 \begin{center}
 \includegraphics[width=4in]{./sim_est.png}
@@ -632,7 +632,7 @@ Building blocks for the conditional approach: \textcolor{red}{Six} functions, $C
 \frametitle{Temperature- and pressure-forecast errors}
 
 \begin{itemize}
-\item Datatset: \textcolor{red}{Temperature-} and \textcolor{red}{pressure-forecast} errors at station locations in the Pacific Northwest of North America on December 18, 2003 at 4p.m. \citep{Gneitingetal2010}.
+\item Datatset: \textcolor{red}{Temperature-forecast errors} and \textcolor{red}{pressure-forecast errors} at station locations in the Pacific Northwest of North America on December 18, 2003 at 4p.m. \citep{Gneitingetal2010}.
 \item Data come from 157 measurement stations (co-located measurements).
 \item The pressure\hyp{}forecast error process, ($Y_2(\cdot)$), is highly dependent on the temperature\hyp{}forecast error process ($Y_1(\cdot)$).
 \item We fit \textcolor{red}{four models} and compare them using \red{cross-validation} and \textcolor{red}{AIC}:
@@ -652,7 +652,7 @@ Building blocks for the conditional approach: \textcolor{red}{Six} functions, $C
 \begin{frame}
 \frametitle{Discretisations}
 \begin{itemize}
-\item Consider a discretisation of $Y_1(\cdot)$ and $Y_2(\cdot)$; call the resulting $n$-dimensional ($n=2063$) vectors, $\Yvec_1$ and $\Yvec_2$, respectively, and define $\Yvec \equiv (\Yvec_1^{\prime},\Yvec_2^{\prime})'$. The 314-dimensional ($m=m_1+m_2=314$) data vector is $\Zvec \equiv (\Zvec_1^{\prime},\Zvec_2^{\prime})'$ at 157 locations:
+\item Consider a discretisation of $Y_1(\cdot)$ and $Y_2(\cdot)$; call the resulting $n$-dimensional ($n=2063$) vectors, $\Yvec_1$ and $\Yvec_2$, respectively, and define $\Yvec \equiv (\Yvec_1^{\prime},\Yvec_2^{\prime})'$. The 314-dimensional ($m=m_1+m_2=314$) data vector is $\Zvec \equiv (\Zvec_1^{\prime},\Zvec_2^{\prime})'$ co-located at 157 locations:
 \end{itemize}
 
 \vspace{-0.15in}
@@ -686,16 +686,16 @@ where $\{A_k:k=1,\ldots,2063\}$ are the polygonal-tessellation areas.
 \frametitle{Full model}
 
 We have \red{observations}, $O_q(s_i)$, and \red{forecasts}, $F_q(s_i)$, $q = 1,2$. The data are 
-$$Z_q(s_i)=Y_q(s_i)=F_q(s_i)-O_q(s_i)~(i =1,\dots,157; q = 1,2).$$ 
+$$Z_q(s_i)=Y_q(s_i)=F_q(s_i)-O_q(s_i)~\textrm{for}~i =1,\dots,157; q = 1,2.$$ 
 The data $Z_q$ and the process $Y_q$ at their respective locations are the same. 
 
 \begin{itemize}
-\item \textcolor{red}{\textbf{Data model}}:
+\item \textcolor{red}{{Data model}}:
 \begin{equation*}
 \Zvec_1 = \Dmat\Yvec_1, \qquad \Zvec_2 = \Dmat\Yvec_2,
 \end{equation*}
 where $\Dmat$ is a $157\times 2063$ \textcolor{red}{incidence matrix}.
-\item \textcolor{red}{\textbf{Process model}}:
+\item \textcolor{red}{{Process model}}:
 \begin{equation*}
 \left.\begin{pmatrix} \Yvec_1 \\ \Yvec_2 \end{pmatrix}\right| \thetab \sim \mathcal{N}
 \left(
@@ -715,7 +715,7 @@ where $\Dmat$ is a $157\times 2063$ \textcolor{red}{incidence matrix}.
 \begin{frame}
 \frametitle{Maximum-likelihood estimation}
 \vspace{-.5cm}
-Assume $C_{11}(\cdot)$ and $C_{2|1}(\cdot)$ are equally smooth Mat{\'e}rn covariance functions with parameters ($\nu_{11}, \kappa_{11}, \sigma_{11}^2$) and ($\nu_{2|1},\kappa_{2|1},\sigma_{2|1}^2$), respectively. Notice how the log likelihood and the estimate for $A$ increase, while the AIC and the estimate for $\sigma_{2\mid 1}$ decrease overall, with the model number.
+Assume $C_{11}(\cdot)$ and $C_{2|1}(\cdot)$ are equally smooth Mat{\'e}rn covariance functions with parameters ($\nu_{11}, \kappa_{11}, \sigma_{11}^2$) and ($\nu_{2|1},\kappa_{2|1},\sigma_{2|1}^2$), respectively. Notice that as the model number increases, the log likelihood and the magnitude of $A$ increase, while the AIC and the estimate for $\sigma_{2\mid 1}$ decrease.
 \footnotesize
 
 \begin{tabular}{rrrrrrrrr}
@@ -741,30 +741,7 @@ Model 1 &  &  &  & & \red{$-$1276.77} & \red{2569.54} \\
 % ###################
 
 \begin{frame}
-\frametitle{Posterior mean field: Minimum temperature}
-
-\begin{figure}
-\includegraphics[width=3in]{Fig3b1.png}
-\end{figure}
-\vspace{-.5cm}
-Optimal (cokriging) map of predicted \textcolor{red}{temperature-forecast error}, $\E(\Yvec_1 \mid  \Zvec_1,\Zvec_2)$, in degrees Celsius (degC).
-\end{frame}
-
-% ###################
-
-\begin{frame}
-\frametitle{Posterior mean field: Maximum temperature}
-\begin{figure}
-\includegraphics[width=3in]{Fig3b2.png}
-\end{figure}
-\vspace{-.5cm}
-Optimal (cokriging) map of predicted \textcolor{red}{pressure-forecast error}, $\E(\Yvec_2 \mid  \Zvec_1,\Zvec_2)$, in Pascal (Pa).
-\end{frame}
-
-% ###################
-
-\begin{frame}
-\frametitle{Interaction function for Model 3}
+\frametitle{Correlation functions for Model 4}
 \vspace{-0.2in}
 \begin{figure}
 \includegraphics[width=2.5in]{Fig_cross_fns.png}
@@ -777,12 +754,48 @@ Optimal (cokriging) map of predicted \textcolor{red}{pressure-forecast error}, $
 
 
 \begin{frame}
+\frametitle{Predictions: Temperature-forecast error}
+
+\begin{figure}
+\includegraphics[width=3in]{Fig3b1.png}
+\end{figure}
+\vspace{-.5cm}
+Optimal (cokriging) map of predicted \textcolor{red}{temperature-forecast error}, $\E(\Yvec_1 \mid  \Zvec_1,\Zvec_2)$, in degrees Celsius (degC).
+\end{frame}
+
+% ###################
+
+\begin{frame}
+\frametitle{Predictions: Pressure-forecast error}
+\begin{figure}
+\includegraphics[width=3in]{Fig3b2.png}
+\end{figure}
+\vspace{-.5cm}
+Optimal (cokriging) map of predicted \textcolor{red}{pressure-forecast error}, $\E(\Yvec_2 \mid  \Zvec_1,\Zvec_2)$, in Pascal (Pa).
+\end{frame}
+
+% ###################
+
+\begin{frame}
+\frametitle{Summary of results}
+\vspace{-0.2in}
+
+\begin{itemize}
+\item In this application, \red{Model 4} considerably outperformed the linear model of coregionalisation and standard, asymmetric, bivariate geostatistical models (e.g., the parsimonious Mat{\'e}rn model) in terms of cross-validation performance and CRPS: \red{Asymmetry} is clearly present.
+\item \red{Computation time} for maximum-likelihood estimation was an order-of-magnitude greater for \red{Models 3 and 4} than for Models 1 and 2 (symmetric models with closed-form covariance functions).
+\item \red{Switching temperature with pressure} yielded worse fits and worse out-of-sample prediction performance: The \red{preferred direction} is clearly from temperature to pressure. That is, we model the \red{conditional distribution of pressure given temperature}, and not the other way around.
+\end{itemize}
+\end{frame}
+
+% ###################
+
+\begin{frame}
 \frametitle{Conclusions}
 \vspace{-.8cm}
 \begin{itemize}
-\item \textcolor{red}{Bivariate and multivariate spatial models} often appear in environmental studies. For convenience, one or more of these variables are often ``explained away'' prior to commencing a univariate spatial analysis. We wish to avoid this by providing a methodology for building flexible (e.g., no symmetry constraint; easy-to-verify nnd conditions) multivariate spatial models.
+\item \textcolor{red}{Bivariate and multivariate spatial models} often appear in environmental studies. For convenience, one or more of these variables are often ``explained away'' prior to commencing a univariate spatial analysis. Multivariate spatio-temporal modelling is a more principled approach for prediction in these situations.
 \item The \textcolor{red}{conditional approach} allows for a (very) flexible model class through the specification of integrable \textcolor{red}{interaction functions} that can be arbitrarily complex.
-\item One way to handle \textcolor{red}{non-Gaussian multivariate data} is as follows: A generalised linear model for the data model;  a transformed multivariate Gaussian process within the process model; and the \textcolor{red}{conditional approach} applied to the Gaussian process.
+\item There are several other applications (e.g., paleo-climate reconstruction) that would benefit from being \red{hierarchical}.
 \item \red{Reproducible code available} at \texttt{https://github.com/andrewzm/bicon}.
 \end{itemize}
 \end{frame}
