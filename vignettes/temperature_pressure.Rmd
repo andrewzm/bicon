@@ -7,7 +7,7 @@ output:
     fig_caption: yes
 bibliography: Bibliography.bib
 header-includes: \usepackage{natbib}
-csl: elsevier-harvard.csl
+csl: apa.csl
 Extension: raw_tex
 vignette: >
   %\VignetteIndexEntry{Bivariate conditional spatial models: Case study in Section 5}
@@ -54,6 +54,7 @@ vignette: >
 \newcommand{\Gau}{\mathrm{Gau}}
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\T}{{ \mathrm{\scriptscriptstyle T} }}
+\renewcommand{\figurename}{Fig.}
 
 ## Setting up
 
@@ -822,7 +823,7 @@ colnames(select_results) <- colnames(select_resultsRF) <- colnames(sh_pars_resul
 
 
 ## Join our results with those from RandomFields and the shifted parsimonious Matern
-all_results <- rbind(select_results,select_resultsRF,sh_pars_results) %>% 
+all_results <- rbind.data.frame(select_results,select_resultsRF,sh_pars_results) %>% 
     as.data.frame() %>% arrange(Process)
 
 ## Print the LaTeX table
