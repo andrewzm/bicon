@@ -56,15 +56,15 @@ vignette: >
 
 ## Setting up
 
-In this document we show the *R Software* [@R] code used to reproduce the results shown in Section 3.2 of @CressieZammit2015. The code for the application study in Section 5 is available in a separate document. Both these documents are available as vignettes in the package `bicon` which can be installed by first installing and loading the package `devtools` and then running
+In this document we show the *R Software* [@R] code used to reproduce the results shown in Section 3.2 of @CressieZammit2015. The code for the case study in Section 5 is available in a separate document.  For both studies, the package `bicon` is required. This package can be installed by first installing and loading the package `devtools`, and then running
 
 ```{r,eval=FALSE}
 install_github("andrewzm/bicon") 
 ```
 
-The package will take some time to download since all the results of Section 5 are dispatched with the package.
+The package will take some time to download since all the results of Section 5 are dispatched with the package. To install these documents as vignettes use the argument `build_vignettes = TRUE`.
 
-In order to run this code, a few ther packages are needed. For the package versions used here, please refer to the end of the document. The first, `Matrix`, is needed for algebraic operations while `dplyr` and `tidyr` are needed for data manipulation.
+In order to run this code, a few other packages are needed. For the package versions used here, please refer to the end of the document. The first, `Matrix`, is needed for algebraic operations while `dplyr` and `tidyr` are needed for data manipulation.
 
 ```{r,message=FALSE}
 library(Matrix)
@@ -72,7 +72,7 @@ library(dplyr)
 library(tidyr)
 ```
 
-Other packages, listed below, are needed for plotting, and for arranging the figures into panels for publication.
+Other packages, listed below, are needed for plotting and for arranging the figures into panels for publication.
 
 ```{r,message=FALSE}
 library(ggplot2)
@@ -82,7 +82,7 @@ library(extrafont)
 loadfonts()
 ```
 
-Finally, the package `bicon` provides the machinery for bivariate modelling using the conditional approach with (i) bisquare interaction functions and (ii) Matérn covariance functions for $C_{11}(\cdot)$ and $C_{2|1}(\cdot)$.
+Finally, the package `bicon` provides the machinery for bivariate modelling using the conditional approach with (i) a bisquare interaction function and (ii) Matérn covariance functions for $C_{11}(\cdot)$ and $C_{2|1}(\cdot)$.
 
 ```{r,message=FALSE,warning=FALSE}
 library(bicon)
@@ -99,7 +99,7 @@ show_figs <- 1               ## Show the figures in document
 print_figs <-  0             ## Print figures to file
 ```
 
-Now we set up the simulation domain. We choose $D = [-1,1]$, and a spacing $\eta_i = 0.01, i = 1,\dots,200$. We collect the grid information in a data frame `df`, to which extra columns will be added further on in the program. We also define `n1` as the number of grid cells for $\Yvec_1$ and `n2` as the number of grid cells for $\Yvec_2$. In this study, `n1` = `n2` = 200 and we define `n` = `n1` + `n2` = 400.
+Now we set up the simulation domain. We choose $D = [-1,1]$ and a spacing $\eta_i = 0.01, i = 1,\dots,200$. We collect the grid information in a data frame `df`, to which extra columns will be added further on in the program. We also define `n1` as the number of grid cells for $\Yvec_1$ and `n2` as the number of grid cells for $\Yvec_2$. In this study, `n1` = `n2` = 200, and we define `n` = `n1` + `n2` = 400.
 
 ```{r}
 ###---------------
@@ -145,7 +145,7 @@ sigmav <- 0.5       ## Observation error std
 
 ## Matrix construction and simulation
 
-After setting the required parameters, we now can construct the full covariance matrix $\bSigma$,
+After setting the required parameters, we now can construct the full covariance matrix
 $$
   \bSigma = \begin{bmatrix}\bSigma_{11} & \bSigma_{11}\bB^\T \\ \bB \bSigma_{11} & \bSigma_{2\mid 1}+\bB\bSigma_{11}\bB^\T  \end{bmatrix}.
 $$
@@ -163,7 +163,7 @@ H <- t(outer(df$s,df$s,FUN = "-"))             ## Find displacements
 B <- A*bisquare_1d(H,delta = delta,r = r)*ds   ## Find B
 ```
 
-Above, the function `bisquare_1d` is also provided in `bicon`. We can now construct the required covariance matrix as follows.
+The function `bisquare_1d` above is also provided in `bicon`. We can now construct the required covariance matrix as follows.
 ```{r}
 D <- abs(H)
 Dvec <- as.double(c(D))                 ## Find distances
@@ -175,7 +175,7 @@ Sigma <- makeSY(r = Dvec,
                 B = B)                ## Build covariance matrix
 ```
 
-The individual marginal and cross-covariance functions can then be illustrated by extracting individual rows from the block matrix $\Sigma$ corresponding to the location $s = 0$ (the mid-point of $D$).
+The individual marginal and cross-covariance functions can then be illustrated by extracting the individual rows from the full covariance matrix $\Sigma,$ corresponding to the location $s = 0$ (the mid-point of $D$).
 
 ```{r}
 Cov11 <- Sigma[n1/2,1:n1]
@@ -222,7 +222,7 @@ keep_Z2 <- 1:200   ## Keep Z2 everywhere
 
 ## Cokriging
 
-Since we are fixing both processes to have zero mean, cokriging of $Y_1(s_0), s_0 \in D$ proceeds through the *simple* cokriging equations. These are given through
+Since we are fixing both processes to have zero mean, cokriging of $Y_1(s_0),$, for $s_0 \in D,$ proceeds through the *simple* cokriging equations. These are given by
 
 $$
 \hat Y_1(\svec_0) \equiv \E(Y_1(\svec_0) \mid  \Zvec_1, \Zvec_2) = \begin{bmatrix} \cmat_{11}^\T & \cmat_{12}^\T \end{bmatrix}  \begin{bmatrix} \Cmat_{11} + \sigma^2_{\varepsilon_1} \Imat_{m_1} & \Cmat_{12} \\ \Cmat_{21} & \Cmat_{22} + \sigma^2_{\varepsilon_2} \Imat_{m_2} \end{bmatrix}^{-1}                                \begin{bmatrix} \Zvec_1 \\ \Zvec_2 \end{bmatrix},                                                               $$
@@ -239,10 +239,10 @@ In the following cokriging function, we require four input variables. These are:
 
 - `df`: The original dataframe with information on grid spacings, locations and observations.
 - `A`:  The amplitude of the bisquare function. If `A` = 0, then the two fields are independent.
-- `obs_ind`: A vector with values equal to 1 for observations which are kept, and 0 for observations which are omitted.
+- `obs_ind`: A vector with values equal to 1 for observations that are kept and equal to 0 for observations that are omitted.
 - `name`: The name to be associated with the cokriging results.
 
-The function first constructs the required $\bSigma$ (through `makeSY`), and then implements the above equations. Predictions and prediction errors are stored in the data frame `df`.
+The function first constructs the required $\bSigma$ (through `makeSY`), and then it implements the equations above. Predictions and prediction errors are stored in the data frame `df`.
 
 ```{r}
 ###--------------------
@@ -285,12 +285,12 @@ obs_ind <- c(keep_Z1,keep_Z2 + n1)
 
 We used the cokriging equations to implement three different predictors
 \begin{enumerate}
-\item Auto-kriging predictor  ($\widetilde \Yvec_1$): $A$ set to 0.
-\item Cokriging predictor under misspecified model ($\Yvec_1^\dagger$): $A$ and $r$ found using maximum likelihood with $\Delta$ fixed to zero.
-\item Cokriging predictor under true model ($\hat\Yvec_1$): $A$ and $r$ fixed to their true values.
+\item Kriging predictor using only data $Z_1$ ($\widetilde \Yvec_1$): $A$ set to 0.
+\item Cokriging predictor using data $Z_1$ and $Z_2$ under misspecified model ($\Yvec_1^\dagger$): $A$ and $r$ found using maximum likelihood with $\Delta$ fixed to zero.
+\item Cokriging predictor using data $Z_1$ and $Z_2$ under true model ($\hat\Yvec_1$): $A$ and $r$ fixed to their true values.
 \end{enumerate}
 
-Note that for predictor 1., cokriging with `A = 0` is identical to simple kriging on $Y_1$ using only $Z_1$, since under independence the system is *autokrigeable* [see @Wackernagel1995, p.149]. For predictor 2. we need to define the log-likelihood and find the maximum likelihood parameters using an optimisation routine (`optim` in `R`). This is given by the following code, following which the maximum likelihood parameters are stored in `non_symm_par`.
+Note that for predictor 1., cokriging with `A = 0` is identical to simple kriging on $Y_1$ using only data $Z_1$, since under independence the system is *autokrigeable* [see @Wackernagel1995, p.149]. For predictor 2., we need to define the log-likelihood and find the maximum likelihood parameters using an optimisation routine (`optim` in `R`). This is given by the following code, following which the maximum likelihood parameters are stored in `non_symm_par`.
 
 
 ```{r,message=FALSE,results='hide'}
@@ -469,7 +469,7 @@ if(print_figs) {
 
 ## Package versions
 
-If you find that the code above is not reproducing the figures precisely, it is highly likely that this is due to some new, updated package implementing things differently. The package versions used to construct this document are listed below.
+If the code above is not reproducing the figures precisely, it is highly likely that this is due to some new, updated package implementing things differently. The package versions used to construct this document are listed below.
 
 ```{r}
 sessionInfo()

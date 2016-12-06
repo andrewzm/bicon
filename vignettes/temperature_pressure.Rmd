@@ -57,15 +57,15 @@ vignette: >
 
 ## Setting up
 
-In this document we show the *R Software* [@R] code used to reproduce the results shown in Section 5 of @CressieZammit2015. The code for the application study in Section 3.2 is available in a separate document. Both these documents are available as vignettes in the package `bicon` which can be installed by first installing and loading the package `devtools` and then running
+In this document we show the *R Software* [@R] code used to reproduce the results shown in Section 5 of @CressieZammit2015. The code for the application study in Section 3.2 is available in a separate document. For both studies, the package `bicon` is required. This package can be installed by first installing and loading the package `devtools`, and then running
 
 ```{r,eval=FALSE}
 install_github("andrewzm/bicon") 
 ```
 
-The package will take some time to download since all the results of Section 5 are dispatched with the package.
+The package will take some time to download since all the results of Section 5 are dispatched with the package. To install these documents as vignettes use the argument `build_vignettes = TRUE`.
 
-As part of this example we will be needing the `INLA` package for mesh construction, and installation instructions for this can be found on the [R-INLA homepage](http://www.r-inla.org/). Once this is installed we can load the required packages. As with the other document (simulation example in Section 3.2), we will also need `dplyr`, `tidyr`, and `Matrix` for core operations and `ggplot2`, `gridExtra`, `grid`, `extrafont` for plotting purposes. In addition, in this vignette we will need `maptools`, `mapproj`, and `RandomFields` (that provides the data used in this problem), and the `verification` package that contains a handy routing for computing CRPSs. For parallel operations we will be requiring `foreach` and `doParallel` and possibly `doMPI` if an MPI backend is available.
+As part of this example we will be needing the `INLA` package for mesh construction, and installation instructions for this can be found on the [R-INLA homepage](http://www.r-inla.org/). Once this is installed we can load the required packages. As with the other document (Simulation example in Section 3.2), we will also need `dplyr`, `tidyr`, and `Matrix` for core operations and `ggplot2`, `gridExtra`, `grid`, `extrafont` for plotting purposes. In addition, in this vignette we will need `maptools`, `mapproj`, and `RandomFields` (that provides the data used in this problem), and the `verification` package that contains a handy routing for computing CRPSs. For parallel operations we will be requiring `foreach` and `doParallel` and possibly `doMPI` if an MPI backend is available.
 
 
 ```{r,message=FALSE,warning=FALSE}
@@ -101,7 +101,7 @@ As detailed in @CressieZammit2015, in this example we consider four models that 
 \textrm{Model 4 (asymmetric dependence):} &b_o(\h) \equiv \left\{\begin{array}{ll} A\{1 - (\|\h - \Deltab\|/r)^2\}^2, & \| \h - \Deltab\| \le r \\ 0, & \textrm{otherwise}, \end{array} \right. 
 \end{array}
 \end{equation*}
-where $\Deltab = (\Delta_1, \Delta_2)^\T$ is a shift parameter vector that captures asymmetry, $r$ is the aperture parameter, and $A$ is a scaling parameter. In Models 3 and 4, $b_o(\h)$ is a shifted bisquare function in $\mathbb{R}^2$. The covariance functions $C_{11}(\cdot)$ and $C_{2|1}(\cdot)$ are Matérn covariance functions. For each model we also consider a \emph{reversed} dependence, where we switch $Y_2$ and $Y_1$. This gives us a total of eight models to fit and compare.
+where $\Deltab = (\Delta_1, \Delta_2)^\T$ is a shift-parameter vector that captures asymmetry, $r$ is the aperture parameter, and $A$ is a scaling parameter. In Models 3 and 4, $b_o(\h)$ is a shifted bisquare function defined on $\mathbb{R}^2$. The covariance functions $C_{11}(\cdot)$ and $C_{2|1}(\cdot)$ are Matérn covariance functions. For each model we also consider a \emph{reversed} dependence, where we switch $Y_2$ and $Y_1$. This gives us a total of eight models to fit and compare.
 
 
 First we set program options, indicating which parts of the program we want to run and which parts we want to skip, loading results from cache instead. The flag  `LK_analysis` indicates whether we want to carry out a standard likelihood fit of all 8 models using the entire dataset (requires about 30 minutes of computing time) and the flag `LOO_analysis` indicates whether we want to run the leave-one-out cross-validation study (without re-fitting). In this vignette we set both flags to zero; the results are instead loaded from cache. If you wish to run parts of the program from scratch, please omit or comment out any of the `save` commands encountered below.
@@ -121,7 +121,7 @@ useMPI <- 0                                 ## MPI backend available?
 
 ## The data
 
-The data were made available through the package \texttt{RandomFields} and was studied at length in the paper of @Gneitingetal2010. We first load the data.
+The data were made available through the package \texttt{RandomFields} and analysed by @Gneitingetal2010. We first load the data.
 
 ```{r,eval=TRUE}
 data(weather,package = "RandomFields")
@@ -129,7 +129,7 @@ weather <- weather %>% data.frame()
 print(head(weather))
 ```
 
-The `weather` table contains four fields, with latitude, longitude, pressure forecasting errors and temperature forecasting errors for December 13, 2003 at 4 p.m. in the North American Pacific Northwest. Since pressure and temperature have different units, we find a scaling factor by taking the ratio of the variances of the two variates, and computing its square root. We will use this factor to scale the pressure variable.
+The `weather` table contains four fields, with latitude, longitude, pressure forecasting errors, and temperature forecasting errors for December 13, 2003 at 4 p.m. in the North American Pacific Northwest. Since pressure and temperature have different units, we find a scaling factor by taking the ratio of the sample variances of the two variates, and computing its square root. We will use this factor to scale the pressure variable.
 
 ```{r}
 P_scale <- (var(weather$pressure)/var(weather$temperature)) %>%
@@ -205,9 +205,9 @@ n2 <- nrow(mesh_locs)
 n <- n1 + n2
 ```
 
-As in the first document (simulation example in Section 3.2), we will approximate the integration using the rectangular rule. When using finite elements, this reduces to using the area of the Voronoi tessellation as integration weight.
+As in the first document (simulation example in Section 3.2), we will approximate the integration using the rectangular rule. When using finite elements, this reduces to using the areas of the Voronoi tessellation as integration weights.
 
-We first compute the vector of displacements $h$ which will be of length (`n2` $\times$ `n1`) and with each element associate an integration weight equal to the area of the Voronoi tessellation associated with the element.
+We first compute the vector of displacements $h$ which will be of length (`n2` $\times$ `n1`). Then, with each element we associate an integration weight equal to the area of the Voronoi tessellation of the element.
 
 ```{r}
 ### Mesh integration points
@@ -239,7 +239,7 @@ C <- bdiag(C1,C1)                                   ## incidence matrix
 
 ## Maximum likelihood estimation
 
-Since the optimisation algorithm requires a parameter vector of the same length (irrespective of the model number) we first define a function `append_theta` that takes the parameter vector associated with the model in question and appends it so it is of the required size (in this case of length 11).
+Since the optimisation algorithm requires a parameter vector of the same length (irrespective of the model number) we first define a function `append_theta` that takes the parameter vector associated with the model in question and appends it so it is of the required size (in this case of length 12).
 
 ```{r,message=F}
 append_theta <- function(theta,model_num) {
@@ -260,7 +260,7 @@ Next, we require a function that, given the parameter vector `theta` and the mod
 \begin{equation}\label{eqn:cov-matrix}
 \textrm{\texttt{SY}} =  \begin{bmatrix}\bSigma_{11} & \bSigma_{11}\bB^\T \\ \bB \bSigma_{11} & \bSigma_{2\mid 1}+\bB\bSigma_{11}\bB^\T \end{bmatrix}, ~~\qquad \textrm{\texttt{So}} =  \begin{bmatrix}\tau_1^2I_m  & 0\\ 0 & \tau_2^2I_m  \end{bmatrix}.                                
 \end{equation}
-We then add these two together to obtain the matrix $\textrm{cov}((\Yvec_1^\T,\Yvec_2^\T)^\T)$ which, recall that for this example is identical to $\textrm{cov}((\Zvec_1^\T,\Zvec_2^\T)^\T)$ since the data is equal to the process at the observed locations. If `whole_mesh` is `TRUE`, then the process covariance matrix is evaluated over the entire mesh (used for co-kriging at unobserved locations).
+We then add these two together to obtain the matrix $\textrm{cov}((\Yvec_1^\T,\Yvec_2^\T)^\T)$ which, recall that for this example is identical to $\textrm{cov}((\Zvec_1^\T,\Zvec_2^\T)^\T)$ since the data is equal to the process at the observed locations. If `whole_mesh` is `TRUE`, then the process covariance matrix is evaluated over the entire mesh (used for cokriging at unobserved locations).
 
 ```{r}
 construct_mats <- function(theta,model_num,whole_mesh=F) {
@@ -320,7 +320,7 @@ construct_mats <- function(theta,model_num,whole_mesh=F) {
 }
 ```
 
-Now we're in place to define the log-likelihood function. This is the usual Gaussian log-likelihood function. In the function we allow the dropping of certain observations for cross-validation purposes. The indices of the observations we wish to drop are stored in the parameter `i`. If `i = NULL` then no observation are dropped. This argument is useful for cross-validation.
+Now we're in place to define the log-likelihood function. This is the usual Gaussian log-likelihood function. In the function we allow the dropping of certain observations for cross-validation purposes. The indices of the observations we wish to drop are stored in the parameter `i`. If `i = NULL` then no observations are dropped. This argument is useful for cross-validation.
 
 ```{r}
 loglik_Model <- function(theta,model_num,i=NULL) {
@@ -372,7 +372,7 @@ loglik_Model <- function(theta,model_num,i=NULL) {
 } 
 ```
 
-For optimising we will use the `R` function `optim` (BFGS). We allow for 3000 maximum iterations and set `trace=6` for detailed output. We choose to not compute the Hessian since this is not required in our analysis. Recall that the parameter `i` here contains the indices of the observations we do not wish to include in the fit. If `i = NULL` then all observations are inlcuded. The function `optim_loglik` is called for each model in the program later on.
+For optimising we will use the `R` function `optim` (BFGS). We allow for 3000 maximum iterations and set `trace = 6` for detailed output. We choose not tp compute the Hessian since this is not required in our analysis. Recall that the parameter `i` here contains the indices of the observations we do not wish to include in the fit. If `i = NULL` then all observations are inlcuded. The function `optim_loglik` is called for each model in the program later on.
 
 ```{r}
 optim_loglik <- function(par,model_num, i = NULL){
@@ -389,7 +389,7 @@ optim_loglik <- function(par,model_num, i = NULL){
 }
 ```
 
-The last function we need to define is one that fits all the models, possibly with a set of observations in `i` removed. Below, in the function `fit_all_models`, we first fit Model 1 using realistic starting values and store the results in `fit.Model1`, and then fit the reversed version (with pressure as $Y_1$) and store that in `fit.Model1_rev`. Model 2 is then fit using the estimates of Model 1 as starting values. Model 3 uses the maximum likelihood estimates of Model 2, and so on. The reversed version of Model 2 uses the results of the reversed version of Model 1 as starting values and so on.
+The last function we need to define is one that fits all the models, possibly with a set of observations in `i` removed. In the function `fit_all_models` below, we first fit Model 1 using realistic starting values and store the results in `fit.Model1`, and then we fit the reversed version (with pressure as $Y_1$) and store that in `fit.Model1_rev`. Model 2 is then fit using the estimates of Model 1 as starting values. Model 3 uses the maximum likelihood estimates of Model 2 as starting values, and so on. The reversed version of Model 2 uses the results of the reversed version of Model 1 as starting values and so on.
 
 ```{r}
 fit_all_models <- function(i) {
@@ -425,7 +425,7 @@ if(LK_analysis) {
 }
 ```
 
-The log-likelihoods and AICs given by our fit are given in the table below. Note that Model 5 is Model 1 reversed (i.e., with pressure as $Y_1$), Model 6 is Model 2 reversed, and so on.
+The log-likelihoods and AICs given by our fit are given in the table below. Recall that Model 5 is Model 1 reversed (i.e., with pressure as $Y_1$), Model 6 is Model 2 reversed, and so on.
 
 ```{r}
 print("Log-likelihood for all models trained with complete dataset")
@@ -433,7 +433,7 @@ sapply(fit_all_data,function(x) x$value) ## Negative LL
 sapply(fit_all_data,function(x) x$value)*2 + 2*c(8,9,10,12) ## AIC
 ```
 
-The parameters are listed below (the output is in LaTeX for direct use in paper). Note that since `P_scale` was used to put pressure on the same scale as temperature, we scale the fitted marginal standard deviation of the pressure fields so that they are on the original scale.
+The parameter estimates can be printed using the code below (the output is in LaTeX for direct use in a paper). Note that since `P_scale` was used to put pressure on the same scale as temperature, we scale the fitted marginal standard deviation of the pressure fields so that they are on the original scale.
 
 ```{r,results='hide'}
 print("Estimated parameters for all models")
@@ -455,7 +455,7 @@ print(xtable::xtable(par_est1,digits=c(rep(2,5),3,3,rep(2,6))),
 
 ## Prediction
 
-We predict the temperature and pressure fields at the unobserved locations using cokriging. Since we assume zero mean, this is simple cokriging; the predictive mean and variance can thus be obtained by simple conditioning with a joint multivariate Gaussian distribution. If `i = NULL` then the data is used to predict at all (observed and unobserved) locations. Otherwise prediction is only carried out at the locations in $i$ with the observations in $i$ removed. Note that when `i` is specified it is assumed that only the covariance matrices associated with the observation locations are supplied. This enables us to use the same function for cross-validation (see below).
+We predict the temperature and pressure fields at the unobserved locations using cokriging. Since we assume mean zero, this is simple cokriging; the predictive mean and variance can thus be obtained by simple conditioning with a joint multivariate Gaussian distribution. If `i = NULL` then the data is used to predict at all (observed and unobserved) locations. Otherwise prediction is only carried out at the locations in `i` with the observations in `i` removed. Note that when `i` is specified it is assumed that only the covariance matrices associated with the observation locations are supplied. This enables us to use the same function for cross-validation (see below).
 
 ```{r}
 cokrige <- function(X,i=NULL) {
@@ -499,9 +499,9 @@ Mesh["y2_Model1"] <- ALL1$mu_pred[-(1:n1)]
 Mesh["y2_Model4"] <- ALL4$mu_pred[-(1:n1)]  
 ```
 
-## Leave-one-out cross-validation
+## Leave-one-out cross validation
 
-Unlike @Gneitingetal2010, here we carry out leave-one-out cross validation (LOOCV) without re-fitting the model each time. If we have an MPI cluster available we carry out the LOOCV over MPI, otherwise we parallelise using the machine's multiple cores. The two loops below iterate over the observations and models.
+Unlike @Gneitingetal2010, here we carry out leave-one-out cross validation (LOOCV) without re-fitting the model each time. If we have an MPI cluster available we carry out the LOOCV over MPI, otherwise we parallelise using the computer's multiple cores. The two loops below iterate over the observations and models.
 
 ```{r}
 ## Now we do a LOO analysis
@@ -559,7 +559,7 @@ if(!LOO_analysis) {
 
 ## The shifted parsimonious Matérn model
 
-In this section we repeat the above analysis for the *shifted* parsimonious Matérn model, obtained by applying the method of @Li_2011 to the standard parsimonious model. First we define a function that constructs the matrices based on the usual parameters.
+In this section we repeat the analysis above for the *shifted* parsimonious Matérn model, obtained by applying the method of @Li_2011 to the standard parsimonious model. First we define a function that constructs the matrices based on the usual parameters.
 
 ```{r}
 sh_pars_mats <- function(theta) {
@@ -584,7 +584,7 @@ sh_pars_mats <- function(theta) {
 }
 ```
 
-Next, we define the likelihood funciton; note that the parameter definitions for the parsimonious Matérn are different than for the conditional approach:
+Next, we define the likelihood funciton; note that the parameter definitions for the parsimonious Matérn are different than for the conditional approach.
 
 ```{r}
 loglik_sh_pars_model <- function(theta,shift=FALSE) {
@@ -632,7 +632,7 @@ loglik_sh_pars_model <- function(theta,shift=FALSE) {
 }
 ```
 
-Finally, we estimate the parameters:
+Finally, we estimate the parameters.
 
 ```{r}
 ## Set shift=TRUE below to estimate the shift parameters; otherwise they are fixed to zero
@@ -647,20 +647,22 @@ if(Shifted_Pars_estimation) {
                    control=list(trace=6,
                                 maxit=3000),
                    shift=TRUE)
-    save(optim_est_sh_pars,file = "../inst/extdata/temp_pressure/Shifted_Pars_est_results.rda")
+    save(optim_est_sh_pars,
+         file = "../inst/extdata/temp_pressure/Shifted_Pars_est_results.rda")
 } else {
-    load(system.file("extdata/temp_pressure","Shifted_Pars_est_results.rda", package = "bicon"))
+    load(system.file("extdata/temp_pressure",
+                     "Shifted_Pars_est_results.rda", package = "bicon"))
 }
 
 
 print(paste0("Log-lik. of shifted parsimonious Matern is ",
-             optim_est_sh_pars$value))
+             -optim_est_sh_pars$value))
 print(paste0("AIC of shifted parsimonious Matern is ",
              optim_est_sh_pars$value*2 + 20)) # 10 parameters
 
 ```
 
-For co-kriging (for cross-validation) we follow the same approach as earlier:
+For cokriging and for cross-validation we follow the same approach as earlier.
 
 ```{r}
 theta_lk <- optim_est_sh_pars$par
@@ -677,9 +679,9 @@ pred_sh_pars <- foreach(i = 1:m1,.combine = "rbind") %do% {
 ```
 
 
-## Curing of results
+## Processing the results
 
-The following code is only documented in-line since it just involves data manipulation for obtaining the results shown in the paper. For verification we find the mean absolute error (MAE), the root mean-squared prediction error (RMSPE) and the continuous probability rank score (CRPS) as described by @Gneiting_2005.
+The following code is only documented in-line since it just involves data manipulation for obtaining the results shown in the paper. For verification we find the mean absolute error (MAE), the root mean-squared prediction error (RMSPE) and the continuous probability rank score [CRPS, @Gneiting_2005].
 
 ```{r,message=FALSE}
 ### Analyse results
@@ -723,11 +725,11 @@ results <- sanitise_results(pred)
 print(results)
 ```
 
-We next do the same for the shifted parsimonious Matérn model.
+Next we do the same for the shifted parsimonious Matérn model.
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 ## Extract our results
-sh_pars_results <- sanitise_results(pred_sh_pars) %>%   # Only consider models with Y1 temp. 
+sh_pars_results <- sanitise_results(pred_sh_pars) %>%    
                   dplyr::select(model_num,MAE,RMSPE,CRPS) 
 sh_pars_results$model_num <- "Shifted_Pars"
 ```
@@ -812,7 +814,7 @@ RFresults <- RFpred2 %>%
             CRPS_se = sd(crps_wrapper(Z,mu_pred,sqrt(var_pred)))/sqrt(m1-1))
 
 ## Extract our results
-select_results <- filter(results,model_num < 5) %>%          # Only consider models with Y1 temp. 
+select_results <- filter(results,model_num < 5) %>%          
                   dplyr::select(model_num,MAE,RMSPE,CRPS) 
 
 ## Extract RandomFields results
@@ -896,7 +898,7 @@ table(best_performing$best_model_CRPS)
 
 ## Plotting
 
-The rest of the code is devoted to plotting. Since this is terse, we do not discuss it. It relies on knowledge of the packages ``ggplot2``, ``dplyr``, and ``tidyr``, the latter needed for putting the data into an appropriate format. 
+The rest of the code is devoted to plotting and uses the packages ``ggplot2``, ``dplyr``, and ``tidyr``. The latter package is needed for putting the data into an appropriate format. 
 
 
 ```{r,fig.width=10,fig.cap=' State boundaries and province boundaries of a region of the U.S.A. and Canada (dark solid lines), with the domain of interest enclosed by a bounding polygon (dashed line). The irregular triangular grid used for discretizing $D$ (light solid lines) and the observation locations given by $D^O$ (dots) are also shown. The discretized spatial domain $D^L$ consists of the vertices of the triangular grid.',message=FALSE,warning=FALSE}
@@ -909,8 +911,10 @@ Ca_States <- maptools::readShapeSpatial(shape2)
 US_States_fort <- fortify(US_States) %>% mutate( id= as.numeric(id))
 Ca_States_fort <- fortify(Ca_States) %>% mutate( id= as.numeric(id)+100)
 
-US_State_names <- data.frame(Name = US_States$NAME, id = 0:(length(US_States$NAME)-1))
-Ca_State_names <- data.frame(Name = Ca_States$NAME, id = 0:(length(Ca_States$NAME)-1) + 100)
+US_State_names <- data.frame(Name = US_States$NAME, 
+                             id = 0:(length(US_States$NAME)-1))
+Ca_State_names <- data.frame(Name = Ca_States$NAME, 
+                             id = 0:(length(Ca_States$NAME)-1) + 100)
 
 US_States_fort <- left_join(US_States_fort,US_State_names,by="id")
 Ca_States_fort <- left_join(Ca_States_fort,Ca_State_names,by="id")
@@ -967,7 +971,7 @@ if(show_figs) {
 ```
 
 
-```{r,fig.width=14,fig.cap="Cross-covariance functions for Model 4 and Model 8 (that is, Model 4 with temperature and pressure reversed)"}
+```{r,fig.width=14,fig.cap="Cross-covariance functions for Model 4 and Model 8 (i.e., Model 4 with temperature and pressure reversed)"}
 par1 <- fit_all_data[[4]]$par
 par2 <- fit_all_data[[8]]$par
 x <- seq(-3,3,length=100)
@@ -987,7 +991,7 @@ g2 <- LinePlotTheme() + geom_tile(data=XY,aes(h1,h2,fill=b2)) +
 if(show_figs) grid.arrange(g1,g2,nrow=1)
 ```
 
-```{r,fig.cap='Correlation between interpolated gridded maps of temperature and pressure as a function of displacement of the temperature field in latitude/longitude degrees, h. The yellow symbol indicates the maximum-likelihood estimate of the shift parameter with Model 4.'}
+```{r,fig.cap='Correlation between interpolated gridded maps of temperature and pressure as a function of the two-dimensional displacement vector $h=(h_1,h_2)^\\T$, where $h_1$ is longitude (in degrees) and $h_2$ is latitude (in degrees). The yellow diamond symbol indicates the maximum-likelihood estimate of the shift parameter with Model 4.'}
 h1_grid<- seq(-4,4,by=0.2)
 h2_grid <- seq(-4,4,by=0.2)
 Disp <- expand.grid(h1 = h1_grid,h2 = h2_grid)
@@ -1004,10 +1008,11 @@ Disp$corr <- foreach(i = 1:nrow(Disp),.combine="c") %dopar% {
 }
 axes <- geom_line(data=data.frame(x=c(0,0,-4,4),y=c(-4,4,0,0),grp=c(1,1,2,2)),
                   aes(x,y,group=grp),colour="black") 
-corr_plot <- LinePlotTheme() + geom_tile(data=Disp,aes(h1,h2,fill=corr)) + axes + bluered +
-                          geom_point(data=data.frame(d1 = par1[11],d2 = par1[12]),
-                                     aes(d1,d2),pch=9,size=5,colour="yellow") +
-                          coord_fixed(xlim=c(-2.5,2.5),ylim=c(-2.5,2.5))
+corr_plot <- LinePlotTheme() + geom_tile(data=Disp,aes(h1,h2,fill=corr)) + 
+  axes + bluered +
+  geom_point(data=data.frame(d1 = par1[11],d2 = par1[12]),
+             aes(d1,d2),pch=9,size=5,colour="yellow") +
+  coord_fixed(xlim=c(-2.5,2.5),ylim=c(-2.5,2.5))
 
 if(show_figs) print(corr_plot)
 if(print_figs) ggsave(corr_plot, 
@@ -1016,7 +1021,7 @@ if(print_figs) ggsave(corr_plot,
 ```
 
 
-```{r,fig.cap="The correlation and cross-correlation functions estimated using Model 4, depicted as a function of displacement $h$ in degrees longitude/latitude, at the location $\\svec = (-123^\\circ,45^\\circ)$. Contour lines of correlation are in intervals of $0.2$.",fig.width=12,fig.height=12}
+```{r,fig.cap="The correlation and cross-correlation functions estimated using Model 4, depicted as a function of $h$ (in degrees longitude/latitude), at the location $\\svec = (-123^\\circ,45^\\circ)$. Contour lines of correlation are in intervals of $0.2$.",fig.width=12,fig.height=12}
 delta <- 0.25
 x_grid<- seq(-131,-115,by=delta)
 y_grid <- seq(40,50,by=delta)
@@ -1086,7 +1091,7 @@ if(print_figs) {
 }
 ```
 
-```{r,out.width='12cm',fig.width=28,fig.height=16,fig.cap='A scatter plot of the kriging standard errors of $Y_1$ obtained with Model 4 against those obtained with Model 1 at each of the mesh vertices. The colour illustrates the difference between the two, with green denoting the higher standard error of Model 4 and purple the higher standard error of Model 1.',fig.align='center',message=FALSE,warning=FALSE}
+```{r,out.width='12cm',fig.width=28,fig.height=16,fig.cap='A scatter plot of the cokriging prediction standard errors of $Y_1$ obtained with Model 4 against those obtained with Model 1 at each of the mesh vertices. The colour illustrates the difference between the two, with green denoting the higher standard error of Model 4 and purple the higher standard error of Model 1.',fig.align='center',message=FALSE,warning=FALSE}
 Mesh["M1T_errors"] <- sqrt(pmax(ALL1$var_pred,0))[1:n1]
 Mesh["M4T_errors"] <- sqrt(pmax(ALL4$var_pred,0))[1:n1]
 Mesh["diffT_errors"] <- Mesh["M1T_errors"] - Mesh["M4T_errors"]
@@ -1130,7 +1135,7 @@ if(print_figs) {
 
 ## Package versions
 
-If you find that the code above is not reproducing the figures precisely, it is highly likely that this is due to some new, updated package implementing things differently. The package versions used to construct this document are listed below.
+If the code above is not reproducing the results or figures precisely, it is highly likely that this is due to some new, updated package implementing things differently. The package versions used to construct this document are listed below.
 
 ```{r}
 sessionInfo()
