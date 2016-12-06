@@ -43,5 +43,4 @@ and select the vignettes under `bicon`.
 References
 -----
 
-Cressie, N., \& Zammit-Mangion, A. (2015). Multivariate spatial covariance models: A conditional approach.
-Submitted.
+Cressie, N., \& Zammit-Mangion, A. (2017). Multivariate spatial covariance models: A conditional approach. Biometrika, in press.
